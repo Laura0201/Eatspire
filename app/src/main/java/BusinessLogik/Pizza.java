@@ -9,6 +9,7 @@ public class Pizza extends Gericht{
     Pizza(String Name, double Preis){
         name=Name;
         preis=Preis;
+        int test;
     }
 
     public void erstelleZutatenliste(Zutat[] Zutatenliste) {
