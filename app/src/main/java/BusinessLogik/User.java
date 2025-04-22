@@ -32,7 +32,7 @@ public class User {
     ArrayList<String> benutzerIdZuordnung = new ArrayList<String>();
 
     //Konstruktor:
-    User(String Username, String Password) {
+    public User(String Username, String Password) {
         /*if (!testePasswort(Password)) {
             System.out.println("Passwort entspricht nicht den Richtlinien");
         } else {

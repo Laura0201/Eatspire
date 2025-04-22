@@ -1,48 +1,113 @@
 package com.example.eatspire;
 
+import android.health.connect.datatypes.ExerciseRoute;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.activity.ComponentActivity;
-//Das ist alles nur random aus der vorlesung!!!
-public class MainActivity1 extends ComponentActivity {
-    private EditText _editTextCustomerName;
-    private EditText _editTextDeviceName;
-    private CheckBox _checkBoxAgb;
-    private Button _buttonNew;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.text.BreakIterator;
+
+import BusinessLogik.User;
+
+public class MainActivity1 extends AppCompatActivity {
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private User user;
+    private BreakIterator locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        enableEdgeToEdge();
         setContentView(R.layout.activity_main);
 
-        _editTextCustomerName = findViewById(R.id.edit_text_customer_name);
-        _editTextDeviceName = findViewById(R.id.edit_text_device_name);
-        _checkBoxAgb = findViewById(R.id.check_box_agb_accept);
-        _buttonNew = findViewById(R.id.button_new_order);
+        user = new User("username", "password");
+        user.setContext(this);
 
-        _buttonNew.setOnClickListener(view ->{
-            String customerName = _editTextCustomerName.getText().toString();
-            String deviceName = _editTextDeviceName.getText().toString();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            user.setContext(this);
+        }
+    }
 
-            boolean agbAccepted = _checkBoxAgb.isChecked();
-            if(!agbAccepted){
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                user.setContext(this);
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
-
-            // Handle the button click event here
-            // For example, you can start a new activity or show a message
-            // based on the input values.
-        });
+        }
     }
 
-    private void enableEdgeToEdge() {
-        // Implement your edge-to-edge functionality here
-    }
+    private void updateLocationTextView(ExerciseRoute.Location location) {
+ if (location != null) {
+     String locationText = null;
+     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+         locationText = "Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude();
+     }
+     locationTextView.setText(locationText);
 }
+ }
+
+
+}
+
+/// /Das ist alles nur random aus der vorlesung!!!
+//public class MainActivity1 extends ComponentActivity {
+//    private EditText _editTextCustomerName;
+//    private EditText _editTextDeviceName;
+//    private CheckBox _checkBoxAgb;
+//    private Button _buttonNew;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        enableEdgeToEdge();
+//        setContentView(R.layout.activity_main);
+//
+//        _editTextCustomerName = findViewById(R.id.edit_text_customer_name);
+//        _editTextDeviceName = findViewById(R.id.edit_text_device_name);
+//        _checkBoxAgb = findViewById(R.id.check_box_agb_accept);
+//        _buttonNew = findViewById(R.id.button_new_order);
+//
+//        _buttonNew.setOnClickListener(view ->{
+//            String customerName = _editTextCustomerName.getText().toString();
+//            String deviceName = _editTextDeviceName.getText().toString();
+//
+//            boolean agbAccepted = _checkBoxAgb.isChecked();
+//            if(!agbAccepted){
+//
+//            }
+//
+//            // Handle the button click event here
+//            // For example, you can start a new activity or show a message
+//            // based on the input values.
+//        });
+//    }
+//
+//    private void enableEdgeToEdge() {
+//        // Implement your edge-to-edge functionality here
+//    }
+//}
 
 
 
