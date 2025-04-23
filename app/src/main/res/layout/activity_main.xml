@@ -20,9 +20,11 @@
         android:text="Name Kunde" />
 
     <EditText
+        android:autofillHints=""
+        android:text="penis"
         android:id="@+id/edit_text_customer_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/text_view_customer_name" />
 
     <TextView
@@ -33,15 +35,16 @@
         android:text="Gerätebeschreibung" />
 
     <EditText
+        android:text="Penis"
         android:id="@+id/edit_text_device_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/text_view_device_name" />
 
     <CheckBox
         android:id="@+id/check_box_agb_accept"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/edit_text_device_name"
         android:text="AGB akzeptieren" />
 

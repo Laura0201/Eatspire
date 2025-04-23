@@ -1,5 +1,7 @@
 package BusinessLogik;
 
+import android.os.Build;
+
 import java.time.LocalTime;
 
 public abstract class EssensOrt {
@@ -26,7 +28,11 @@ public abstract class EssensOrt {
     }
     // Prüft, ob eine Uhrzeit innerhalb der Öffnungszeiten liegt
     public boolean istGeoeffnet(LocalTime zeit) {
-        return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
+        }
+        return false; // Fallback für ältere Android-Versionen
+    }
     }
     /*Hinweise zur UHrzeit:
     Da du LocalTime für die Öffnungs- und Schließzeiten verwendest, müssen die Zeiten im HH:mm:ss-Format
@@ -52,5 +58,5 @@ LocalTime.parse() erwartet Strings im Format "HH:mm" oder "HH:mm:ss". Ein ungül
 wirft eine DateTimeParseException.
      */
 
-}
+
 
