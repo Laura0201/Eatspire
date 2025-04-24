@@ -1,6 +1,9 @@
-package BusinessLogik;
+package BusinessLogik.EssensOrte;
 
 import java.util.ArrayList;
+
+import BusinessLogik.Nahrung.BasisGericht;
+
 public class Restaurant extends EssensOrt{
 
     private double latitude;
@@ -9,7 +12,7 @@ public class Restaurant extends EssensOrt{
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    private ArrayList<Gericht> listeGerichte = new ArrayList<Gericht>();
+    private ArrayList<BasisGericht> listeGerichte = new ArrayList<BasisGericht>();
 
     //Methoden:
     public double getLatitude() {
