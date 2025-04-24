@@ -1,4 +1,4 @@
-package BusinessLogik;
+package BusinessLogik.UserStuff;
 
 public class Standort {//public class MainActivity1 extends AppCompatActivity {
 //    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;

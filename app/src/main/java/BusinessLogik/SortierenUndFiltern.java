@@ -1,4 +1,4 @@
-package BusinessLogik;
+package BusinessLogik.UserStuff;
 
 import android.health.connect.datatypes.ExerciseRoute;
 import android.location.Location;
@@ -18,25 +18,25 @@ public class SortierenUndFiltern {
     - Empfehlen nach Parametern(legen wir mit Strings fest) und heute beliebt
      */
 
-    private List<Restaurant> restaurants;
+    private List<BusinessLogik.EssensOrte.Restaurant> restaurants;
 
     public SortierenUndFiltern() {
         restaurants = new ArrayList<>();
     }
 
     // Methode zum Hinzufügen eines einzelnen Restaurants
-    public void addRestaurant(Restaurant restaurant) {
+    public void addRestaurant(BusinessLogik.EssensOrte.Restaurant restaurant) {
         restaurants.add(restaurant);
     }
 
     // Optional: Methode zum Hinzufügen mehrerer Restaurants gleichzeitig
-    public void addRestaurants(List<Restaurant> restaurants) {
+    public void addRestaurants(List<BusinessLogik.EssensOrte.Restaurant> restaurants) {
         this.restaurants.addAll(restaurants);
     }
 
     // Liefert eine nach Entfernung sortierte Liste zurück
-    public List<Restaurant> getRestaurantsSorted(ExerciseRoute.Location userLocation) {
-        List<Restaurant> sortedList = new ArrayList<>(restaurants);
+    public List<BusinessLogik.EssensOrte.Restaurant> getRestaurantsSorted(ExerciseRoute.Location userLocation) {
+        List<BusinessLogik.EssensOrte.Restaurant> sortedList = new ArrayList<>(restaurants);
         Collections.sort(sortedList, (r1, r2) -> {
             float distance1 = 0;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {

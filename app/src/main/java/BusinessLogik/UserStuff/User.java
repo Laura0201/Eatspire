@@ -1,4 +1,4 @@
-package BusinessLogik;
+package BusinessLogik.UserStuff;
 
 import static androidx.core.location.LocationManagerCompat.requestLocationUpdates;
 

@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.activity.ComponentActivity;
+import BusinessLogik.UserStuff.User;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -20,8 +21,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.text.BreakIterator;
-
-import BusinessLogik.User;
 
 
 
