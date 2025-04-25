@@ -1,0 +1,77 @@
+Index: app/src/main/java/BusinessLogik/Getraenk.java
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/Getraenk.java b/app/src/main/java/BusinessLogik/Getraenk.java
+new file mode 100644
+--- /dev/null	(date 1745413211296)
++++ b/app/src/main/java/BusinessLogik/Getraenk.java	(date 1745413211296)
+@@ -0,0 +1,22 @@
++package BusinessLogik;
++
++public class Getraenk {
++    private String name;
++    private double preis;
++    public Getraenk(String name, double preis) {
++        this.name = name;
++        this.preis = preis;
++    }
++    public String getName() {
++        return name;
++    }
++    public void setName(String neuerNameGetraenk){
++        name=neuerNameGetraenk;
++    }
++    public double getPreis() {
++        return preis;
++    }
++    public void setPreis(double neuerPreisgetraenk){
++        preis=neuerPreisgetraenk;
++    }
++}
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.9.1\"\r\nkotlin = \"2.0.21\"\r\ncoreKtx = \"1.10.1\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.1.5\"\r\nespressoCore = \"3.5.1\"\r\nlifecycleRuntimeKtx = \"2.6.1\"\r\nactivityCompose = \"1.8.0\"\r\ncomposeBom = \"2024.09.00\"\r\nplayServicesLocation = \"21.3.0\"\r\nappcompat = \"1.7.0\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-lifecycle-runtime-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-runtime-ktx\", version.ref = \"lifecycleRuntimeKtx\" }\r\nandroidx-activity-compose = { group = \"androidx.activity\", name = \"activity-compose\", version.ref = \"activityCompose\" }\r\nandroidx-compose-bom = { group = \"androidx.compose\", name = \"compose-bom\", version.ref = \"composeBom\" }\r\nandroidx-ui = { group = \"androidx.compose.ui\", name = \"ui\" }\r\nandroidx-ui-graphics = { group = \"androidx.compose.ui\", name = \"ui-graphics\" }\r\nandroidx-ui-tooling = { group = \"androidx.compose.ui\", name = \"ui-tooling\" }\r\nandroidx-ui-tooling-preview = { group = \"androidx.compose.ui\", name = \"ui-tooling-preview\" }\r\nandroidx-ui-test-manifest = { group = \"androidx.compose.ui\", name = \"ui-test-manifest\" }\r\nandroidx-ui-test-junit4 = { group = \"androidx.compose.ui\", name = \"ui-test-junit4\" }\r\nandroidx-material3 = { group = \"androidx.compose.material3\", name = \"material3\" }\r\nplay-services-location = { group = \"com.google.android.gms\", name = \"play-services-location\", version.ref = \"playServicesLocation\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-android = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\nkotlin-compose = { id = \"org.jetbrains.kotlin.plugin.compose\", version.ref = \"kotlin\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/gradle/libs.versions.toml	(date 1745335949470)
+@@ -1,5 +1,5 @@
+ [versions]
+-agp = "8.9.1"
++agp = "8.9.2"
+ kotlin = "2.0.21"
+ coreKtx = "1.10.1"
+ junit = "4.13.2"
+Index: app/src/main/java/BusinessLogik/Dönerladen.java
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/Dönerladen.java b/app/src/main/java/BusinessLogik/Dönerladen.java
+new file mode 100644
+--- /dev/null	(date 1745413211285)
++++ b/app/src/main/java/BusinessLogik/Dönerladen.java	(date 1745413211285)
+@@ -0,0 +1,9 @@
++package BusinessLogik;
++
++import java.util.ArrayList;
++
++public class Dönerladen extends EssensOrt{
++    private ArrayList<Gericht> listeGerichte = new ArrayList<Gericht>();
++    private ArrayList<Getraenk> listeGetraenke = new ArrayList<Getraenk>();
++
++}
+Index: app/src/main/res/layout/settings_tab.xml
+===================================================================
+diff --git a/app/src/main/res/layout/settings_tab.xml b/app/src/main/res/layout/settings_tab.xml
+new file mode 100644
+--- /dev/null	(date 1745413866199)
++++ b/app/src/main/res/layout/settings_tab.xml	(date 1745413866199)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:orientation="vertical"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++</LinearLayout>
+\ No newline at end of file
