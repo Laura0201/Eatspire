@@ -1,0 +1,454 @@
+Index: app/src/main/java/com/example/eatspire/MainActivity1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.eatspire;\r\n\r\nimport android.health.connect.datatypes.ExerciseRoute;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.EditText;\r\n\r\nimport androidx.activity.ComponentActivity;\r\n\r\nimport android.Manifest;\r\nimport android.content.pm.PackageManager;\r\nimport android.os.Bundle;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport java.text.BreakIterator;\r\n\r\nimport BusinessLogik.User;\r\n\r\npublic class MainActivity1 extends AppCompatActivity {\r\n    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;\r\n    private User user;\r\n    private BreakIterator locationTextView;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        user = new User(\"username\", \"password\");\r\n        user.setContext(this);\r\n\r\n        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)\r\n                != PackageManager.PERMISSION_GRANTED) {\r\n            ActivityCompat.requestPermissions(this,\r\n                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},\r\n                    LOCATION_PERMISSION_REQUEST_CODE);\r\n        } else {\r\n            user.setContext(this);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults);\r\n        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {\r\n            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {\r\n                user.setContext(this);\r\n            } else {\r\n                Toast.makeText(this, \"Location permission denied\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void updateLocationTextView(ExerciseRoute.Location location) {\r\n if (location != null) {\r\n     String locationText = null;\r\n     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {\r\n         locationText = \"Latitude: \" + location.getLatitude() + \", Longitude: \" + location.getLongitude();\r\n     }\r\n     locationTextView.setText(locationText);\r\n}\r\n }\r\n\r\n\r\n}\r\n\r\n/// /Das ist alles nur random aus der vorlesung!!!\r\n//public class MainActivity1 extends ComponentActivity {\r\n//    private EditText _editTextCustomerName;\r\n//    private EditText _editTextDeviceName;\r\n//    private CheckBox _checkBoxAgb;\r\n//    private Button _buttonNew;\r\n//\r\n//    @Override\r\n//    protected void onCreate(Bundle savedInstanceState) {\r\n//        super.onCreate(savedInstanceState);\r\n//        enableEdgeToEdge();\r\n//        setContentView(R.layout.activity_main);\r\n//\r\n//        _editTextCustomerName = findViewById(R.id.edit_text_customer_name);\r\n//        _editTextDeviceName = findViewById(R.id.edit_text_device_name);\r\n//        _checkBoxAgb = findViewById(R.id.check_box_agb_accept);\r\n//        _buttonNew = findViewById(R.id.button_new_order);\r\n//\r\n//        _buttonNew.setOnClickListener(view ->{\r\n//            String customerName = _editTextCustomerName.getText().toString();\r\n//            String deviceName = _editTextDeviceName.getText().toString();\r\n//\r\n//            boolean agbAccepted = _checkBoxAgb.isChecked();\r\n//            if(!agbAccepted){\r\n//\r\n//            }\r\n//\r\n//            // Handle the button click event here\r\n//            // For example, you can start a new activity or show a message\r\n//            // based on the input values.\r\n//        });\r\n//    }\r\n//\r\n//    private void enableEdgeToEdge() {\r\n//        // Implement your edge-to-edge functionality here\r\n//    }\r\n//}\r\n\r\n\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/eatspire/MainActivity1.java b/app/src/main/java/com/example/eatspire/MainActivity1.java
+--- a/app/src/main/java/com/example/eatspire/MainActivity1.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/com/example/eatspire/MainActivity1.java	(date 1745338071982)
+@@ -1,8 +1,10 @@
+ package com.example.eatspire;
+ 
+ import android.health.connect.datatypes.ExerciseRoute;
++import android.location.Location;
+ import android.os.Build;
+ import android.os.Bundle;
++import android.os.Looper;
+ import android.widget.Button;
+ import android.widget.CheckBox;
+ import android.widget.EditText;
+@@ -12,6 +14,7 @@
+ import android.Manifest;
+ import android.content.pm.PackageManager;
+ import android.os.Bundle;
++import android.widget.TextView;
+ import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
+@@ -19,6 +22,12 @@
+ import androidx.core.app.ActivityCompat;
+ import androidx.core.content.ContextCompat;
+ 
++import com.google.android.gms.location.FusedLocationProviderClient;
++import com.google.android.gms.location.LocationCallback;
++import com.google.android.gms.location.LocationRequest;
++import com.google.android.gms.location.LocationResult;
++import com.google.android.gms.location.LocationServices;
++
+ import java.text.BreakIterator;
+ 
+ import BusinessLogik.User;
+@@ -26,49 +35,111 @@
+ public class MainActivity1 extends AppCompatActivity {
+     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+     private User user;
+-    private BreakIterator locationTextView;
++    private TextView locationTextView;
++    private FusedLocationProviderClient fusedLocationClient;
++    private LocationCallback locationCallback;
++    private LocationRequest locationRequest;
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+ 
++        // Verknüpfen des UI-TextViews über findViewById
++        locationTextView = findViewById(R.id.locationTextView);
++
++        // Beispielhafte Initialisierung des Users (falls benötigt)
+         user = new User("username", "password");
+         user.setContext(this);
+ 
++        // Erhalte den FusedLocationProviderClient
++        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
++// Erstelle die LocationRequest (Updateintervall, Priorität usw.)
++        locationRequest = LocationRequest.create();
++        locationRequest.setInterval(10000);          // Alle 10 Sekunden
++        locationRequest.setFastestInterval(5000);      // Mindestens alle 5 Sekunden
++        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
++
++        // Prüfe, ob die Berechtigung erteilt wurde
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                 != PackageManager.PERMISSION_GRANTED) {
+             ActivityCompat.requestPermissions(this,
+                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                     LOCATION_PERMISSION_REQUEST_CODE);
+         } else {
+-            user.setContext(this);
++            startLocationUpdates();
++        }
++    }
++    // Startet die Standortupdates
++    private void startLocationUpdates() {
++        // Erstelle den LocationCallback
++        locationCallback = new LocationCallback() {
++            @Override
++            public void onLocationResult(LocationResult locationResult) {
++                if (locationResult == null) return;
++                // Iteriere über alle verfügbaren Standortupdates
++                for (Location loc : locationResult.getLocations()) {
++                    // Falls deine updateLocationTextView-Methode den Typ ExerciseRoute.Location erwartet,
++                    // musst du den Android-Location-Typ ggf. umwandeln. Hier ein Beispiel, falls es so kompatibel ist:
++                    android.location.Location myLocation = convertLocation(loc);
++                    updateLocationTextView(myLocation);
++                }
++            }
++        };
++        // Mit der Berechtigung (erneut) die Standortupdates anfordern
++        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
++                != PackageManager.PERMISSION_GRANTED) {
++            return;
++        }
++        fusedLocationClient.requestLocationUpdates(locationRequest,
++                locationCallback,
++                Looper.getMainLooper());
++    }
++    // Falls deine App in den Hintergrund geht, beende die Standortupdates
++    @Override
++    protected void onPause() {
++        super.onPause();
++        if (fusedLocationClient != null && locationCallback != null) {
++            fusedLocationClient.removeLocationUpdates(locationCallback);
+         }
+     }
+ 
++    // Callback, wenn der Nutzer die Berechtigung erteilt oder verweigert hat
+     @Override
+-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
++    public void onRequestPermissionsResult(int requestCode,
++                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+-                user.setContext(this);
++            if (grantResults.length > 0
++                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
++                startLocationUpdates();
+             } else {
+                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+             }
+         }
+     }
++    // Hilfsmethode, um android.location.Location in ExerciseRoute.Location umzuwandeln
++    private android.location.Location convertLocation(android.location.Location loc) {
++        if (loc != null) {
++            // Es ist kein Umwandlungsprozess nötig, da wir bereits die richtige Location-Klasse verwenden.
++            return loc;
++        }
++        return null; // Rückgabe von null, falls kein gültiger Standort vorliegt.
++    }
+ 
+-    private void updateLocationTextView(ExerciseRoute.Location location) {
+- if (location != null) {
+-     String locationText = null;
+-     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+-         locationText = "Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude();
+-     }
+-     locationTextView.setText(locationText);
+-}
+- }
+-
+-
++    // Aktualisiert das TextView mit dem Standort
++    // Tipp: Entferne den API-Level-Check, damit auf allen Geräten der Standort angezeigt wird.
++    private void updateLocationTextView(Location location) {
++        if (location != null) {
++            String locationText = null;
++            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
++                locationText = "Latitude: " + location.getLatitude()
++                        + ", Longitude: " + location.getLongitude();
++            }
++            locationTextView.setText(locationText);
++        }
++    }
+ }
+ 
+ /// /Das ist alles nur random aus der vorlesung!!!
+Index: app/src/main/java/BusinessLogik/EssensOrt.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\nimport java.time.LocalTime;\r\n\r\npublic abstract class EssensOrt {\r\n    public String name;\r\n    public String beschreibung;\r\n\r\n    //Standortschnittstelle\r\n    //Öffnungszeiten - Schnittstelle?\r\n\r\n    //Kontaktdaten:\r\n    public String adressfeld;\r\n    public String telefonnummer;\r\n    public String mail;\r\n    public String website;\r\n\r\n\r\n    //Uhrzeit\r\n    private LocalTime oeffnungszeit;\r\n    private LocalTime schliesszeit;\r\n\r\n    public void setOeffnungszeiten(LocalTime oeffnungszeit, LocalTime schliesszeit) {\r\n        this.oeffnungszeit = oeffnungszeit;\r\n        this.schliesszeit = schliesszeit;\r\n    }\r\n    // Prüft, ob eine Uhrzeit innerhalb der Öffnungszeiten liegt\r\n    public boolean istGeoeffnet(LocalTime zeit) {\r\n        return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);\r\n    }\r\n    /*Hinweise zur UHrzeit:\r\n    Da du LocalTime für die Öffnungs- und Schließzeiten verwendest, müssen die Zeiten im HH:mm:ss-Format\r\n    (Stunden:Minuten:Sekunden) angegeben werden. Das bedeutet, dass du Zeiten in einem 24-Stunden-Format\r\n    ohne AM/PM übergeben solltest.\r\nBeispiel:\r\nrestaurant.setOeffnungszeiten(LocalTime.of(9, 0), LocalTime.of(18, 0));\r\nErklärung:\r\nLocalTime.of(hour, minute):\r\nÜbergib die Stunden und Minuten als Integer-Werte. Sekunden können weggelassen werden, wenn sie nicht benötigt werden,\r\nda der Standardwert für Sekunden 0 ist.\r\nOder aus einem String:\r\nLocalTime oeffnungszeit = LocalTime.parse(\"09:00:00\");\r\nLocalTime schliesszeit = LocalTime.parse(\"18:00:00\");\r\nrestaurant.setOeffnungszeiten(oeffnungszeit, schliesszeit);\r\nNur Stunden und Minuten (ohne Sekunden):\r\nLocalTime oeffnungszeit = LocalTime.of(9, 0);  // 09:00 Uhr\r\nLocalTime schliesszeit = LocalTime.of(18, 0); // 18:00 Uhr\r\nEingabeformat:\r\nLocalTime.of() erwartet, dass die Stunden zwischen 0 und 23 und die Minuten zwischen 0 und 59 liegen.\r\n\r\nLocalTime.parse() erwartet Strings im Format \"HH:mm\" oder \"HH:mm:ss\". Ein ungültiger String, wie z. B. \"25:00\",\r\nwirft eine DateTimeParseException.\r\n     */\r\n\r\n}\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/EssensOrt.java b/app/src/main/java/BusinessLogik/EssensOrt.java
+--- a/app/src/main/java/BusinessLogik/EssensOrt.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/EssensOrt.java	(date 1745409421101)
+@@ -1,13 +1,13 @@
+ package BusinessLogik;
+ 
++import android.os.Build;
++
+ import java.time.LocalTime;
+ 
+ public abstract class EssensOrt {
++    //Grundsätziches:
+     public String name;
+-    public String beschreibung;
+-
+-    //Standortschnittstelle
+-    //Öffnungszeiten - Schnittstelle?
++    public String beschreibungAlsFreitextfeld;
+ 
+     //Kontaktdaten:
+     public String adressfeld;
+@@ -15,42 +15,30 @@
+     public String mail;
+     public String website;
+ 
++    //Öffnungszeiten
++    public LocalTime oeffnungszeit;
++    public LocalTime schliesszeit;
+ 
+-    //Uhrzeit
+-    private LocalTime oeffnungszeit;
+-    private LocalTime schliesszeit;
+-
++    //Konstruktor?
+     public void setOeffnungszeiten(LocalTime oeffnungszeit, LocalTime schliesszeit) {
+         this.oeffnungszeit = oeffnungszeit;
+         this.schliesszeit = schliesszeit;
++//        Beispiel: LocalTime.of(hour, minute):
++//        restaurant.setOeffnungszeiten(LocalTime.of(9, 0), LocalTime.of(18, 0));
++//        Oder aus einem String:
++//        LocalTime.parse("09:00:00");
++//        LocalTime.of() erwartet, dass die Stunden zwischen 0 und 23 und die Minuten zwischen 0 und 59 liegen.
++//        LocalTime.parse() erwartet Strings im Format "HH:mm" oder "HH:mm:ss".
+     }
+-    // Prüft, ob eine Uhrzeit innerhalb der Öffnungszeiten liegt
+     public boolean istGeoeffnet(LocalTime zeit) {
+-        return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
++            return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
++        }
++        return false;
++        //LocalTime.now() wird aktuell in der Uhrzeit-Klasse abgefragt, eventuell kann das in die
++        //User-Klasse integriert werden, macht aber in meinen Augen keinen Unterschied
+     }
+-    /*Hinweise zur UHrzeit:
+-    Da du LocalTime für die Öffnungs- und Schließzeiten verwendest, müssen die Zeiten im HH:mm:ss-Format
+-    (Stunden:Minuten:Sekunden) angegeben werden. Das bedeutet, dass du Zeiten in einem 24-Stunden-Format
+-    ohne AM/PM übergeben solltest.
+-Beispiel:
+-restaurant.setOeffnungszeiten(LocalTime.of(9, 0), LocalTime.of(18, 0));
+-Erklärung:
+-LocalTime.of(hour, minute):
+-Übergib die Stunden und Minuten als Integer-Werte. Sekunden können weggelassen werden, wenn sie nicht benötigt werden,
+-da der Standardwert für Sekunden 0 ist.
+-Oder aus einem String:
+-LocalTime oeffnungszeit = LocalTime.parse("09:00:00");
+-LocalTime schliesszeit = LocalTime.parse("18:00:00");
+-restaurant.setOeffnungszeiten(oeffnungszeit, schliesszeit);
+-Nur Stunden und Minuten (ohne Sekunden):
+-LocalTime oeffnungszeit = LocalTime.of(9, 0);  // 09:00 Uhr
+-LocalTime schliesszeit = LocalTime.of(18, 0); // 18:00 Uhr
+-Eingabeformat:
+-LocalTime.of() erwartet, dass die Stunden zwischen 0 und 23 und die Minuten zwischen 0 und 59 liegen.
+-
+-LocalTime.parse() erwartet Strings im Format "HH:mm" oder "HH:mm:ss". Ein ungültiger String, wie z. B. "25:00",
+-wirft eine DateTimeParseException.
+-     */
++    //Getter & Setter nicht nötig, weil eh public, damit die vererbt werden
+ 
+ }
+ 
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/.idea/deploymentTargetSelector.xml	(date 1745338382626)
+@@ -4,6 +4,14 @@
+     <selectionStates>
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
++        <DropdownSelection timestamp="2025-04-22T16:09:50.196264600Z">
++          <Target type="DEFAULT_BOOT">
++            <handle>
++              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Jona1\.android\avd\Medium_Phone.avd" />
++            </handle>
++          </Target>
++        </DropdownSelection>
++        <DialogSelection />
+       </SelectionState>
+     </selectionStates>
+   </component>
+Index: app/src/main/java/BusinessLogik/Gericht.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Gericht {\r\n    private int id;\r\n    //Index in der ArrayList kann die User-ID sein\r\n    ArrayList<Gericht> favorisierteGerichte = new ArrayList<Gericht>();\r\n    ArrayList<EssensOrt> favorisierteOrte= new ArrayList<EssensOrt>();\r\n}\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/Gericht.java b/app/src/main/java/BusinessLogik/Gericht.java
+--- a/app/src/main/java/BusinessLogik/Gericht.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/Gericht.java	(date 1745413211270)
+@@ -6,7 +6,6 @@
+ public class Gericht {
+     private int id;
+     //Index in der ArrayList kann die User-ID sein
+-    ArrayList<Gericht> favorisierteGerichte = new ArrayList<Gericht>();
+-    ArrayList<EssensOrt> favorisierteOrte= new ArrayList<EssensOrt>();
++
+ }
+ 
+Index: app/src/main/java/BusinessLogik/SortierenUndFiltern.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\nimport android.health.connect.datatypes.ExerciseRoute;\r\nimport android.location.Location;\r\nimport android.os.Build;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\n\r\npublic class SortierenUndFiltern {\r\n    /* Liste Sortierfunktionen:\r\n    - Preis auf und absteigend\r\n    - Standort nur nähe aufsteigend\r\n    - nach Gerichtstyp\r\n    - Bewertungen auf und absteigend\r\n    - (Filter nach Zutat)\r\n    - Empfehlen nach Parametern(legen wir mit Strings fest) und heute beliebt\r\n     */\r\n\r\n    private List<Restaurant> restaurants;\r\n\r\n    public SortierenUndFiltern() {\r\n        restaurants = new ArrayList<>();\r\n    }\r\n\r\n    // Methode zum Hinzufügen eines einzelnen Restaurants\r\n    public void addRestaurant(Restaurant restaurant) {\r\n        restaurants.add(restaurant);\r\n    }\r\n\r\n    // Optional: Methode zum Hinzufügen mehrerer Restaurants gleichzeitig\r\n    public void addRestaurants(List<Restaurant> restaurants) {\r\n        this.restaurants.addAll(restaurants);\r\n    }\r\n\r\n    // Liefert eine nach Entfernung sortierte Liste zurück\r\n    public List<Restaurant> getRestaurantsSorted(ExerciseRoute.Location userLocation) {\r\n        List<Restaurant> sortedList = new ArrayList<>(restaurants);\r\n        Collections.sort(sortedList, (r1, r2) -> {\r\n            float distance1 = 0;\r\n            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {\r\n                distance1 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r1.getLatitude(), r1.getLongitude());\r\n            }\r\n            float distance2 = 0;\r\n            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {\r\n                distance2 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r2.getLatitude(), r2.getLongitude());\r\n            }\r\n            return Float.compare(distance1, distance2);\r\n        });\r\n        return sortedList;\r\n    }\r\n\r\n    // Berechnet die Entfernung in Metern\r\n    private float calculateDistance(double lat1, double lon1, double lat2, double lon2) {\r\n        float[] result = new float[1];\r\n        Location.distanceBetween(lat1, lon1, lat2, lon2, result);\r\n        return result[0];\r\n    }\r\n}\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/SortierenUndFiltern.java b/app/src/main/java/BusinessLogik/SortierenUndFiltern.java
+--- a/app/src/main/java/BusinessLogik/SortierenUndFiltern.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/SortierenUndFiltern.java	(date 1745406320496)
+@@ -18,40 +18,34 @@
+     - Empfehlen nach Parametern(legen wir mit Strings fest) und heute beliebt
+      */
+ 
+-    private List<Restaurant> restaurants;
+-
++    private List<EssensOrt> essensorte;
+     public SortierenUndFiltern() {
+-        restaurants = new ArrayList<>();
++        essensorte = new ArrayList<>();
+     }
+ 
+     // Methode zum Hinzufügen eines einzelnen Restaurants
+-    public void addRestaurant(Restaurant restaurant) {
+-        restaurants.add(restaurant);
++    public void addRestaurant(EssensOrt neuerEssensort) {
++        essensorte.add(neuerEssensort);
+     }
+ 
+     // Optional: Methode zum Hinzufügen mehrerer Restaurants gleichzeitig
+-    public void addRestaurants(List<Restaurant> restaurants) {
+-        this.restaurants.addAll(restaurants);
++    public void addRestaurants(List<EssensOrt> listeMehrereNeueEssensorte) {
++        this.essensorte.addAll(listeMehrereNeueEssensorte);
+     }
+ 
+-    // Liefert eine nach Entfernung sortierte Liste zurück
+-    public List<Restaurant> getRestaurantsSorted(ExerciseRoute.Location userLocation) {
+-        List<Restaurant> sortedList = new ArrayList<>(restaurants);
++    // Eventuell kann dieses Gerüst genutzt werden, das ist allerdings ein Copilot-Überbleibsel
++    // und es funktioniert offensichtich bisher nicht
++    public List<EssensOrt> getRestaurantsSorted(ExerciseRoute.Location userLocation) {
++        List<EssensOrt> sortedList = new ArrayList<>(essensorte);
+         Collections.sort(sortedList, (r1, r2) -> {
+-            float distance1 = 0;
+-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+-                distance1 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r1.getLatitude(), r1.getLongitude());
+-            }
+-            float distance2 = 0;
+-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+-                distance2 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r2.getLatitude(), r2.getLongitude());
+-            }
+-            return Float.compare(distance1, distance2);
+-        });
++            return 0;
++        }
++        );
+         return sortedList;
+     }
+ 
+-    // Berechnet die Entfernung in Metern
++    // Ebenfalls Copilot-Überbleibsel - Berechnet theoretisch die Entfernung in Metern, aber
++    // ich bin nicht sicher, ob das was bringt
+     private float calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+         float[] result = new float[1];
+         Location.distanceBetween(lat1, lon1, lat2, lon2, result);
+Index: app/src/main/java/BusinessLogik/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\nimport static androidx.core.location.LocationManagerCompat.requestLocationUpdates;\r\n\r\nimport android.Manifest;\r\nimport android.content.Context;\r\nimport android.content.pm.PackageManager;\r\nimport android.location.Location;\r\nimport android.os.Looper;\r\n\r\nimport androidx.core.app.ActivityCompat;\r\n\r\nimport com.google.android.gms.location.FusedLocationProviderClient;\r\nimport com.google.android.gms.location.LocationCallback;\r\nimport com.google.android.gms.location.LocationRequest;\r\nimport com.google.android.gms.location.LocationResult;\r\nimport com.google.android.gms.location.LocationServices;\r\n\r\nimport java.util.ArrayList;\r\npublic class User {\r\n    private Location currentLocation;\r\n    private FusedLocationProviderClient fusedLocationClient;\r\n    public static int anzahlNutzer;\r\n    private int userId;\r\n    //Standortschnittstelle\r\n    private String username;\r\n    //Getter und Setter\r\n    private String Password;\r\n\r\n    //Hashtables zur Veraltung von Nutzer-IDs und Passwörtern\r\n    ArrayList<String> passwordVerwaltung = new ArrayList<String>();\r\n    ArrayList<String> benutzerIdZuordnung = new ArrayList<String>();\r\n\r\n    //Konstruktor:\r\n    public User(String Username, String Password) {\r\n        /*if (!testePasswort(Password)) {\r\n            System.out.println(\"Passwort entspricht nicht den Richtlinien\");\r\n        } else {\r\n            this.Password = Password;\r\n        }*/\r\n        username = Username;\r\n        userId = anzahlNutzer;\r\n        anzahlNutzer++;\r\n        passwordVerwaltung.add(Password);\r\n        benutzerIdZuordnung.add(username);\r\n    }\r\n\r\n    public void setContext(Context context) {\r\n        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);\r\n        requestLocationUpdates(context);\r\n    }\r\n\r\n    private Location requestLocationUpdates(Context context) {\r\n        LocationRequest locationRequest = LocationRequest.create();\r\n        locationRequest.setInterval(10000); // Intervall von 10 Sekunden\r\n        locationRequest.setFastestInterval(5000); // Schnellste Aktualisierung alle 5 Sekunden\r\n        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);\r\n\r\n        // Überprüfe die Laufzeitberechtigungen\r\n        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)\r\n                != PackageManager.PERMISSION_GRANTED &&\r\n                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)\r\n                        != PackageManager.PERMISSION_GRANTED) {\r\n            // Hier solltest du die notwendigen Berechtigungen anfordern\r\n            return null;\r\n        }\r\n\r\n        fusedLocationClient.requestLocationUpdates(locationRequest, new LocationCallback() {\r\n            @Override\r\n            public void onLocationResult(LocationResult locationResult) {\r\n                if (locationResult != null && !locationResult.getLocations().isEmpty()) {\r\n                    // Es wird der letzte Standort aus der Liste genommen\r\n                    currentLocation = locationResult.getLastLocation();\r\n                    // Optional: Hier könnte man auch noch die Genauigkeit prüfen:\r\n                    // if (currentLocation.getAccuracy() <= gewünschterWert) { ... }\r\n                }\r\n            }\r\n        }, Looper.getMainLooper());\r\n\r\n//        public Location getCurrentLocation() {\r\n//            return currentLocation;\r\n//        }\r\n\r\n//Passwort\r\n       /* public boolean passwortRichtlinien (String Password){\r\n            byte benötigteAnzahlGroßbuchstaben = 2;\r\n            byte benötigteAnzahlZahlen = 2;\r\n            byte benötigteAnzahlSonderzeichen = 2;\r\n            char[] zulässigeSonderzeichen = {'(', ')', '!', '.', ':', ',', '#', '?', '§', '\"', '$', '%', '&', '/', '*'};\r\n            boolean ergebnisDerPrüfung = false;\r\n            char[] PasswordAlsCharArray = Password.toCharArray();\r\n            //Test Anzahl Großbuchstaben\r\n            byte counterGroßbuchstaben = 0;\r\n            for (int i = 0; i < PasswordAlsCharArray.length; i++) {\r\n                if (Character.isUpperCase(PasswordAlsCharArray[i])) {\r\n                    counterGroßbuchstaben++;\r\n                }\r\n            }\r\n            //Test Anzahl Zahlen\r\n            byte counterZahlen = 0;\r\n            for (int i = 0; i < PasswordAlsCharArray.length; i++) {\r\n                if (Character.isDigit(PasswordAlsCharArray[i])) {\r\n                    counterZahlen++;\r\n                }\r\n            }\r\n            //Test Anzahl Sonderzeichen\r\n            byte counterSonderzeichen = 0;\r\n            for (int i = 0; i < PasswordAlsCharArray.length; i++) {\r\n                for (int a = 0; a < zulässigeSonderzeichen.length; a++) {\r\n                    if (PasswordAlsCharArray[i] == zulässigeSonderzeichen[a]) {\r\n                        counterSonderzeichen++;\r\n                    }\r\n                }\r\n            }\r\n            if (counterGroßbuchstaben >= 2 && counterZahlen >= 2 && counterSonderzeichen >= 2) {\r\n                ergebnisDerPrüfung = true;\r\n            }\r\n\r\n            return ergebnisDerPrüfung;\r\n        }\r\n\r\n\r\n        public boolean passwortKorrekt (String Benutzername, String Password){\r\n            if (Password.equals(passwordVerwaltung.get(userId))) {\r\n                return true;\r\n            } else {\r\n                return false;\r\n            }\r\n        }\r\n\r\n        private String präferenz; //legen wir mit Strings fest\r\n\r\n\r\n        public boolean testePasswort (String Passwort){\r\n            //Erstellung der Methode zum Passworttesten also Anforderungen an das Passwort\r\n            return true;\r\n        }*/\r\n        return null;\r\n    }\r\n}\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/User.java b/app/src/main/java/BusinessLogik/User.java
+--- a/app/src/main/java/BusinessLogik/User.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/User.java	(date 1745409421082)
+@@ -137,5 +137,18 @@
+         }*/
+         return null;
+     }
++    /*Favoriten hier statt eigene Klasse?
++    private ArrayList<EssensOrt> favoritenorte = new ArrayList<EssensOrt>();
++    // evtl. private ArrayList<Gericht> favoritenGerichte = new ArrayList<Gericht>();
++    public void addFavoritenorte(EssensOrt essensort) {
++        favoritenorte.add(essensort);
++    }
++    public void removeFavoritenorte(EssensOrt essensort) {
++        favoritenorte.remove(essensort);
++    }
++    public ArrayList<EssensOrt> getFavoritenorte() {
++        return favoritenorte;
++    }
++    */
+ }
+ 
+Index: app/src/main/java/BusinessLogik/Restaurant.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\nimport java.util.ArrayList;\r\npublic class Restaurant extends EssensOrt{\r\n\r\n    private double latitude;\r\n    private double longitude;\r\n    public Restaurant(double latitude, double longitude) {\r\n        this.latitude = latitude;\r\n        this.longitude = longitude;\r\n    }\r\n    private ArrayList<Gericht> listeGerichte = new ArrayList<Gericht>();\r\n\r\n    //Methoden:\r\n    public double getLatitude() {\r\n        return latitude;\r\n    }\r\n\r\n    public double getLongitude() {\r\n        return longitude;\r\n    }\r\n    public void setName(String Name){\r\n        name=Name;\r\n    }\r\n    public void setAdresse(String Adresse){\r\n        adressfeld=Adresse;\r\n    }\r\n    //....\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/Restaurant.java b/app/src/main/java/BusinessLogik/Restaurant.java
+--- a/app/src/main/java/BusinessLogik/Restaurant.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/Restaurant.java	(date 1745409421053)
+@@ -3,27 +3,17 @@
+ import java.util.ArrayList;
+ public class Restaurant extends EssensOrt{
+ 
++    private ArrayList<Gericht> listeGerichte = new ArrayList<Gericht>();
++
++}
++/* Überbleibsel aus Standort-Idee
+     private double latitude;
+     private double longitude;
+     public Restaurant(double latitude, double longitude) {
+         this.latitude = latitude;
+-        this.longitude = longitude;
+-    }
+-    private ArrayList<Gericht> listeGerichte = new ArrayList<Gericht>();
+-
+-    //Methoden:
++        this.longitude = longitude;}
+     public double getLatitude() {
+-        return latitude;
+-    }
+-
++        return latitude;}
+     public double getLongitude() {
+-        return longitude;
+-    }
+-    public void setName(String Name){
+-        name=Name;
+-    }
+-    public void setAdresse(String Adresse){
+-        adressfeld=Adresse;
+-    }
+-    //....
+-}
++        return longitude;}
++ */
+Index: app/src/main/java/BusinessLogik/Uhrzeit.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BusinessLogik;\r\n\r\nimport java.time.LocalTime;\r\n\r\npublic class Uhrzeit {\r\n    // Gibt die aktuelle Uhrzeit zurück\r\n    public LocalTime getAktuelleUhrzeit() {\r\n        return LocalTime.now();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/BusinessLogik/Uhrzeit.java b/app/src/main/java/BusinessLogik/Uhrzeit.java
+--- a/app/src/main/java/BusinessLogik/Uhrzeit.java	(revision 529b287ff75c43b7351372dfe786da4ccf7dce24)
++++ b/app/src/main/java/BusinessLogik/Uhrzeit.java	(date 1745402111694)
+@@ -1,10 +1,15 @@
+ package BusinessLogik;
+ 
++import android.os.Build;
++
+ import java.time.LocalTime;
+ 
+ public class Uhrzeit {
+     // Gibt die aktuelle Uhrzeit zurück
+     public LocalTime getAktuelleUhrzeit() {
+-        return LocalTime.now();
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
++            return LocalTime.now();
++        }
++        return null;
+     }
+ }
