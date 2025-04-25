@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--//Alles aus der Vorlesung übungen-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Current Location"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/text_view_customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name Kunde" />
+
+    <EditText
+        android:autofillHints=""
+        android:text="penis"
+        android:id="@+id/edit_text_customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/text_view_customer_name" />
+
+    <TextView
+        android:id="@+id/text_view_device_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_customer_name"
+        android:text="Gerätebeschreibung" />
+
+    <EditText
+        android:text="Penis"
+        android:id="@+id/edit_text_device_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/text_view_device_name" />
+
+    <CheckBox
+        android:id="@+id/check_box_agb_accept"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/edit_text_device_name"
+        android:text="AGB akzeptieren" />
+
+    <Button
+        android:id="@+id/button_new_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:text="+" />
+
+</RelativeLayout>
