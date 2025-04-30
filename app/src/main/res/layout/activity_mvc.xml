@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/textViewAdresse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adresse wird geladen..."
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:padding="12dp"
+        android:background="#EEEEEE"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/buttonHoleStandort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Standort aktualisieren"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/editTextAdresse"
+        android:hint="Manuelle Adresse eingeben"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:inputType="textPostalAddress"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/buttonSetManuelleAdresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adresse übernehmen"
+        android:padding="12dp"/>
 
 </LinearLayout>
