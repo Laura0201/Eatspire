@@ -1,32 +1,46 @@
-/**
- * Klasse zur Erzeugung des User Interface
- * @author Julius
- * @version 1.0
- */
-
 package BusinessLogik.MVC;
 
-import com.example.eatspire.MainActivity1;
+import android.app.Activity;
+import android.content.Intent;
+import android.widget.Toast;
 
-import BusinessLogik.Data.DataManager;
-
+/**
+ * MVCView ist zuständig für die Benutzeroberfläche (UI) und Navigation.
+ */
 public class MVCView {
 
-    MVCController controller;
-
-    MainActivity1 ui;
+    private MVCController controller;
+    private Activity activity;
 
     public MVCView(MVCController controller) {
-
         this.controller = controller;
-        // init(); --> Start des User-Interface Aufbaus
+        this.activity = controller.getActivity();
         init();
     }
 
-    public void init(){
+    /**
+     * Initialisiert die Benutzeroberfläche.
+     */
+    public void init() {
+        System.out.println("UI initialisiert.");
+        Toast.makeText(activity, "App gestartet!", Toast.LENGTH_SHORT).show();
+    }
 
-        ui = new MainActivity1();
-        System.out.println("Initialisieren des UI abgeschlossen");
+    /**
+     * Zeigt die aktuelle Adresse im Layout an.
+     */
+    public void zeigeAdresseAn(String adresse) {
+        if (activity instanceof MVC) {
+            ((MVC) activity).zeigeAdresseAn(adresse);
+        }
+    }
 
+    /**
+     * Startet eine neue Activity (wenn du z.B. später eine Hauptseite hast).
+     */
+    public void geheZurNaechstenSeite() {
+        //Intent intent = new Intent(activity, MainPageActivity.class);  // Beispiel
+        //activity.startActivity(intent);
+        //activity.finish(); // Alte Seite schließen, damit User nicht zurück kann
     }
 }
