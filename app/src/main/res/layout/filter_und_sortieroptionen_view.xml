@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#004d00"> <!-- Dunkelgrüner Hintergrund -->
+
+<!-- Zurück-Button oben links -->
+<Button
+    android:id="@+id/buttonBackTop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_margin="16dp"
+    android:background="#004700"
+    android:text="Zurück"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold" />
+
+<!-- Spinner für Sortieroptionen, noch zu Überprüfen im emulator!!-->
+<Spinner
+    android:id="@+id/dropdownSortOptions"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_margin="16dp"
+    android:background="#1b5e20"
+    android:spinnerMode="dropdown"
+    android:popupBackground="#004700"
+    android:prompt="Sortieren nach" />
+    <CheckBox
+        android:id="@+id/checkboxToGo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/dropdownSortOptions"
+        android:layout_margin="16dp"
+        android:text="To-Go möglich"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Geöffnet -->
+    <CheckBox
+        android:id="@+id/checkboxOpen"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxToGo"
+        android:layout_margin="16dp"
+        android:text="Geöffnet"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Barzahlung möglich -->
+    <CheckBox
+        android:id="@+id/checkboxCashPayment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxOpen"
+        android:layout_margin="16dp"
+        android:text="Barzahlung möglich"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Kartenzahlung möglich -->
+    <CheckBox
+        android:id="@+id/checkboxCardPayment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxCashPayment"
+        android:layout_margin="16dp"
+        android:text="Kartenzahlung möglich"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Vegetarisch -->
+    <CheckBox
+        android:id="@+id/checkboxVegetarian"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxCardPayment"
+        android:layout_margin="16dp"
+        android:text="Vegetarisch"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Vegan -->
+    <CheckBox
+        android:id="@+id/checkboxVegan"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxVegetarian"
+        android:layout_margin="16dp"
+        android:text="Vegan"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Checkbox: Haustierfreundlich -->
+    <CheckBox
+        android:id="@+id/checkboxPetFriendly"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkboxVegan"
+        android:layout_margin="16dp"
+        android:text="Haustierfreundlich"
+        android:textColor="#FFFFFF"
+        android:background="#004d00" />
+
+    <!-- Platzhalter zwischen Checkboxen und "Anwenden"-Button -->
+    <View
+        android:id="@+id/spaceView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/checkboxPetFriendly"
+        android:layout_above="@id/buttonApply" />
+<!-- Anwenden-Button unten -->
+<Button
+    android:id="@+id/buttonApply"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="16dp"
+    android:background="#004700"
+    android:text="Anwenden"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold" />
+
+</RelativeLayout>

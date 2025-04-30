@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#004d00"> <!-- Dunkles Grün als Hintergrund -->
+
+    <!-- Zurück-Button oben links -->
+    <Button
+        android:id="@+id/buttonBackTop"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#004700"
+        android:text="Zurück"
+        android:textColor="#FFFFFF"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="329dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/buttonBackTop"
+        android:background="#004700"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="Kontoeinstellungen ändern"
+        android:textColor="#FFFFFF"
+        android:textSize="20.5dp"
+        android:textStyle="bold" />
+
+    <!-- Button: Benutzername -->
+    <Button
+        android:id="@+id/buttonUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonBackTop"
+        android:layout_margin="16dp"
+        android:background="#1b5e20"
+        android:text="Benutzername"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Button: Email -->
+    <Button
+        android:id="@+id/buttonEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonUsername"
+        android:layout_margin="16dp"
+        android:background="#1b5e20"
+        android:text="Email"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Button: Passwort ändern -->
+    <Button
+        android:id="@+id/buttonChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonEmail"
+        android:layout_margin="16dp"
+        android:background="#1b5e20"
+        android:text="Passwort ändern"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Button: Telefonnummer -->
+    <Button
+        android:id="@+id/buttonPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonChangePassword"
+        android:layout_margin="16dp"
+        android:background="#1b5e20"
+        android:text="Telefonnummer"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/präferenzenÄndernButton"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/buttonPhoneNumber"
+        android:layout_margin="16dp"
+        android:background="#1b5e20"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:text="Präferenzen ändern"
+        android:layout_height="wrap_content"/>
+
+    <!-- Platz zwischen den Buttons und dem unteren Zurück-Button -->
+    <View
+        android:id="@+id/spaceView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/präferenzenÄndernButton"
+        />
+    <!-- Zurück-Button unten -->
+    <Button
+        android:id="@+id/speichernButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:background="#004700"
+        android:text="Zurück"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+
+
+</RelativeLayout>
