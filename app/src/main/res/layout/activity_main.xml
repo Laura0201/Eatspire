@@ -1,60 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><!--//Alles aus der Vorlesung übungen-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
 
-
+    <!-- Willkommens-Text -->
     <TextView
-        android:id="@+id/locationTextView"
+        android:id="@+id/textViewWillkommen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Current Location"
-        android:textSize="18sp" />
+        android:text="Willkommen!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
 
-
+    <!-- Standort-Information -->
     <TextView
-        android:id="@+id/text_view_customer_name"
+        android:id="@+id/textViewStandortInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name Kunde" />
-
-    <EditText
-        android:autofillHints=""
-        android:text="penis"
-        android:id="@+id/edit_text_customer_name"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/text_view_customer_name" />
-
-    <TextView
-        android:id="@+id/text_view_device_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_text_customer_name"
-        android:text="Gerätebeschreibung" />
-
-    <EditText
-        android:text="Penis"
-        android:id="@+id/edit_text_device_name"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/text_view_device_name" />
-
-    <CheckBox
-        android:id="@+id/check_box_agb_accept"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/edit_text_device_name"
-        android:text="AGB akzeptieren" />
-
+        android:text="Standort wird geladen..."
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:background="#EEEEEE"/>
     <Button
-        android:id="@+id/button_new_order"
+        android:id="@+id/buttonStandortAktualisieren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:text="+" />
+        android:text="Standort aktualisieren"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"/>
 
-</RelativeLayout>
+</LinearLayout>

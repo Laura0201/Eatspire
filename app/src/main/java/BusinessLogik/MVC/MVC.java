@@ -1,30 +1,69 @@
-/**
- * Klasse zum Start vom ALLEM lol
- * @author Julius
- * @version 1.0
- */
-
 package BusinessLogik.MVC;
-public class MVC {
 
-    public static void main(String[] args) {
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-       /* Ist aus alter Main kopiert, wenn jemand das noch braucht.
-       User Jona = new User("jt.buettner", "JTZ67(@erkjlsg");
-        BusinessLogik.EssensOrte.Restaurant Restaurant1 = new BusinessLogik.EssensOrte.Restaurant(52.5200, 13.4050);
-        Restaurant1.setName("Restaurant1");
-        Restaurant1.setAdresse("Musterstraße 1, 12345 Musterstadt");
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eatspire.R;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            System.out.println(Restaurant1.istGeoeffnet(LocalTime.parse("19:00"))); // Beispiel: Montag, 12:30 Uhr
-        }
+/**
+ * Start-Activity der App. Verbindet das View mit dem Controller.
+ */
+public class MVC extends AppCompatActivity {
 
-        */
+    private MVCController controller;
 
+    private EditText editTextAdresse;
+    private Button buttonSetManuelleAdresse;
+    private Button buttonHoleStandort;
+    private TextView textViewAdresse;
 
-        new MVCController();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        controller = new MVCController();       // Controller erstellen
+        controller.setActivity(this);            // Activity referenzieren
+
+        setContentView(R.layout.activity_mvc);  // Layout setzen
+
+        // UI-Elemente binden
+        editTextAdresse = findViewById(R.id.editTextAdresse);
+        buttonSetManuelleAdresse = findViewById(R.id.buttonSetManuelleAdresse);
+        buttonHoleStandort = findViewById(R.id.buttonHoleStandort);
+        textViewAdresse = findViewById(R.id.textViewAdresse);
+
+        // Listener: Automatisch Standort holen
+        buttonHoleStandort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.holeAutomatischStandort();
+            }
+        });
+
+        // Listener: Manuelle Adresse setzen
+        buttonSetManuelleAdresse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String adresseInput = editTextAdresse.getText().toString().trim();
+                if (!adresseInput.isEmpty()) {
+                    controller.handleManuelleAdresse(adresseInput);
+                } else {
+                    Toast.makeText(MVC.this, "Bitte Adresse eingeben.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+    /**
+     * Aktualisiert die Adresse im TextView.
+     */
+    public void zeigeAdresseAn(String adresse) {
+        textViewAdresse.setText("Adresse: " + adresse);
+    }
 }
