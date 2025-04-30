@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#004d00">
+
+    <!-- Kleiner Zurück-Button oben links -->
+    <Button
+        android:id="@+id/buttonBackTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:background="#004700"
+        android:text="Zurück"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- TextView: aktueller Benutzername -->
+    <TextView
+        android:id="@+id/textViewCurrentUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_below="@id/buttonBackTop"
+        android:padding="8dp"
+        android:background="#1b5e20"
+        android:text="Benutzername: [aktueller Name]"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Eingabefeld für neuen Benutzernamen -->
+    <EditText
+        android:id="@+id/editTextNewUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_below="@id/textViewCurrentUsername"
+        android:padding="8dp"
+        android:background="#004700"
+        android:hint="Neuen Benutzernamen eingeben"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#A5D6A7"
+        android:textStyle="bold" />
+
+    <!-- Großer Speichern-Button unten -->
+    <Button
+        android:id="@+id/buttonBackBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="#004700"
+        android:text="Speichern"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</RelativeLayout>
