@@ -1,12 +1,16 @@
 package BusinessLogik.UserStuff;
 
+import android.os.Build;
+
+import java.time.LocalTime;
+
 public class User {
 
     public static int anzahlNutzer;
     private int userId;
     private String username;
     private String password;
-
+    private LocalTime aktuelleUhrzeit;
     private double latitude;
     private double longitude;
     private String adresse;
@@ -17,6 +21,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.userId = anzahlNutzer++;
+        this.aktuelleUhrzeit=getAktuelleUhrzeit();
         this.standort = new Standort(); // Standort gleich anlegen
     }
 
@@ -37,5 +42,15 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
         this.adresse = adresse;
+    }
+    public void setAktuelleUhrzeit(){
+        aktuelleUhrzeit=getAktuelleUhrzeit();
+    }
+
+    public LocalTime getAktuelleUhrzeit() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return LocalTime.now();
+        }
+        return null; // Fallback für ältere Android-Versionen
     }
 }

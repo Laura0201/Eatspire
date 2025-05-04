@@ -17,7 +17,6 @@ import com.example.eatspire.R;
 public class MVC extends AppCompatActivity {
 
     private MVCController controller;
-
     private EditText editTextAdresse;
     private Button buttonSetManuelleAdresse;
     private Button buttonHoleStandort;

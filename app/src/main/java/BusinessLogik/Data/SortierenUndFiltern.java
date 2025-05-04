@@ -1,4 +1,4 @@
-package BusinessLogik.UserStuff;
+package BusinessLogik.Data;
 
 import android.health.connect.datatypes.ExerciseRoute;
 import android.location.Location;

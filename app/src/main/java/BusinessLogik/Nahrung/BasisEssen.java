@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import BusinessLogik.EssensOrte.EssensOrt;
 
-public class BasisEssen {
+public abstract class BasisEssen {
     private int id;
 
     private double preis;
@@ -53,8 +53,4 @@ public class BasisEssen {
     public EssenTypen getTyp() {
         return typ;
     }
-
-    //Index in der ArrayList kann die User-ID sein
-    ArrayList<BasisGericht> favorisierteGerichte = new ArrayList<BasisGericht>();
-    ArrayList<BusinessLogik.EssensOrte.EssensOrt> favorisierteOrte= new ArrayList<EssensOrt>();
 }
