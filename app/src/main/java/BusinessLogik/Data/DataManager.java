@@ -55,10 +55,10 @@ public class DataManager {
                 new Zutat("Trüffel", 2.46)
         };
         Restaurant dönerdeluxe = new Restaurant();
-        ArrayList<BasisEssen> listeDönerDeluxe= new ArrayList<BasisEssen>();
+        ArrayList<Hauptspeiße> listeDönerDeluxeHauptspeisen= new ArrayList<Hauptspeiße>();
         Hauptspeiße VegetarischeLasagneEssen = new Hauptspeiße("Vegetarische Lasagne", VegetarischeLasagne);
-        listeDönerDeluxe.add(VegetarischeLasagneEssen);
-        dönerdeluxe.setEssenListe(listeDönerDeluxe);
+        listeDönerDeluxeHauptspeisen.add(VegetarischeLasagneEssen);
+        dönerdeluxe.setHauptspeisenListe(listeDönerDeluxeHauptspeisen);
         Zutat[] Trüffelrisotto = {
                 new Zutat("Zutat117", 3.95),
                 new Zutat("Kerbel", 4.14),
