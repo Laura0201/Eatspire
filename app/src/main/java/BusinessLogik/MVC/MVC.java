@@ -29,7 +29,7 @@ public class MVC extends AppCompatActivity {
         controller = new MVCController();       // Controller erstellen
         controller.setActivity(this);            // Activity referenzieren
 
-        setContentView(R.layout.activity_mvc);  // Layout setzen
+        setContentView(R.layout.standort_activity);  // Layout setzen
 
         // UI-Elemente binden
         editTextAdresse = findViewById(R.id.editTextAdresse);
