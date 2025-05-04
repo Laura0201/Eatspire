@@ -7,8 +7,8 @@
  */
 package BusinessLogik.Nahrung;
 
-public class Nachspeiße extends BasisGericht {
-    Nachspeiße(String name, double preis, Zutat[] zutaten, EssenTypen typ) {
-        super(name, preis, zutaten, typ);
+public class Nachspeiße extends BasisEssen {
+    Nachspeiße(String name, double preis, Zutat[] zutaten) {
+        super(name, preis, zutaten);
     }
 }

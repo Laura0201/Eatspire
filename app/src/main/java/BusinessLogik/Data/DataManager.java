@@ -9,6 +9,11 @@ package BusinessLogik.Data;
 import static BusinessLogik.Nahrung.EssenTypen.COCKTAIL;
 import static BusinessLogik.Nahrung.EssenTypen.LIMO;
 
+import java.util.ArrayList;
+
+import BusinessLogik.EssensOrte.Restaurant;
+import BusinessLogik.Nahrung.BasisEssen;
+import BusinessLogik.Nahrung.Hauptspeiße;
 import BusinessLogik.Nahrung.Kaltgetränk;
 import BusinessLogik.Nahrung.Zutat;
 
@@ -41,7 +46,7 @@ public class DataManager {
                 new Zutat("Meersalz", 2.14),
                 new Zutat("Spaghetti", 4.2)
         };
-        Zutat[] VegetarischeLasagne = {
+        Zutat[] VegetarischeLasagne = new Zutat[]{
                 new Zutat("Kardamom", 2.67),
                 new Zutat("Lasagneblätter", 3.57),
                 new Zutat("Estragon", 0.82),
@@ -49,7 +54,11 @@ public class DataManager {
                 new Zutat("Knoblauch", 4.2),
                 new Zutat("Trüffel", 2.46)
         };
-
+        Restaurant dönerdeluxe = new Restaurant();
+        ArrayList<BasisEssen> listeDönerDeluxe= new ArrayList<BasisEssen>();
+        Hauptspeiße VegetarischeLasagneEssen = new Hauptspeiße("Vegetarische Lasagne", VegetarischeLasagne);
+        listeDönerDeluxe.add(VegetarischeLasagneEssen);
+        dönerdeluxe.setEssenListe(listeDönerDeluxe);
         Zutat[] Trüffelrisotto = {
                 new Zutat("Zutat117", 3.95),
                 new Zutat("Kerbel", 4.14),
@@ -711,8 +720,8 @@ public class DataManager {
                 new Zutat("Basilikum", 0.43)
         };
 
-        Kaltgetränk orangenlimo = new Kaltgetränk("Orangenlimo", 4.5, zutatenOrangenlimo, LIMO, 0.4, false);
-        Kaltgetränk caipirinha = new Kaltgetränk("Caipirinha", 11, zutatenCaipirinha, COCKTAIL, 0.4, true);
+        Kaltgetränk orangenlimo = new Kaltgetränk("Orangenlimo", 4.5, zutatenOrangenlimo,  0.4, false);
+        Kaltgetränk caipirinha = new Kaltgetränk("Caipirinha", 11, zutatenCaipirinha, 0.4, true);
 
     }
 

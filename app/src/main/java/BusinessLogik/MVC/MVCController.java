@@ -3,7 +3,6 @@ package BusinessLogik.MVC;
 import android.app.Activity;
 
 import BusinessLogik.Data.UserVerwaltung;
-import BusinessLogik.Nahrung.EssenTypen;
 import BusinessLogik.UserStuff.User;
 
 /**

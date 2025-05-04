@@ -6,32 +6,20 @@
  */
 package BusinessLogik.Nahrung;
 
-import java.util.ArrayList;
-
-import BusinessLogik.EssensOrte.EssensOrt;
-
 public abstract class BasisEssen {
-    private int id;
+    private static int idDesGerichts = 0;
 
     private double preis;
     private String name;
     private Zutat[] zutaten;
 
-    private EssenTypen typ;
-    BasisEssen(String name, double preis, Zutat[] zutaten, EssenTypen typ){
+    BasisEssen(String name, Zutat[] zutaten){
         this.name = name;
         this.zutaten = zutaten;
         this.preis = errechnePreis(zutaten);
-        this.typ = typ;
     }
-    public String gibZutatenAus(BasisEssen essen) {
-        StringBuilder zutatenListe = new StringBuilder();
-        for (Zutat Z : essen.zutaten) {
-            zutatenListe.append(Z.getName());
-            zutatenListe.append("; ");
-        }
-        System.out.println(zutatenListe.toString());
-        return zutatenListe.toString();
+    public Zutat[] gibZutatenArrayZurück(BasisEssen essen) {
+        return essen.getZutaten();
     }
 
     public String getName() {
@@ -39,7 +27,7 @@ public abstract class BasisEssen {
     }
 
     public int getId() {
-        return id;
+        return idDesGerichts;
     }
 
     public void setPreis(double neuerPreis){
@@ -59,7 +47,4 @@ public abstract class BasisEssen {
         return zutaten;
     }
 
-    public EssenTypen getTyp() {
-        return typ;
-    }
 }
