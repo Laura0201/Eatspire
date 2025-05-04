@@ -15,7 +15,4 @@ public class Zutat {
         return name;
     }
 
-    public double getPreis() {
-        return preis;
-    }
 }

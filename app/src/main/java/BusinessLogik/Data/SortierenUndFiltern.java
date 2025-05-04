@@ -50,4 +50,14 @@ public class SortierenUndFiltern {
         sortiert.sort(Comparator.comparingDouble(Restaurant::getBewertung).reversed());
         return sortiert;
     }*/
+
+    public static List<Restaurant> filterNachVegetarisch(List<Restaurant> restaurants) {
+        List<Restaurant> gefiltert = new ArrayList<>();
+        for (Restaurant r : restaurants) {
+            if (r.isHatVegetarisch()) {
+                gefiltert.add(r);
+            }
+        }
+        return gefiltert;
+    }
 }
