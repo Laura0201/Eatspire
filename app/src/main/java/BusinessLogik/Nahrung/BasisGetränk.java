@@ -6,7 +6,7 @@
  */
 package BusinessLogik.Nahrung;
 
-public class BasisGetränk extends BasisEssen{
+public class BasisGetränk {
     double volumen;
 
     BasisGetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen) {

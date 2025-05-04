@@ -13,7 +13,7 @@ public abstract class BasisEssen {
     private String name;
     private Zutat[] zutaten;
 
-    BasisEssen(String name, Zutat[] zutaten){
+    BasisEssen(String name, double preis, Zutat[] zutaten){
         this.name = name;
         this.zutaten = zutaten;
         this.preis = errechnePreis(zutaten);
