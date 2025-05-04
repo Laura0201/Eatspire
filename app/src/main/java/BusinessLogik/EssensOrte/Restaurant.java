@@ -24,6 +24,8 @@ public class Restaurant {
     private double longitude;
     private Kategorien kategorie;
 
+    private boolean hatVegetarisch = false;
+
     private ArrayList<Hauptspeiße> listeHauptspeisen = new ArrayList<Hauptspeiße>();
     private ArrayList<Vorspeise> listeVorspeisen = new ArrayList<Vorspeise>();
     private ArrayList<Nachspeiße> listeNachspeisen = new ArrayList<Nachspeiße>();
@@ -80,5 +82,13 @@ public class Restaurant {
             return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
         }
         return false; // Fallback für ältere Android-Versionen
+    }
+
+    public boolean isHatVegetarisch() {
+        return hatVegetarisch;
+    }
+
+    public void setHatVegetarisch(boolean hatVegetarisch) {
+        this.hatVegetarisch = hatVegetarisch;
     }
 }

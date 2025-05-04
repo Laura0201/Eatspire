@@ -6,11 +6,49 @@
  */
 package BusinessLogik.Nahrung;
 
-public class BasisGetränk {
+public abstract class BasisGetränk{
+
+    private static int idDesGerichts = 0;
     double volumen;
 
-    BasisGetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen) {
-        super(name, preis, zutaten, typ);
-        this.volumen = volumen;
+    private String name;
+
+    private Zutat[] zutaten;
+    public double preis;
+
+    BasisGetränk(String name, Zutat[] zutaten) {
+        this.name = name;
+        this.zutaten = zutaten;
+        this.preis = errechnePreis(zutaten);
     }
+
+    public Zutat[] gibZutatenArrayZurück(BasisEssen essen) {
+        return essen.getZutaten();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return idDesGerichts;
+    }
+
+    public void setPreis(double neuerPreis){
+        this.preis = neuerPreis;
+    }
+    public double getPreis() {
+        return preis;
+    }
+    public double errechnePreis(Zutat[] zutaten){
+        double preis = 0;
+        for (Zutat zutat : zutaten) {
+            preis += zutat.getPreis();
+        }
+        return preis;
+    }
+    public Zutat[] getZutaten() {
+        return zutaten;
+    }
+
 }
