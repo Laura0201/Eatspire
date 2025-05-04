@@ -8,9 +8,6 @@ package BusinessLogik.Data;
 
 import java.util.ArrayList;
 
-import BusinessLogik.Nahrung.BasisGericht;
-import BusinessLogik.Nahrung.EssenTypen;
-
 public class EssenVerwaltung {
 
     private ArrayList<BasisGericht> gerichte;
