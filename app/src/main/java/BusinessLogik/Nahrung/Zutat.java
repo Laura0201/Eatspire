@@ -4,7 +4,7 @@ public class Zutat {
     private String name;
     private double preis;
 
-    public Zutat(String name, double preis){
+    public Zutat(String name, double preis) {
         this.name = name;
         this.preis = preis;
     }
@@ -13,5 +13,9 @@ public class Zutat {
     }
     public String getName() {
         return name;
+    }
+
+    public double getPreis() {
+        return preis;
     }
 }
