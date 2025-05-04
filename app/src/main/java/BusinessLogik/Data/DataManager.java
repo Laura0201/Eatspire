@@ -9,8 +9,12 @@ package BusinessLogik.Data;
 import static BusinessLogik.Nahrung.EssenTypen.COCKTAIL;
 import static BusinessLogik.Nahrung.EssenTypen.LIMO;
 
+import android.os.Build;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 
+import BusinessLogik.EssensOrte.Kategorien;
 import BusinessLogik.EssensOrte.Restaurant;
 import BusinessLogik.Nahrung.BasisEssen;
 import BusinessLogik.Nahrung.Hauptspeiße;
@@ -31,21 +35,7 @@ public class DataManager {
     }
 
     public void initGerichteAlsZutatenArrays() {
-        Zutat limette = new Zutat("Limette", 2.00);
-        Zutat zucker = new Zutat("Zucker", 0.25);
-        Zutat orange = new Zutat("Orange", 1.50);
-        Zutat minze = new Zutat("Minze", 0.75);
-        Zutat wasser = new Zutat("Wasser", 0.10);
-        Zutat eis = new Zutat("Eis", 0.50);
-
-        Zutat[] zutatenCaipirinha = {limette, zucker};
-        Zutat[] zutatenOrangenlimo = {orange, minze, wasser, eis};
-        Zutat[] LachsfiletmitSpargel = {
-                new Zutat("Spargel weiß", 3.9),
-                new Zutat("Lachsfilet", 2.37),
-                new Zutat("Meersalz", 2.14),
-                new Zutat("Spaghetti", 4.2)
-        };
+    //Initialisierung Bella Napoli
         Zutat[] VegetarischeLasagne = new Zutat[]{
                 new Zutat("Kardamom", 2.67),
                 new Zutat("Lasagneblätter", 3.57),
@@ -54,11 +44,133 @@ public class DataManager {
                 new Zutat("Knoblauch", 4.2),
                 new Zutat("Trüffel", 2.46)
         };
-        Restaurant dönerdeluxe = new Restaurant();
-        ArrayList<Hauptspeiße> listeDönerDeluxeHauptspeisen= new ArrayList<Hauptspeiße>();
+        Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
+        ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
         Hauptspeiße VegetarischeLasagneEssen = new Hauptspeiße("Vegetarische Lasagne", VegetarischeLasagne);
-        listeDönerDeluxeHauptspeisen.add(VegetarischeLasagneEssen);
-        dönerdeluxe.setHauptspeisenListe(listeDönerDeluxeHauptspeisen);
+        listeBellaNapoliHauptspeisen.add(VegetarischeLasagneEssen);
+        BellaNapoli.setHauptspeisenListe(listeBellaNapoliHauptspeisen);
+        BellaNapoli.setName("Bella Napoli");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            BellaNapoli.setOeffnungszeiten(LocalTime.of(9, 30), LocalTime.of(22, 00));
+        }
+        BellaNapoli.website= "www.bellanapoli.de";
+        BellaNapoli.beschreibung= "Das Beste italienische Restaurant der Stadt mit einem großen Angebot weit über Pizza und Pasta hinaus." +
+                "Unser freundliches Personal freut sich auf Ihren Besuch und kann sie auch in Bezug auf unsere Große Weinkarte gut beraten!";
+        BellaNapoli.telefonnummer= "0123 456789";
+        BellaNapoli.mail= "bella@napoli.com";
+
+// Restaurant „La Provence“ Initialisierung
+        Zutat[] Ratatouille = new Zutat[] {
+                new Zutat("Aubergine", 2.10),
+                new Zutat("Zucchini", 1.80),
+                new Zutat("Paprika", 1.50),
+                new Zutat("Tomaten", 2.30),
+                new Zutat("Thymian", 0.90)
+        };
+
+        Zutat[] QuicheLorraine = new Zutat[] {
+                new Zutat("Blätterteig", 2.00),
+                new Zutat("Schinken", 2.50),
+                new Zutat("Ei", 0.80),
+                new Zutat("Sahne", 1.60),
+                new Zutat("Lauch", 1.20)
+        };
+
+        Zutat[] Bouillabaisse = new Zutat[] {
+                new Zutat("Fischfilet", 4.50),
+                new Zutat("Fenchel", 1.20),
+                new Zutat("Safran", 3.00),
+                new Zutat("Tomaten", 2.00),
+                new Zutat("Weißwein", 2.70)
+        };
+
+        Zutat[] CoqAuVin = new Zutat[] {
+                new Zutat("Hähnchenkeule", 3.20),
+                new Zutat("Rotwein", 2.80),
+                new Zutat("Champignons", 1.30),
+                new Zutat("Zwiebeln", 0.60),
+                new Zutat("Thymian", 0.80)
+        };
+
+        Zutat[] TarteTatin = new Zutat[] {
+                new Zutat("Äpfel", 1.50),
+                new Zutat("Blätterteig", 2.10),
+                new Zutat("Zucker", 0.70),
+                new Zutat("Butter", 1.10),
+                new Zutat("Zimt", 0.60)
+        };
+        Restaurant LaProvence = new Restaurant(Kategorien.FRANZÖSISCH, true);
+        ArrayList<Hauptspeiße> listeLaProvenceHauptspeisen = new ArrayList<>();
+
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Ratatouille", Ratatouille));
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Quiche Lorraine", QuicheLorraine));
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Bouillabaisse", Bouillabaisse));
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Coq au Vin", CoqAuVin));
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Tarte Tatin", TarteTatin));
+
+        LaProvence.setHauptspeisenListe(listeLaProvenceHauptspeisen);
+        LaProvence.setName("La Provence");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LaProvence.setOeffnungszeiten(LocalTime.of(11, 0), LocalTime.of(23, 0));
+        }
+
+        LaProvence.website = "www.laprovence.fr";
+        LaProvence.beschreibung = "Ein charmantes französisches Bistro im Herzen der Stadt – genießen Sie klassische Spezialitäten und erlesene Weine in stilvollem Ambiente.";
+        LaProvence.telefonnummer = "0456 789012";
+        LaProvence.mail = "info@laprovence.fr";
+
+        // Zutaten und Gerichte für das Asiatische Restaurant "Tokyo Zen"
+        // 1. Sushi Platter
+        Zutat[] SushiZutaten = new Zutat[]{
+                new Zutat("Reis", 2.50),
+                new Zutat("Nori", 1.50),
+                new Zutat("Lachs", 5.00),
+                new Zutat("Gurke", 0.80),
+                new Zutat("Avocado", 1.20)
+        };
+        Hauptspeiße SushiPlatter = new Hauptspeiße("Sushi Platter", SushiZutaten);
+
+        // 2. Gemüse Tempura
+        Zutat[] TempuraZutaten = new Zutat[]{
+                new Zutat("Garnelen", 3.75),
+                new Zutat("Zucchini", 1.80),
+                new Zutat("Aubergine", 2.00),
+                new Zutat("Tempura-Teig", 0.90),
+                new Zutat("Dip-Sauce", 0.50)
+        };
+        Hauptspeiße GemüseTempura = new Hauptspeiße("Gemüse Tempura", TempuraZutaten);
+
+        // 3. Miso Suppe
+        Zutat[] MisoZutaten = new Zutat[]{
+                new Zutat("Miso Paste", 1.25),
+                new Zutat("Tofu", 2.10),
+                new Zutat("Frühlingszwiebeln", 0.65),
+                new Zutat("Seetang", 1.10)
+        };
+        Hauptspeiße MisoSuppe = new Hauptspeiße("Miso Suppe", MisoZutaten);
+
+        // Erstellen des Restaurants und Befüllen der Gerichte-Liste
+        Restaurant TokyoZen = new Restaurant(Kategorien.ASIATISCH, true);
+        ArrayList<Hauptspeiße> listeTokyoZenHauptspeisen = new ArrayList<Hauptspeiße>();
+        listeTokyoZenHauptspeisen.add(SushiPlatter);
+        listeTokyoZenHauptspeisen.add(GemüseTempura);
+        listeTokyoZenHauptspeisen.add(MisoSuppe);
+
+        TokyoZen.setHauptspeisenListe(listeTokyoZenHauptspeisen);
+        TokyoZen.setName("Tokyo Zen");
+
+        // Öffnungszeiten setzen (mit API Level Überprüfung)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            TokyoZen.setOeffnungszeiten(LocalTime.of(11, 0), LocalTime.of(23, 0));
+        }
+
+        TokyoZen.website = "www.tokyozen.jp";
+        TokyoZen.beschreibung = "Erleben Sie authentische japanische Küche in modernem Ambiente. Unser Angebot umfasst frisches Sushi, knackige Tempura und traditionelle Miso Suppe. Wir freuen uns auf Ihren Besuch!";
+        TokyoZen.telefonnummer = "0987 654321";
+        TokyoZen.mail = "info@tokyozen.jp";
+        
+
         Zutat[] Trüffelrisotto = {
                 new Zutat("Zutat117", 3.95),
                 new Zutat("Kerbel", 4.14),

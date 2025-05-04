@@ -1,6 +1,6 @@
 package BusinessLogik.EssensOrte;
 
 public enum Kategorien {
-    PIZZA, PASTA, ASIATISCH, FASTFOOD, SNACKS, SPIRITUOSEN,
+    ITALIENISCH, ASIATISCH, FASTFOOD, SNACKS, SPIRITUOSEN, FRANZÖSISCH
 }
 
