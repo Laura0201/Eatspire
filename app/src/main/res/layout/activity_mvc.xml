@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="#004d00">
 
     <TextView
         android:id="@+id/textViewAdresse"
@@ -12,9 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Adresse wird geladen..."
         android:textSize="18sp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:padding="12dp"
-        android:background="#EEEEEE"
+        android:background="#004700"
         android:layout_marginBottom="24dp" />
 
     <Button
@@ -22,7 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Standort aktualisieren"
+        android:textStyle="bold"
         android:padding="12dp"
+        android:background="#004700"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="24dp"/>
 
     <EditText
@@ -33,13 +37,17 @@
         android:minHeight="48dp"
         android:inputType="textPostalAddress"
         android:padding="12dp"
+        android:background="#004700"
         android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/buttonSetManuelleAdresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#004700"
         android:text="Adresse übernehmen"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:padding="12dp"/>
 
 </LinearLayout>

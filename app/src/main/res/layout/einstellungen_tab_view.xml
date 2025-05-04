@@ -18,8 +18,8 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="#004700"
-        android:text="Zurück"
         android:textColor="#FFFFFF"
+        android:text="Zurück"
         android:textSize="10dp" />
 
     <TextView
