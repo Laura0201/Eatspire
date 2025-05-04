@@ -1,61 +1,53 @@
 package BusinessLogik.Data;
 
-import android.health.connect.datatypes.ExerciseRoute;
 import android.location.Location;
-import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import BusinessLogik.UserStuff.User;
+import BusinessLogik.EssensOrte.Restaurant;
+
 public class SortierenUndFiltern {
-    /* Liste Sortierfunktionen:
-    - Preis auf und absteigend
-    - Standort nur nähe aufsteigend
-    - nach Gerichtstyp
-    - Bewertungen auf und absteigend
-    - (Filter nach Zutat)
-    - Empfehlen nach Parametern(legen wir mit Strings fest) und heute beliebt
-     */
 
-    private List<BusinessLogik.EssensOrte.Restaurant> restaurants;
+    // Entfernung berechnen
+    public static float berechneEntfernung(User user, Restaurant restaurant) {
+        Location userLocation = new Location("User");
+        userLocation.setLatitude(user.getLatitude());
+        userLocation.setLongitude(user.getLongitude());
 
-    public SortierenUndFiltern() {
-        restaurants = new ArrayList<>();
+        Location restaurantLocation = new Location("Restaurant");
+        restaurantLocation.setLatitude(restaurant.getLatitude());
+        restaurantLocation.setLongitude(restaurant.getLongitude());
+
+        return userLocation.distanceTo(restaurantLocation);
     }
 
-    // Methode zum Hinzufügen eines einzelnen Restaurants
-    public void addRestaurant(BusinessLogik.EssensOrte.Restaurant restaurant) {
-        restaurants.add(restaurant);
-    }
-
-    // Optional: Methode zum Hinzufügen mehrerer Restaurants gleichzeitig
-    public void addRestaurants(List<BusinessLogik.EssensOrte.Restaurant> restaurants) {
-        this.restaurants.addAll(restaurants);
-    }
-
-    // Liefert eine nach Entfernung sortierte Liste zurück
-    public List<BusinessLogik.EssensOrte.Restaurant> getRestaurantsSorted(ExerciseRoute.Location userLocation) {
-        List<BusinessLogik.EssensOrte.Restaurant> sortedList = new ArrayList<>(restaurants);
-        Collections.sort(sortedList, (r1, r2) -> {
-            float distance1 = 0;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                distance1 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r1.getLatitude(), r1.getLongitude());
+    // 1. Filtert Restaurants nach Umkreis
+    public static List<Restaurant> filterNachUmkreis(User user, List<Restaurant> restaurants, float maxDistanzMeter) {
+        List<Restaurant> gefiltert = new ArrayList<>();
+        for (Restaurant r : restaurants) {
+            float distanz = berechneEntfernung(user, r);
+            if (distanz <= maxDistanzMeter) {
+                gefiltert.add(r);
             }
-            float distance2 = 0;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                distance2 = calculateDistance(userLocation.getLatitude(), userLocation.getLongitude(), r2.getLatitude(), r2.getLongitude());
-            }
-            return Float.compare(distance1, distance2);
-        });
-        return sortedList;
+        }
+        return gefiltert;
     }
 
-    // Berechnet die Entfernung in Metern
-    private float calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        float[] result = new float[1];
-        Location.distanceBetween(lat1, lon1, lat2, lon2, result);
-        return result[0];
+    // 2. Sortiert Restaurants nach Entfernung aufsteigend
+    public static List<Restaurant> sortiereNachEntfernung(User user, List<Restaurant> restaurants) {
+        List<Restaurant> sortiert = new ArrayList<>(restaurants);
+        sortiert.sort(Comparator.comparingDouble(r -> berechneEntfernung(user, r)));
+        return sortiert;
     }
+
+    // 3. Sortiert Restaurants nach Bewertung absteigend (5.0 zuerst)
+    /*public static List<Restaurant> sortiereNachBewertung(List<Restaurant> restaurants) {
+        List<Restaurant> sortiert = new ArrayList<>(restaurants);
+        sortiert.sort(Comparator.comparingDouble(Restaurant::getBewertung).reversed());
+        return sortiert;
+    }*/
 }
-
