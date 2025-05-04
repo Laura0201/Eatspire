@@ -8,13 +8,10 @@
 package BusinessLogik.Nahrung;
 
 public class Heißgetränk extends BasisGetränk {
-    private int temperatur;
-    Heißgetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen, int temperatur) {
-        super(name, preis, zutaten, typ, volumen);
-        this.temperatur = temperatur;
+
+    public Heißgetränk(String name, Zutat[] zutaten) {
+        super(name, zutaten);
     }
 
-    public int getTemperatur() {
-        return temperatur;
-    }
+
 }

@@ -9,8 +9,8 @@ package BusinessLogik.Nahrung;
 
 public class Kaltgetränk extends BasisGetränk {
     private boolean alkoholisch;
-    public Kaltgetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen, boolean alkoholisch) {
-        super(name, preis, zutaten, typ, volumen);
+    public Kaltgetränk(String name, Zutat[] zutaten, boolean alkoholisch) {
+        super(name, zutaten);
         this.alkoholisch = alkoholisch;
     }
 
