@@ -6,6 +6,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import BusinessLogik.Nahrung.BasisEssen;
+import BusinessLogik.Nahrung.Hauptspeiße;
+import BusinessLogik.Nahrung.Heißgetränk;
+import BusinessLogik.Nahrung.Kaltgetränk;
+import BusinessLogik.Nahrung.Nachspeiße;
+import BusinessLogik.Nahrung.Vorspeise;
 
 public class Restaurant {
     public String name;
@@ -18,7 +23,11 @@ public class Restaurant {
     private double latitude;
     private double longitude;
 
-    private ArrayList<BasisEssen> listeGerichte = new ArrayList<BasisEssen>();
+    private ArrayList<Hauptspeiße> listeHauptspeisen = new ArrayList<Hauptspeiße>();
+    private ArrayList<Vorspeise> listeVorspeisen = new ArrayList<Vorspeise>();
+    private ArrayList<Nachspeiße> listeNachspeisen = new ArrayList<Nachspeiße>();
+    private ArrayList<Heißgetränk> listeHeißgetränke = new ArrayList<Heißgetränk>();
+    private ArrayList<Kaltgetränk> listeKaltgetränke = new ArrayList<Kaltgetränk>();
     public Restaurant() {
 
 
@@ -38,8 +47,20 @@ public class Restaurant {
     public void setAdresse(String Adresse){
         adressfeld=Adresse;
     }
-    public void setEssenListe(ArrayList<BasisEssen> listeGerichte){
-        this.listeGerichte=listeGerichte;
+    public void setHauptspeisenListe(ArrayList<Hauptspeiße> listeGerichte){
+        this.listeHauptspeisen=listeGerichte;
+    }
+    public void setVorspeisenListe(ArrayList<Vorspeise> listeGerichte){
+        this.listeVorspeisen=listeGerichte;
+    }
+    public void setNachspeisenListe(ArrayList<Nachspeiße> listeGerichte){
+        this.listeNachspeisen=listeGerichte;
+    }
+    public void setHeißgetränkeListe(ArrayList<Heißgetränk> listeGerichte){
+        this.listeHeißgetränke=listeGerichte;
+    }
+    public void setKaltgetränkeListe(ArrayList<Kaltgetränk> listeGerichte){
+        this.listeKaltgetränke=listeGerichte;
     }
     //....
     private LocalTime oeffnungszeit;
