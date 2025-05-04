@@ -7,9 +7,9 @@
  */
 package BusinessLogik.Nahrung;
 
-public class WarmGetränk extends BasisGetränk {
+public class Heißgetränk extends BasisGetränk {
     private int temperatur;
-    WarmGetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen, int temperatur) {
+    Heißgetränk(String name, double preis, Zutat[] zutaten, EssenTypen typ, double volumen, int temperatur) {
         super(name, preis, zutaten, typ, volumen);
         this.temperatur = temperatur;
     }

@@ -9,7 +9,7 @@ package BusinessLogik.Data;
 import static BusinessLogik.Nahrung.EssenTypen.COCKTAIL;
 import static BusinessLogik.Nahrung.EssenTypen.LIMO;
 
-import BusinessLogik.Nahrung.KaltGetränk;
+import BusinessLogik.Nahrung.Kaltgetränk;
 import BusinessLogik.Nahrung.Zutat;
 
 //import com.google.gson.*;
@@ -36,8 +36,8 @@ public class DataManager {
         Zutat[] zutatenCaipirinha = {limette, zucker};
         Zutat[] zutatenOrangenlimo = {orange, minze, wasser, eis};
 
-        KaltGetränk orangenlimo = new KaltGetränk("Orangenlimo", 4.5, zutatenOrangenlimo, LIMO, 0.4, false);
-        KaltGetränk caipirinha = new KaltGetränk("Caipirinha", 11, zutatenCaipirinha, COCKTAIL, 0.4, true);
+        Kaltgetränk orangenlimo = new Kaltgetränk("Orangenlimo", 4.5, zutatenOrangenlimo, LIMO, 0.4, false);
+        Kaltgetränk caipirinha = new Kaltgetränk("Caipirinha", 11, zutatenCaipirinha, COCKTAIL, 0.4, true);
 
     }
 }

@@ -1,4 +1,4 @@
-package BusinessLogik.UserStuff;
+package BusinessLogik.EssensOrte;
 
 public class Bewertung {
     private int bewertungVon1bis5;
