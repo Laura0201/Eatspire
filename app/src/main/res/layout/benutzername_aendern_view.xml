@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/textViewCurrentUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_margin="16dp"
         android:layout_below="@id/buttonBackTop"
         android:padding="8dp"
@@ -35,7 +35,7 @@
     <EditText
         android:id="@+id/editTextNewUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_margin="16dp"
         android:layout_below="@id/textViewCurrentUsername"
         android:padding="8dp"
