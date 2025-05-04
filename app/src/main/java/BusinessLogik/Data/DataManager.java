@@ -6,36 +6,23 @@
  */
 package BusinessLogik.Data;
 
-import static BusinessLogik.Nahrung.EssenTypen.COCKTAIL;
-import static BusinessLogik.Nahrung.EssenTypen.LIMO;
-
 import android.os.Build;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import BusinessLogik.EssensOrte.Kategorien;
 import BusinessLogik.EssensOrte.Restaurant;
 import BusinessLogik.Nahrung.BasisEssen;
 import BusinessLogik.Nahrung.Hauptspeiße;
 import BusinessLogik.Nahrung.Kaltgetränk;
+import BusinessLogik.Nahrung.Vorspeise;
 import BusinessLogik.Nahrung.Zutat;
-
-//import com.google.gson.*;
-//
-//import java.io.*;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-//
 public class DataManager {
-
     public DataManager() {
         initGerichteAlsZutatenArrays();
     }
-
     public void initGerichteAlsZutatenArrays() {
-    //Initialisierung Bella Napoli
+
+        //Initialisierung Bella Napoli
         Zutat[] VegetarischeLasagne = new Zutat[]{
                 new Zutat("Kardamom", 2.67),
                 new Zutat("Lasagneblätter", 3.57),
@@ -44,11 +31,65 @@ public class DataManager {
                 new Zutat("Knoblauch", 4.2),
                 new Zutat("Trüffel", 2.46)
         };
+        Zutat[] Käseplatte = new Zutat[] {
+                new Zutat("Parmesan", 2.10),
+                new Zutat("Gorgonzola", 2.50),
+                new Zutat("Camembert", 1.80),
+                new Zutat("Baguette", 1.20)
+        };
+        Zutat[] Bruschetta = new Zutat[] {
+                new Zutat("Ciabatta", 1.00),
+                new Zutat("Tomaten", 0.80),
+                new Zutat("Knoblauch", 0.40),
+                new Zutat("Basilikum", 0.30),
+                new Zutat("Olivenöl", 0.50)
+        };
+        Zutat[] Carpaccio = new Zutat[] {
+                new Zutat("Rinderfilet", 3.50),
+                new Zutat("Rucola", 0.60),
+                new Zutat("Parmesan", 1.50),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Olivenöl", 0.50)
+        };
+        Zutat[] VitelloTonnato = new Zutat[] {
+                new Zutat("Kalbfleisch", 3.80),
+                new Zutat("Thunfisch", 1.80),
+                new Zutat("Kapern", 0.60),
+                new Zutat("Mayonnaise", 0.50),
+                new Zutat("Zitronensaft", 0.30)
+        };
+        Zutat[] AntipastiMisto = new Zutat[] {
+                new Zutat("Gegrillte Zucchini", 0.80),
+                new Zutat("Aubergine", 0.90),
+                new Zutat("Paprika", 0.70),
+                new Zutat("Oliven", 0.60),
+                new Zutat("Mozzarella", 1.20)
+        };
+        Zutat[] CrostiniFunghi = new Zutat[] {
+                new Zutat("Crostini", 1.00),
+                new Zutat("Champignons", 0.90),
+                new Zutat("Petersilie", 0.20),
+                new Zutat("Knoblauch", 0.30),
+                new Zutat("Butter", 0.40)
+        };
+        Zutat[] ProsciuttoMelone = new Zutat[] {
+                new Zutat("Parmaschinken", 2.00),
+                new Zutat("Honigmelone", 1.50)
+        };
         Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
         ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
+        ArrayList<Vorspeise> listeBellaNapoliVorspeisen= new ArrayList<Vorspeise>();
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Käseplatte", Käseplatte));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Bruschetta", Bruschetta));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Carpaccio", Carpaccio));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Vitello Tonnato", VitelloTonnato));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Antipasti Misto", AntipastiMisto));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Crostini Funghi", CrostiniFunghi));
+        listeBellaNapoliVorspeisen.add(new Vorspeise("Prosciutto Melone", ProsciuttoMelone));
         Hauptspeiße VegetarischeLasagneEssen = new Hauptspeiße("Vegetarische Lasagne", VegetarischeLasagne);
         listeBellaNapoliHauptspeisen.add(VegetarischeLasagneEssen);
         BellaNapoli.setHauptspeisenListe(listeBellaNapoliHauptspeisen);
+        BellaNapoli.setVorspeisenListe(listeBellaNapoliVorspeisen);
         BellaNapoli.setName("Bella Napoli");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             BellaNapoli.setOeffnungszeiten(LocalTime.of(9, 30), LocalTime.of(22, 00));
@@ -99,16 +140,99 @@ public class DataManager {
                 new Zutat("Butter", 1.10),
                 new Zutat("Zimt", 0.60)
         };
+        Zutat[] Zwiebelsuppe = new Zutat[] {
+                new Zutat("Zwiebeln", 0.80),
+                new Zutat("Butter", 0.50),
+                new Zutat("Weißwein", 1.20),
+                new Zutat("Rinderbrühe", 0.90),
+                new Zutat("Baguette", 1.00),
+                new Zutat("Gruyère", 1.50)
+        };
+
+        Zutat[] QuicheLorraine1 = new Zutat[] {
+                new Zutat("Blätterteig", 1.20),
+                new Zutat("Sahne", 0.80),
+                new Zutat("Eier", 0.60),
+                new Zutat("Speck", 1.00),
+                new Zutat("Emmentaler", 1.10)
+        };
+        Zutat[] Ratatouille1 = new Zutat[] {
+                new Zutat("Zucchini", 0.70),
+                new Zutat("Aubergine", 0.80),
+                new Zutat("Paprika", 0.90),
+                new Zutat("Tomaten", 0.80),
+                new Zutat("Knoblauch", 0.30),
+                new Zutat("Olivenöl", 0.50)
+        };
+        Zutat[] CoquillesSaintJacques = new Zutat[] {
+                new Zutat("Jakobsmuscheln", 4.50),
+                new Zutat("Weißwein", 1.30),
+                new Zutat("Butter", 0.60),
+                new Zutat("Sahne", 0.90),
+                new Zutat("Petersilie", 0.20)
+        };
+        Zutat[] SaladeNicoise = new Zutat[] {
+                new Zutat("Thunfisch", 1.80),
+                new Zutat("Oliven", 0.60),
+                new Zutat("Tomaten", 0.70),
+                new Zutat("Eier", 0.50),
+                new Zutat("Grüne Bohnen", 0.90),
+                new Zutat("Kartoffeln", 0.60)
+        };
+        Zutat[] TarteTatinSavory = new Zutat[] {
+                new Zutat("Blätterteig", 1.10),
+                new Zutat("Zwiebeln", 0.80),
+                new Zutat("Ziegenkäse", 1.60),
+                new Zutat("Honig", 0.40),
+                new Zutat("Thymian", 0.20)
+        };
+        Zutat[] CroqueMonsieur = new Zutat[] {
+                new Zutat("Toastbrot", 0.70),
+                new Zutat("Kochschinken", 1.00),
+                new Zutat("Emmentaler", 1.20),
+                new Zutat("Béchamelsauce", 0.90)
+        };
+        Zutat[] TerrineDeCampagne = new Zutat[] {
+                new Zutat("Schweinefleisch", 2.00),
+                new Zutat("Leber", 1.30),
+                new Zutat("Pistazien", 1.00),
+                new Zutat("Thymian", 0.30),
+                new Zutat("Cognac", 1.50)
+        };
+        Zutat[] LachsTatar = new Zutat[] {
+                new Zutat("Räucherlachs", 2.80),
+                new Zutat("Schalotten", 0.40),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Dill", 0.20),
+                new Zutat("Crème fraîche", 0.70)
+        };
+        Zutat[] Käseauswahl = new Zutat[] {
+                new Zutat("Brie", 1.50),
+                new Zutat("Roquefort", 1.70),
+                new Zutat("Comté", 1.80),
+                new Zutat("Baguette", 1.00),
+                new Zutat("Trauben", 0.60)
+        };
         Restaurant LaProvence = new Restaurant(Kategorien.FRANZÖSISCH, true);
         ArrayList<Hauptspeiße> listeLaProvenceHauptspeisen = new ArrayList<>();
-
-        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Ratatouille", Ratatouille));
-        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Quiche Lorraine", QuicheLorraine));
+        ArrayList<Vorspeise> listeLaProvenceVorspeisen = new ArrayList<>();
+        listeLaProvenceVorspeisen.add(new Vorspeise("Zwiebelsuppe", Zwiebelsuppe));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Coquilles Saint Jacques", CoquillesSaintJacques));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Salade Niçoise", SaladeNicoise));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Tarte Tatin Savory", TarteTatinSavory));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Croque Monsieur", CroqueMonsieur));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Terrine de Campagne", TerrineDeCampagne));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Lachs Tatar", LachsTatar));
+        listeLaProvenceVorspeisen.add(new Vorspeise("Käseauswahl", Käseauswahl));
+        LaProvence.setVorspeisenListe(listeLaProvenceVorspeisen);
+        //Liste der Vorspeisen übertragen
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Ratatouille", Ratatouille1));
+        listeLaProvenceHauptspeisen.add(new Hauptspeiße("Quiche Lorraine", QuicheLorraine1));
         listeLaProvenceHauptspeisen.add(new Hauptspeiße("Bouillabaisse", Bouillabaisse));
         listeLaProvenceHauptspeisen.add(new Hauptspeiße("Coq au Vin", CoqAuVin));
         listeLaProvenceHauptspeisen.add(new Hauptspeiße("Tarte Tatin", TarteTatin));
-
         LaProvence.setHauptspeisenListe(listeLaProvenceHauptspeisen);
+        //Liste der Hauptspeisen übertragen
         LaProvence.setName("La Provence");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -119,6 +243,149 @@ public class DataManager {
         LaProvence.beschreibung = "Ein charmantes französisches Bistro im Herzen der Stadt – genießen Sie klassische Spezialitäten und erlesene Weine in stilvollem Ambiente.";
         LaProvence.telefonnummer = "0456 789012";
         LaProvence.mail = "info@laprovence.fr";
+
+        // Zutaten und Gerichte für das Restaurant "Cocktail Lounge"
+        Zutat[] Mojito = new Zutat[] {
+                new Zutat("Rum", 2.50),
+                new Zutat("Minze", 0.30),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Limettensaft", 0.50),
+                new Zutat("Soda", 0.20),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] TequilaSunrise = new Zutat[] {
+                new Zutat("Tequila", 2.20),
+                new Zutat("Orangensaft", 0.80),
+                new Zutat("Grenadine", 0.50),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] WhiskeySour = new Zutat[] {
+                new Zutat("Whiskey", 2.50),
+                new Zutat("Zitronensaft", 0.50),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] PinaColada = new Zutat[] {
+                new Zutat("Rum", 2.50),
+                new Zutat("Kokosmilch", 1.00),
+                new Zutat("Ananassaft", 0.80),
+                new Zutat("Sahne", 0.40),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] BlueLagoon = new Zutat[] {
+                new Zutat("Wodka", 2.00),
+                new Zutat("Blue Curaçao", 1.00),
+                new Zutat("Zitronensaft", 0.50),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] GinTonic = new Zutat[] {
+                new Zutat("Gin", 2.20),
+                new Zutat("Tonic Water", 0.80),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] EspressoMartini = new Zutat[] {
+                new Zutat("Wodka", 2.00),
+                new Zutat("Kaffeelikör", 1.20),
+                new Zutat("Espresso", 0.80),
+                new Zutat("Eiswürfel", 0.10)
+        };
+        Restaurant BarLounge1 = new Restaurant(Kategorien.SPIRITUOSEN, false);
+        ArrayList<Hauptspeiße> drinksBarLounge1 = new ArrayList<>();
+
+        drinksBarLounge1.add(new Hauptspeiße("Mojito", Mojito));
+        drinksBarLounge1.add(new Hauptspeiße("Tequila Sunrise", TequilaSunrise));
+        drinksBarLounge1.add(new Hauptspeiße("Whiskey Sour", WhiskeySour));
+        drinksBarLounge1.add(new Hauptspeiße("Pina Colada", PinaColada));
+        drinksBarLounge1.add(new Hauptspeiße("Blue Lagoon", BlueLagoon));
+        drinksBarLounge1.add(new Hauptspeiße("Gin Tonic", GinTonic));
+        drinksBarLounge1.add(new Hauptspeiße("Espresso Martini", EspressoMartini));
+
+        BarLounge1.setHauptspeisenListe(drinksBarLounge1);
+        BarLounge1.setName("BarLounge 1");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            BarLounge1.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
+        }
+        BarLounge1.website = "www.barlounge1.de";
+        BarLounge1.beschreibung = "Die stilvolle Cocktailbar im Herzen der Stadt mit Signature Drinks und entspannter Atmosphäre.";
+        BarLounge1.telefonnummer = "040 9876543";
+        BarLounge1.mail = "info@barlounge1.de";
+
+        // Zutaten und Gerichte für das Restaurant "SnackHaus 1"
+        Zutat[] SchinkenBaguette = new Zutat[] {
+                new Zutat("Baguette", 1.20),
+                new Zutat("Butter", 0.30),
+                new Zutat("Schinken", 1.00),
+                new Zutat("Käse", 0.80)
+        };
+
+        Zutat[] ChickenWrap = new Zutat[] {
+                new Zutat("Weizentortilla", 1.00),
+                new Zutat("Hähnchenbrust", 2.00),
+                new Zutat("Eisbergsalat", 0.60),
+                new Zutat("Guacamole", 0.90)
+        };
+
+        Zutat[] VeggieToast = new Zutat[] {
+                new Zutat("Toastbrot", 0.50),
+                new Zutat("Paprika", 0.60),
+                new Zutat("Tomaten", 0.70),
+                new Zutat("Käse", 0.80)
+        };
+
+        Zutat[] SpiegeleiSandwich = new Zutat[] {
+                new Zutat("Toastbrot", 0.50),
+                new Zutat("Spiegelei", 1.00),
+                new Zutat("Bacon", 1.00),
+                new Zutat("Ketchup", 0.30)
+        };
+
+        Zutat[] TunaSnack = new Zutat[] {
+                new Zutat("Thunfisch", 1.20),
+                new Zutat("Oliven", 0.60),
+                new Zutat("Zwiebeln", 0.40)
+        };
+
+        Zutat[] MozzarellaCiabatta = new Zutat[] {
+                new Zutat("Ciabatta", 1.20),
+                new Zutat("Mozzarella", 1.00),
+                new Zutat("Tomaten", 0.70),
+                new Zutat("Basilikum", 0.40)
+        };
+
+        Zutat[] Snackplatte = new Zutat[] {
+                new Zutat("Salami", 1.00),
+                new Zutat("Käse", 0.80),
+                new Zutat("Gurke", 0.40),
+                new Zutat("Röstzwiebeln", 0.30)
+        };
+
+        Restaurant SnackHaus1 = new Restaurant(Kategorien.SNACKS, true);
+        ArrayList<Hauptspeiße> speisenSnackHaus1 = new ArrayList<>();
+
+        speisenSnackHaus1.add(new Hauptspeiße("Schinken Baguette", SchinkenBaguette));
+        speisenSnackHaus1.add(new Hauptspeiße("Chicken Wrap", ChickenWrap));
+        speisenSnackHaus1.add(new Hauptspeiße("Veggie Toast", VeggieToast));
+        speisenSnackHaus1.add(new Hauptspeiße("Spiegelei Sandwich", SpiegeleiSandwich));
+        speisenSnackHaus1.add(new Hauptspeiße("Tuna Snack", TunaSnack));
+        speisenSnackHaus1.add(new Hauptspeiße("Mozzarella Ciabatta", MozzarellaCiabatta));
+        speisenSnackHaus1.add(new Hauptspeiße("Snackplatte", Snackplatte));
+
+        SnackHaus1.setHauptspeisenListe(speisenSnackHaus1);
+        SnackHaus1.setName("SnackHaus 1");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            SnackHaus1.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
+        }
+        SnackHaus1.website = "www.snackhaus1.de";
+        SnackHaus1.beschreibung = "Knackige Snacks, frisch belegt und ideal für unterwegs. Bei uns trifft Genuss auf Geschwindigkeit!";
+        SnackHaus1.telefonnummer = "030 11122233";
+        SnackHaus1.mail = "kontakt@snackhaus1.de";
+
 
         // Zutaten und Gerichte für das Asiatische Restaurant "Tokyo Zen"
         // 1. Sushi Platter
@@ -169,74 +436,91 @@ public class DataManager {
         TokyoZen.beschreibung = "Erleben Sie authentische japanische Küche in modernem Ambiente. Unser Angebot umfasst frisches Sushi, knackige Tempura und traditionelle Miso Suppe. Wir freuen uns auf Ihren Besuch!";
         TokyoZen.telefonnummer = "0987 654321";
         TokyoZen.mail = "info@tokyozen.jp";
-        
 
-        Zutat[] Trüffelrisotto = {
-                new Zutat("Zutat117", 3.95),
-                new Zutat("Kerbel", 4.14),
-                new Zutat("Blauschimmelkäse", 3.53),
-                new Zutat("Olivenöl extra vergine", 1.9),
-                new Zutat("Kapern", 2.07),
-                new Zutat("Butterschmalz", 0.51)
+        // Zutaten und Gerichte für das Italienische Restaurant "Ristorante Amore"
+        Zutat[] PenneArrabbiata = new Zutat[] {
+                new Zutat("Penne", 2.20),
+                new Zutat("Tomaten", 1.50),
+                new Zutat("Chili", 0.80),
+                new Zutat("Knoblauch", 0.60)
         };
 
-        Zutat[] PilzGnocchi = {
-                new Zutat("Dill", 2.39),
-                new Zutat("Steinpilze", 0.78),
-                new Zutat("Blauschimmelkäse", 1.1),
-                new Zutat("Gnocchi", 4.78)
+        Zutat[] Caprese = new Zutat[] {
+                new Zutat("Mozzarella", 2.00),
+                new Zutat("Tomaten", 1.30),
+                new Zutat("Basilikum", 0.70),
+                new Zutat("Olivenöl", 1.10)
         };
 
-        Zutat[] HähnchenbrustmitSelleriepüree = {
-                new Zutat("Hähnchenbrust", 0.79),
-                new Zutat("Zutat114", 4.94),
-                new Zutat("Kerbel", 1.68),
-                new Zutat("Zutat118", 4.53),
-                new Zutat("Selleriepüree", 3.2)
+        Restaurant RistoranteAmore = new Restaurant(Kategorien.ITALIENISCH, true);
+        ArrayList<Hauptspeiße> listeAmore = new ArrayList<>();
+        listeAmore.add(new Hauptspeiße("Penne Arrabbiata", PenneArrabbiata));
+        listeAmore.add(new Hauptspeiße("Caprese", Caprese));
+        RistoranteAmore.setHauptspeisenListe(listeAmore);
+        RistoranteAmore.setName("Ristorante Amore");
+        RistoranteAmore.website = "www.ristorante-amore.it";
+        RistoranteAmore.beschreibung = "Klassische italienische Küche mit Leidenschaft gekocht. Besonders bekannt für unsere hausgemachten Nudelgerichte.";
+        RistoranteAmore.telefonnummer = "030 112233";
+        RistoranteAmore.mail = "info@amore.it";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            RistoranteAmore.setOeffnungszeiten(LocalTime.of(12, 0), LocalTime.of(22, 0));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Trattoria Roma"
+        Zutat[] PizzaQuattroFormaggi = new Zutat[] {
+                new Zutat("Pizzateig", 1.80),
+                new Zutat("Mozzarella", 2.10),
+                new Zutat("Gorgonzola", 2.20),
+                new Zutat("Parmesan", 2.00),
+                new Zutat("Emmentaler", 1.90)
         };
-        Zutat[] RinderfiletmitRotweinreduktion = {
-                new Zutat("Rinderfilet", 3.81),
-                new Zutat("Knoblauch", 3.38),
-                new Zutat("Thymian", 2.1),
-                new Zutat("Butter", 1.63)
+        Zutat[] PastamitMeeresfrüchten = {
+                new Zutat("Spaghetti", 0.83),
+                new Zutat("Garnelen", 3.25),
+                new Zutat("Oktopus", 3.86),
+                new Zutat("Olivenöl extra vergine", 1.77),
+                new Zutat("Knoblauch", 2.34)
+        };
+        Zutat[] GnocchiAlPesto = new Zutat[] {
+                new Zutat("Gnocchi", 2.50),
+                new Zutat("Pesto", 1.80),
+                new Zutat("Pinienkerne", 1.60),
+                new Zutat("Parmesan", 2.10)
         };
 
-        Zutat[] LammkarreemitKräuterkruste = {
-                new Zutat("Lammkarree", 3.12),
-                new Zutat("Rosmarin", 1.19),
-                new Zutat("Schnittlauch", 1.58),
-                new Zutat("Pfeffer schwarz", 4.86)
+        Restaurant TrattoriaRoma = new Restaurant(Kategorien.ITALIENISCH, true);
+        ArrayList<Hauptspeiße> listeRoma = new ArrayList<>();
+        listeRoma.add(new Hauptspeiße("Pizza Quattro Formaggi", PizzaQuattroFormaggi));
+        listeRoma.add(new Hauptspeiße("Gnocchi al Pesto", GnocchiAlPesto));
+        listeRoma.add(new Hauptspeiße("Pasta mit Meeresfrüchten", PastamitMeeresfrüchten));
+        TrattoriaRoma.setHauptspeisenListe(listeRoma);
+        TrattoriaRoma.setName("Trattoria Roma");
+        TrattoriaRoma.website = "www.trattoria-roma.it";
+        TrattoriaRoma.beschreibung = "Traditionelle Trattoria mit Holzofenpizza und mediterranem Flair.";
+        TrattoriaRoma.telefonnummer = "040 998877";
+        TrattoriaRoma.mail = "kontakt@trattoriaroma.it";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            TrattoriaRoma.setOeffnungszeiten(LocalTime.of(11, 30), LocalTime.of(23, 0));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Sakura Sushi"
+        Zutat[] MakiLachs = new Zutat[] {
+                new Zutat("Sushireis", 1.00),
+                new Zutat("Lachs", 2.50),
+                new Zutat("Nori", 0.80),
+                new Zutat("Sojasauce", 0.50)
         };
 
-        Zutat[] ZanderfiletaufsGemüsebeet = {
-                new Zutat("Zander", 1.03),
-                new Zutat("Mangold", 4.84),
-                new Zutat("Chicorée", 3.04),
-                new Zutat("Schmand", 0.9),
-                new Zutat("Basilikum", 2.8)
+        Zutat[] Edamame = new Zutat[] {
+                new Zutat("Edamame", 1.20),
+                new Zutat("Meersalz", 0.40)
         };
-
-        Zutat[] JakobsmuschelnmitSafransauce = {
-                new Zutat("Jakobsmuschel", 1.48),
-                new Zutat("Sahne", 1.67),
-                new Zutat("Zutat118", 1.3),
-                new Zutat("Kapern", 2.94)
-        };
-
         Zutat[] ThunfischtatarmitAvocado = {
                 new Zutat("Thunfischsteak", 2.69),
                 new Zutat("Avocado", 2.12),
                 new Zutat("Zitronenzeste", 3.7),
                 new Zutat("Sesamöl", 0.61)
         };
-
-        Zutat[] EntenbrustaufOrangenspiegel = {
-                new Zutat("Entenbrust", 4.31),
-                new Zutat("Orangenzeste", 2.43),
-                new Zutat("Honig", 1.58),
-                new Zutat("Zimtstange", 1.87)
-        };
-
         Zutat[] SushiVariation = {
                 new Zutat("Sushi-Reis", 3.88),
                 new Zutat("Wasabi", 2.09),
@@ -245,21 +529,225 @@ public class DataManager {
                 new Zutat("Sojasauce", 1.37)
         };
 
-        Zutat[] PastamitMeeresfrüchten = {
-                new Zutat("Spaghetti", 0.83),
-                new Zutat("Garnelen", 3.25),
-                new Zutat("Oktopus", 3.86),
-                new Zutat("Olivenöl extra vergine", 1.77),
-                new Zutat("Knoblauch", 2.34)
+        Restaurant SakuraSushi = new Restaurant(Kategorien.ASIATISCH, true);
+        ArrayList<Hauptspeiße> listeSakura = new ArrayList<>();
+        listeSakura.add(new Hauptspeiße("Maki mit Lachs", MakiLachs));
+        listeSakura.add(new Hauptspeiße("Edamame", Edamame));
+        listeSakura.add(new Hauptspeiße("Thunfischtatar mit Avocado", ThunfischtatarmitAvocado));
+        listeSakura.add(new Hauptspeiße("Sushi Variation", SushiVariation));
+        SakuraSushi.setHauptspeisenListe(listeSakura);
+        SakuraSushi.setName("Sakura Sushi Bar");
+        SakuraSushi.website = "www.sakura-sushi.de";
+        SakuraSushi.beschreibung = "Frisches Sushi in modernem Ambiente. Unsere Spezialität: kreative Maki-Rollen.";
+        SakuraSushi.telefonnummer = "089 334455";
+        SakuraSushi.mail = "info@sakura.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            SakuraSushi.setOeffnungszeiten(LocalTime.of(12, 0), LocalTime.of(22, 30));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Wok Dynasty"
+        Zutat[] WokGemüseReis = new Zutat[] {
+                new Zutat("Reis", 1.20),
+                new Zutat("Gemüsemix", 1.40),
+                new Zutat("Sojasauce", 0.60),
+                new Zutat("Sesamöl", 0.70)
         };
 
+        Zutat[] ThaiCurry = new Zutat[] {
+                new Zutat("Kokosmilch", 1.50),
+                new Zutat("Currypaste", 1.10),
+                new Zutat("Hähnchen", 2.40),
+                new Zutat("Bambus", 1.00)
+        };
+        Zutat[] JakobsmuschelnmitSafransauce = {
+                new Zutat("Jakobsmuschel", 1.48),
+                new Zutat("Sahne", 1.67),
+                new Zutat("Zutat118", 1.3),
+                new Zutat("Kapern", 2.94)
+        };
+        Zutat[] OktopusCarpaccio = {
+                new Zutat("Oktopus", 4.22),
+                new Zutat("Olivenöl extra vergine", 1.95),
+                new Zutat("Zitrone", 0.89),
+                new Zutat("Pfeffer weiß", 1.11)
+        };
+        Restaurant WokDynasty = new Restaurant(Kategorien.ASIATISCH, true);
+        ArrayList<Hauptspeiße> listeWok = new ArrayList<>();
+        listeWok.add(new Hauptspeiße("Gebratener Reis mit Gemüse", WokGemüseReis));
+        listeWok.add(new Hauptspeiße("Thai-Curry mit Hähnchen", ThaiCurry));
+        listeWok.add(new Hauptspeiße("Jakobsmuscheln mit Safransauce", JakobsmuschelnmitSafransauce));
+        listeWok.add(new Hauptspeiße("Oktopus-Carpaccio", OktopusCarpaccio));
+        WokDynasty.setHauptspeisenListe(listeWok);
+        WokDynasty.setName("Wok Dynasty");
+        WokDynasty.website = "www.wokdynasty.de";
+        WokDynasty.beschreibung = "Authentische asiatische Wok-Gerichte – frisch und schnell zubereitet.";
+        WokDynasty.telefonnummer = "0711 223344";
+        WokDynasty.mail = "kontakt@wokdynasty.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WokDynasty.setOeffnungszeiten(LocalTime.of(10, 30), LocalTime.of(21, 30));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Burger Factory"
+        Zutat[] Cheeseburger = new Zutat[] {
+                new Zutat("Rindfleischpatty", 2.50),
+                new Zutat("Cheddar", 1.00),
+                new Zutat("Burgerbrötchen", 0.80),
+                new Zutat("Tomaten", 0.70),
+                new Zutat("Salat", 0.60)
+        };
+
+        Zutat[] VeggieBurger = new Zutat[] {
+                new Zutat("Gemüsepatty", 2.00),
+                new Zutat("Avocado", 1.20),
+                new Zutat("Salat", 0.60),
+                new Zutat("Brötchen", 0.80)
+        };
+
+        Restaurant BurgerFactory = new Restaurant(Kategorien.FASTFOOD, true);
+        ArrayList<Hauptspeiße> listeBurger = new ArrayList<>();
+        listeBurger.add(new Hauptspeiße("Cheeseburger", Cheeseburger));
+        listeBurger.add(new Hauptspeiße("Veggie Burger", VeggieBurger));
+        BurgerFactory.setHauptspeisenListe(listeBurger);
+        BurgerFactory.setName("Burger Factory");
+        BurgerFactory.website = "www.burgerfactory.de";
+        BurgerFactory.beschreibung = "Handgemachte Burger mit hochwertigen Zutaten – klassisch oder vegan!";
+        BurgerFactory.telefonnummer = "0201 556677";
+        BurgerFactory.mail = "info@burgerfactory.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            BurgerFactory.setOeffnungszeiten(LocalTime.of(11, 0), LocalTime.of(23, 0));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Frittenkönig"
+        Zutat[] CurrywurstPommes = new Zutat[] {
+                new Zutat("Currywurst", 2.20),
+                new Zutat("Pommes", 1.50),
+                new Zutat("Currysauce", 0.90)
+        };
+
+        Zutat[] ChiliCheeseFries = new Zutat[] {
+                new Zutat("Pommes", 1.50),
+                new Zutat("Chilisoße", 1.10),
+                new Zutat("Cheddar", 1.00),
+                new Zutat("Frühlingszwiebeln", 0.70)
+        };
+
+        Restaurant Frittenkoenig = new Restaurant(Kategorien.FASTFOOD, true);
+        ArrayList<Hauptspeiße> listeFritten = new ArrayList<>();
+        listeFritten.add(new Hauptspeiße("Currywurst mit Pommes", CurrywurstPommes));
+        listeFritten.add(new Hauptspeiße("Chili Cheese Fries", ChiliCheeseFries));
+        Frittenkoenig.setHauptspeisenListe(listeFritten);
+        Frittenkoenig.setName("Frittenkönig");
+        Frittenkoenig.website = "www.frittenkoenig.de";
+        Frittenkoenig.beschreibung = "Deftiges Fastfood mit Kultcharakter – schnell, günstig, lecker.";
+        Frittenkoenig.telefonnummer = "0511 909090";
+        Frittenkoenig.mail = "kontakt@frittenkoenig.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Frittenkoenig.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(22, 0));
+        }
+
+
+        // Zutaten und Gerichte für das deutsche Restaurant "Hausmannskost"
+        Zutat[] EntenbrustaufOrangenspiegel = {
+                new Zutat("Entenbrust", 4.31),
+                new Zutat("Orangenzeste", 2.43),
+                new Zutat("Honig", 1.58),
+                new Zutat("Zimtstange", 1.87)
+        };
+        Zutat[] ZiegenkäseimSpeckmantel = {
+                new Zutat("Ziegenkäse", 2.33),
+                new Zutat("Frühstücksspeck", 1.98),
+                new Zutat("Honig", 1.56),
+                new Zutat("Thymian", 0.67)
+        };
+        Zutat[] KalbsrückeninSenfkruste = {
+                new Zutat("Kalbsrücken", 3.84),
+                new Zutat("Senf", 1.05),
+                new Zutat("Paniermehl", 0.87),
+                new Zutat("Estragon", 0.78)
+        };Zutat[] ZitronenhähnchenmitRosmarinkartoffeln = {
+                new Zutat("Hähnchenschenkel", 2.77),
+                new Zutat("Zitrone", 0.88),
+                new Zutat("Rosmarin", 0.69),
+                new Zutat("Kartoffeln", 1.35)
+        };
+        Zutat[] Rindergulasch = {
+                new Zutat("Rindfleisch", 3.72),
+                new Zutat("Paprika", 0.97),
+                new Zutat("Zwiebel", 0.33),
+                new Zutat("Lorbeerblatt", 0.31)
+        };
+        Zutat[] SchweinshaxemitKrautsalat = {
+                new Zutat("Schweinshaxe", 4.12),
+                new Zutat("Krautsalat", 1.55),
+                new Zutat("Senf", 0.64),
+                new Zutat("Kartoffeln", 1.02)
+        };
+        Zutat[] ForelleMüllerinArt = {
+                new Zutat("Forelle", 3.11),
+                new Zutat("Butter", 1.32),
+                new Zutat("Zitrone", 0.94),
+                new Zutat("Petersilie", 0.73)
+        };
+        Zutat[] KalbsleberBerlinerArt = {
+                new Zutat("Kalbsleber", 2.87),
+                new Zutat("Zwiebel", 0.43),
+                new Zutat("Apfel", 0.88),
+                new Zutat("Kartoffelpüree", 1.77)
+        };
+        Zutat[] WienerSchnitzel = {
+                new Zutat("Kalbfleisch", 4.55),
+                new Zutat("Ei", 0.38),
+                new Zutat("Paniermehl", 0.55),
+                new Zutat("Zitrone", 0.81)
+        };
+        Zutat[] SchweinebratenmitKloß = {
+                new Zutat("Schweinebraten", 3.44),
+                new Zutat("Kartoffelklöße", 2.22),
+                new Zutat("Sauerkraut", 1.19),
+                new Zutat("Kümmel", 0.61)
+        };
+        Zutat[] HackbratenmitErbsen = {
+                new Zutat("Hackfleisch", 2.05),
+                new Zutat("Erbsen", 1.15),
+                new Zutat("Zwiebel", 0.35),
+                new Zutat("Senf", 0.54)
+        };
+        Restaurant Hausmannskost = new Restaurant(Kategorien.DEUTSCH, false);
+        ArrayList<Hauptspeiße> listeHM = new ArrayList<>();
+        listeHM.add(new Hauptspeiße("Entenbrust auf Orangenspiegel", EntenbrustaufOrangenspiegel));
+        listeHM.add(new Hauptspeiße("Ziegenkäse im Speckmantel", ZiegenkäseimSpeckmantel));
+        listeHM.add(new Hauptspeiße("Kalbsrücken in Senfkruste", KalbsrückeninSenfkruste));
+        listeHM.add(new Hauptspeiße("Zitronenhähnchen mit Rosmarinkartoffeln", ZitronenhähnchenmitRosmarinkartoffeln));
+        listeHM.add(new Hauptspeiße("Rindergulasch", Rindergulasch));
+        listeHM.add(new Hauptspeiße("Schweinshaxe mit Krautsalat", SchweinshaxemitKrautsalat));
+        listeHM.add(new Hauptspeiße("Forelle Müllerin Art", ForelleMüllerinArt));
+        listeHM.add(new Hauptspeiße("Kalbsleber Berliner Art", KalbsleberBerlinerArt));
+        listeHM.add(new Hauptspeiße("Wiener Schnitzel", WienerSchnitzel));
+        listeHM.add(new Hauptspeiße("Schweinebraten mit Kloß", SchweinebratenmitKloß));
+        listeHM.add(new Hauptspeiße("Hackbraten mit Erbsen", HackbratenmitErbsen));
+        Hausmannskost.setHauptspeisenListe(listeHM);
+        Hausmannskost.setName("Hausmannskost");
+        Hausmannskost.website = "www.Hausmannskost.de";
+        Hausmannskost.beschreibung = "Echt deutsche Kost zu echten deutschen Preisen – hier gibt es alles, was das Herz begehrt.";
+        Hausmannskost.telefonnummer = "0511 909090";
+        Hausmannskost.mail = "kontakt@hausmannskost.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Hausmannskost.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(22, 0));
+        }
+
+        // Zutaten und Gerichte für das Restaurant "Veganuss"
         Zutat[] TortellinimitRicottaundSpinat = {
                 new Zutat("Tortellini", 2.59),
                 new Zutat("Ricotta", 2.45),
                 new Zutat("Babyspinat", 1.92),
                 new Zutat("Muskatnuss", 0.74)
         };
-
+        Zutat[] KürbissuppemitIngwer = {
+                new Zutat("Hokkaido", 1.97),
+                new Zutat("Ingwer", 0.84),
+                new Zutat("Kokosmilch", 2.01),
+                new Zutat("Muskatnuss", 0.73)
+        };
         Zutat[] BulgurSalatmitKräutern = {
                 new Zutat("Bulgur", 2.36),
                 new Zutat("Petersilie", 2.18),
@@ -275,19 +763,6 @@ public class DataManager {
                 new Zutat("Tomate", 0.9)
         };
 
-        Zutat[] Garnelenpfanneasiatisch = {
-                new Zutat("Garnelen", 4.1),
-                new Zutat("Zitronengras", 2.49),
-                new Zutat("Sojasauce", 1.92),
-                new Zutat("Chili", 0.94)
-        };
-
-        Zutat[] RavioliinSalbeibutter = {
-                new Zutat("Ravioli", 3.47),
-                new Zutat("Butter", 2.63),
-                new Zutat("Salbei", 1.35)
-        };
-
         Zutat[] QuinoaBowlvegan = {
                 new Zutat("Quinoa", 2.97),
                 new Zutat("Avocado", 3.15),
@@ -295,545 +770,66 @@ public class DataManager {
                 new Zutat("Feldsalat", 2.24),
                 new Zutat("Limette", 0.8)
         };
+        Restaurant Veganuss = new Restaurant(Kategorien.DEUTSCH, true);
+        ArrayList<Hauptspeiße> listeVeganuss = new ArrayList<>();
+        listeVeganuss.add(new Hauptspeiße("Tortellini mit Ricotta und Spinat", TortellinimitRicottaundSpinat));
+        listeVeganuss.add(new Hauptspeiße("Kürbissuppe mit Ingwer", KürbissuppemitIngwer));
+        listeVeganuss.add(new Hauptspeiße("Bulgur-Salat mit Kräutern", BulgurSalatmitKräutern));
+        listeVeganuss.add(new Hauptspeiße("Couscous mit Gemüse", CouscousmitGemüse));
+        listeVeganuss.add(new Hauptspeiße("Quinoa-Bowl vegan", QuinoaBowlvegan));
+        Veganuss.setHauptspeisenListe(listeVeganuss);
+        Veganuss.setName("Veganuss");
+        Veganuss.website = "www.Veganuss.de";
+        Veganuss.beschreibung = "Die leckersten Veganen gerichte - frei von Tierleid, gut für Mensch und Umwelt." +
+                "Kommt vorbei und überzeugt euch selbst davon, dass vegan = lecker ist!";
+        Veganuss.telefonnummer = "0511 909090";
+        Veganuss.mail = "kontakt@Veganuss.de";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Veganuss.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(22, 0));
+        }
 
-        Zutat[] FocacciamitOliven = {
-                new Zutat("Focaccia", 2.43),
-                new Zutat("Oliven schwarz", 1.26),
-                new Zutat("Rosmarin", 0.85),
-                new Zutat("Meersalz", 0.73)
-        };
-        Zutat[] Steinpilzrisotto = {
-                new Zutat("Steinpilze", 3.72),
-                new Zutat("Risottoreis", 2.61),
-                new Zutat("Parmesan", 2.89),
-                new Zutat("Butter", 1.25)
-        };
-
-        Zutat[] ZiegenkäseimSpeckmantel = {
-                new Zutat("Ziegenkäse", 2.33),
-                new Zutat("Frühstücksspeck", 1.98),
-                new Zutat("Honig", 1.56),
-                new Zutat("Thymian", 0.67)
-        };
-
-        Zutat[] AusternaufEis = {
-                new Zutat("Austern", 4.67),
-                new Zutat("Limette", 0.94),
-                new Zutat("Eiswürfel", 0.50),
-                new Zutat("Meersalz", 0.74)
-        };
-
-        Zutat[] HummerThermidor = {
-                new Zutat("Hummer", 5.0),
-                new Zutat("Sahne", 1.72),
-                new Zutat("Senf", 0.84),
-                new Zutat("Cognac", 2.33)
-        };
-
-        Zutat[] OktopusCarpaccio = {
-                new Zutat("Oktopus", 4.22),
-                new Zutat("Olivenöl extra vergine", 1.95),
-                new Zutat("Zitrone", 0.89),
-                new Zutat("Pfeffer weiß", 1.11)
-        };
-
-        Zutat[] Linsensalatorientalisch = {
-                new Zutat("Rote Linsen", 1.76),
-                new Zutat("Kreuzkümmel", 0.93),
-                new Zutat("Koriander", 0.77),
-                new Zutat("Zitrone", 1.22),
-                new Zutat("Olivenöl", 1.45)
-        };
-
-        Zutat[] RoteBeeteCarpaccio = {
-                new Zutat("Rote Beete", 1.34),
-                new Zutat("Feta", 2.08),
-                new Zutat("Walnüsse", 2.42),
-                new Zutat("Balsamico", 1.10)
-        };
-
-        Zutat[] KürbissuppemitIngwer = {
-                new Zutat("Hokkaido", 1.97),
-                new Zutat("Ingwer", 0.84),
-                new Zutat("Kokosmilch", 2.01),
-                new Zutat("Muskatnuss", 0.73)
-        };
-
+        // Snackabar "Snack & Chill"
         Zutat[] BriochemitZiegenkäse = {
                 new Zutat("Brioche", 1.66),
                 new Zutat("Ziegenkäse", 2.35),
                 new Zutat("Feigen", 2.89),
                 new Zutat("Rucola", 1.54)
         };
-
+        Zutat[] FocacciamitOliven = {
+                new Zutat("Focaccia", 2.43),
+                new Zutat("Oliven schwarz", 1.26),
+                new Zutat("Rosmarin", 0.85),
+                new Zutat("Meersalz", 0.73)
+        };
         Zutat[] SauerteigbrotmitAvocado = {
                 new Zutat("Sauerteigbrot", 1.90),
                 new Zutat("Avocado", 2.61),
                 new Zutat("Kirschtomaten", 1.15),
                 new Zutat("Chili", 0.66)
         };
-
         Zutat[] Kaviarschnittchen = {
                 new Zutat("Blinis", 1.33),
                 new Zutat("Crème fraîche", 1.28),
                 new Zutat("Kaviar", 5.00),
                 new Zutat("Dill", 0.67)
         };
+        Restaurant SnackChill = new Restaurant(Kategorien.FASTFOOD, true);
+        ArrayList<Hauptspeiße> listeSnack = new ArrayList<>();
+        listeSnack.add(new Hauptspeiße("Brioche mit Ziegenkäse", BriochemitZiegenkäse));
+        listeSnack.add(new Hauptspeiße("Focaccia mit Oliven", FocacciamitOliven));
+        listeSnack.add(new Hauptspeiße("Sauerteigbrot mit Avocado", SauerteigbrotmitAvocado));
+        listeSnack.add(new Hauptspeiße("Kaviarschnittchen", Kaviarschnittchen));
+        SnackChill.setHauptspeisenListe(listeSnack);
+        SnackChill.setName("Snack & Chill");
+        SnackChill.website = "www.snackandchill.de";
+        SnackChill.beschreibung = "Kreative Snacks und Fingerfood für jeden Anlass – frisch zubereitet und zum Mitnehmen.";
+        SnackChill.telefonnummer = "030 123456";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            SnackChill.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(22, 0));
+        }
 
-        Zutat[] ChicoréeSalat = {
-                new Zutat("Chicorée", 1.42),
-                new Zutat("Orange", 1.18),
-                new Zutat("Walnüsse", 2.05),
-                new Zutat("Joghurt", 0.97)
-        };
 
-        Zutat[] ZitronenhähnchenmitRosmarinkartoffeln = {
-                new Zutat("Hähnchenschenkel", 2.77),
-                new Zutat("Zitrone", 0.88),
-                new Zutat("Rosmarin", 0.69),
-                new Zutat("Kartoffeln", 1.35)
-        };
 
-        Zutat[] KalbsrückeninSenfkruste = {
-                new Zutat("Kalbsrücken", 3.84),
-                new Zutat("Senf", 1.05),
-                new Zutat("Paniermehl", 0.87),
-                new Zutat("Estragon", 0.78)
-        };
-
-        Zutat[] GnocchimitBlauschimmelkäse = {
-                new Zutat("Gnocchi", 2.24),
-                new Zutat("Blauschimmelkäse", 2.98),
-                new Zutat("Sahne", 1.47),
-                new Zutat("Pfeffer", 0.61)
-        };
-
-        Zutat[] JakobsmuschelRisotto = {
-                new Zutat("Jakobsmuschel", 3.74),
-                new Zutat("Risottoreis", 2.66),
-                new Zutat("Weißwein", 2.55),
-                new Zutat("Parmesan", 1.69)
-        };
-        Zutat[] ForelleMüllerinArt = {
-                new Zutat("Forelle", 3.11),
-                new Zutat("Butter", 1.32),
-                new Zutat("Zitrone", 0.94),
-                new Zutat("Petersilie", 0.73)
-        };
-
-        Zutat[] KalbsleberBerlinerArt = {
-                new Zutat("Kalbsleber", 2.87),
-                new Zutat("Zwiebel", 0.43),
-                new Zutat("Apfel", 0.88),
-                new Zutat("Kartoffelpüree", 1.77)
-        };
-
-        Zutat[] WienerSchnitzel = {
-                new Zutat("Kalbfleisch", 4.55),
-                new Zutat("Ei", 0.38),
-                new Zutat("Paniermehl", 0.55),
-                new Zutat("Zitrone", 0.81)
-        };
-
-        Zutat[] SchweinebratenmitKloß = {
-                new Zutat("Schweinebraten", 3.44),
-                new Zutat("Kartoffelklöße", 2.22),
-                new Zutat("Sauerkraut", 1.19),
-                new Zutat("Kümmel", 0.61)
-        };
-
-        Zutat[] HackbratenmitErbsen = {
-                new Zutat("Hackfleisch", 2.05),
-                new Zutat("Erbsen", 1.15),
-                new Zutat("Zwiebel", 0.35),
-                new Zutat("Senf", 0.54)
-        };
-
-        Zutat[] SpaghettiBolognese = {
-                new Zutat("Spaghetti", 1.1),
-                new Zutat("Hackfleisch", 2.3),
-                new Zutat("Tomaten", 0.92),
-                new Zutat("Oregano", 0.44)
-        };
-
-        Zutat[] PenneArrabbiata = {
-                new Zutat("Penne", 1.15),
-                new Zutat("Chili", 0.64),
-                new Zutat("Knoblauch", 0.42),
-                new Zutat("Tomaten", 1.05)
-        };
-
-        Zutat[] Rindergulasch = {
-                new Zutat("Rindfleisch", 3.72),
-                new Zutat("Paprika", 0.97),
-                new Zutat("Zwiebel", 0.33),
-                new Zutat("Lorbeerblatt", 0.31)
-        };
-
-        Zutat[] TafelspitzmitMeerrettich = {
-                new Zutat("Tafelspitz", 4.33),
-                new Zutat("Meerrettich", 0.98),
-                new Zutat("Karotten", 0.67),
-                new Zutat("Sellerie", 0.84)
-        };
-
-        Zutat[] SchweinshaxemitKrautsalat = {
-                new Zutat("Schweinshaxe", 4.12),
-                new Zutat("Krautsalat", 1.55),
-                new Zutat("Senf", 0.64),
-                new Zutat("Kartoffeln", 1.02)
-        };
-
-        Zutat[] PutengeschnetzeltesmitReis = {
-                new Zutat("Putenbrust", 2.45),
-                new Zutat("Reis", 1.05),
-                new Zutat("Paprika", 0.88),
-                new Zutat("Sahne", 0.92)
-        };
-
-        Zutat[] RehbratenmitPreiselbeeren = {
-                new Zutat("Rehbraten", 4.88),
-                new Zutat("Preiselbeeren", 1.33),
-                new Zutat("Rotkohl", 1.14),
-                new Zutat("Semmelknödel", 1.95)
-        };
-
-        Zutat[] EntenkeulemitBlaukraut = {
-                new Zutat("Entenkeule", 3.79),
-                new Zutat("Blaukraut", 1.11),
-                new Zutat("Apfel", 0.77),
-                new Zutat("Rotwein", 1.55)
-        };
-
-        Zutat[] GebrateneLebermitZwiebeln = {
-                new Zutat("Leber", 2.15),
-                new Zutat("Zwiebel", 0.28),
-                new Zutat("Butter", 1.07),
-                new Zutat("Petersilie", 0.63)
-        };
-
-        Zutat[] FischfiletmitRemoulade = {
-                new Zutat("Seelachsfilet", 2.62),
-                new Zutat("Remoulade", 1.14),
-                new Zutat("Salzkartoffeln", 1.26),
-                new Zutat("Zitrone", 0.73)
-        };
-
-        Zutat[] Kartoffelsuppe = {
-                new Zutat("Kartoffeln", 1.09),
-                new Zutat("Porree", 0.88),
-                new Zutat("Karotten", 0.67),
-                new Zutat("Petersilie", 0.51)
-        };
-
-        Zutat[] ErbsensuppemitWurst = {
-                new Zutat("Erbsen", 1.42),
-                new Zutat("Wiener Würstchen", 1.76),
-                new Zutat("Karotten", 0.83),
-                new Zutat("Sellerie", 0.92)
-        };
-
-        Zutat[] Zucchiniauflauf = {
-                new Zutat("Zucchini", 1.04),
-                new Zutat("Hackfleisch", 2.26),
-                new Zutat("Tomatensauce", 0.98),
-                new Zutat("Käse", 1.67)
-        };
-
-        Zutat[] Blumenkohlgratin = {
-                new Zutat("Blumenkohl", 1.55),
-                new Zutat("Sahne", 0.88),
-                new Zutat("Käse", 1.42),
-                new Zutat("Muskatnuss", 0.41)
-        };
-
-        Zutat[] SpinatmitSpiegelei = {
-                new Zutat("Rahmspinat", 1.22),
-                new Zutat("Ei", 0.33),
-                new Zutat("Kartoffeln", 1.07),
-                new Zutat("Butter", 0.67)
-        };
-        Zutat[] Ratatouille = {
-                new Zutat("Zucchini", 1.02),
-                new Zutat("Aubergine", 1.18),
-                new Zutat("Paprika", 0.99),
-                new Zutat("Tomaten", 1.07)
-        };
-
-        Zutat[] QuicheLorraine = {
-                new Zutat("Blätterteig", 1.45),
-                new Zutat("Speck", 1.66),
-                new Zutat("Eier", 0.89),
-                new Zutat("Sahne", 1.11)
-        };
-
-        Zutat[] Moussaka = {
-                new Zutat("Hackfleisch", 2.28),
-                new Zutat("Aubergine", 1.13),
-                new Zutat("Tomatensauce", 1.01),
-                new Zutat("Béchamel", 1.32)
-        };
-
-        Zutat[] FalafelmitHummus = {
-                new Zutat("Kichererbsen", 1.08),
-                new Zutat("Kreuzkümmel", 0.66),
-                new Zutat("Tahini", 1.25),
-                new Zutat("Petersilie", 0.55)
-        };
-
-        Zutat[] CouscousSalat = {
-                new Zutat("Couscous", 1.12),
-                new Zutat("Gurke", 0.79),
-                new Zutat("Paprika", 0.92),
-                new Zutat("Minze", 0.57)
-        };
-
-        Zutat[] Paella = {
-                new Zutat("Paellareis", 1.67),
-                new Zutat("Meeresfrüchte", 3.44),
-                new Zutat("Safran", 1.99),
-                new Zutat("Paprika", 0.91)
-        };
-
-        Zutat[] ThaiCurry = {
-                new Zutat("Kokosmilch", 1.55),
-                new Zutat("Currypaste", 1.33),
-                new Zutat("Hähnchen", 2.19),
-                new Zutat("Bambus", 0.98)
-        };
-
-        Zutat[] PhoBo = {
-                new Zutat("Reisnudeln", 1.22),
-                new Zutat("Rindfleisch", 2.88),
-                new Zutat("Sojasprossen", 0.66),
-                new Zutat("Koriander", 0.55)
-        };
-
-        Zutat[] Bibimbap = {
-                new Zutat("Reis", 1.14),
-                new Zutat("Rindfleisch", 2.72),
-                new Zutat("Spinat", 0.84),
-                new Zutat("Gochujang", 1.47)
-        };
-
-        Zutat[] SushiMaki = {
-                new Zutat("Sushireis", 1.45),
-                new Zutat("Nori", 1.22),
-                new Zutat("Lachs", 2.94),
-                new Zutat("Gurke", 0.88)
-        };
-
-        Zutat[] Burrito = {
-                new Zutat("Weizentortilla", 1.19),
-                new Zutat("Bohnen", 1.02),
-                new Zutat("Rindfleisch", 2.55),
-                new Zutat("Käse", 1.24)
-        };
-
-        Zutat[] Tacos = {
-                new Zutat("Maistortillas", 1.33),
-                new Zutat("Pulled Pork", 2.77),
-                new Zutat("Salsa", 0.91),
-                new Zutat("Avocado", 1.38)
-        };
-
-        Zutat[] ChiliConCarne = {
-                new Zutat("Hackfleisch", 2.11),
-                new Zutat("Kidneybohnen", 1.02),
-                new Zutat("Tomaten", 0.98),
-                new Zutat("Mais", 0.82)
-        };
-
-        Zutat[] Ramen = {
-                new Zutat("Ramen-Nudeln", 1.32),
-                new Zutat("Schweinebauch", 2.65),
-                new Zutat("Sojasauce", 0.78),
-                new Zutat("Ei", 0.44)
-        };
-
-        Zutat[] Enchiladas = {
-                new Zutat("Tortillas", 1.25),
-                new Zutat("Hähnchen", 2.05),
-                new Zutat("Käse", 1.55),
-                new Zutat("Tomatensauce", 0.89)
-        };
-
-        Zutat[] Gulaschsuppe = {
-                new Zutat("Rindfleisch", 2.72),
-                new Zutat("Paprika", 0.93),
-                new Zutat("Zwiebeln", 0.41),
-                new Zutat("Tomatenmark", 0.77)
-        };
-
-        Zutat[] Labskaus = {
-                new Zutat("Corned Beef", 2.88),
-                new Zutat("Kartoffeln", 1.02),
-                new Zutat("Rote Beete", 0.94),
-                new Zutat("Rollmops", 1.29)
-        };
-
-        Zutat[] KönigsbergerKlopse = {
-                new Zutat("Hackfleisch", 2.42),
-                new Zutat("Kapern", 0.97),
-                new Zutat("Sahnesauce", 1.11),
-                new Zutat("Kartoffeln", 1.13)
-        };
-
-        Zutat[] PastaPesto = {
-                new Zutat("Pasta", 1.25),
-                new Zutat("Basilikumpesto", 1.88),
-                new Zutat("Pinienkerne", 2.15),
-                new Zutat("Parmesan", 1.66)
-        };
-
-        Zutat[] Käsespätzle = {
-                new Zutat("Spätzle", 1.39),
-                new Zutat("Käse", 1.72),
-                new Zutat("Röstzwiebeln", 0.95),
-                new Zutat("Butter", 0.87)
-        };
-        Zutat[] Lasagne = {
-                new Zutat("Lasagneplatten", 1.34),
-                new Zutat("Hackfleisch", 2.45),
-                new Zutat("Tomatensauce", 1.12),
-                new Zutat("Béchamel", 1.20)
-        };
-
-        Zutat[] RöstiMitSpiegelei = {
-                new Zutat("Kartoffeln", 1.08),
-                new Zutat("Ei", 0.36),
-                new Zutat("Butter", 0.65),
-                new Zutat("Salz", 0.15)
-        };
-
-        Zutat[] Shakshuka = {
-                new Zutat("Tomaten", 1.15),
-                new Zutat("Paprika", 0.95),
-                new Zutat("Ei", 0.37),
-                new Zutat("Kreuzkümmel", 0.44)
-        };
-
-        Zutat[] Linsensuppe = {
-                new Zutat("Linsen", 1.18),
-                new Zutat("Karotten", 0.52),
-                new Zutat("Sellerie", 0.66),
-                new Zutat("Wiener Würstchen", 1.72)
-        };
-
-        Zutat[] SemmelknödelMitPilzrahm = {
-                new Zutat("Semmelknödel", 1.46),
-                new Zutat("Champignons", 1.09),
-                new Zutat("Sahne", 0.89),
-                new Zutat("Petersilie", 0.48)
-        };
-
-        Zutat[] ReisPfanneAsia = {
-                new Zutat("Reis", 1.04),
-                new Zutat("Gemüse-Mix", 1.27),
-                new Zutat("Sojasauce", 0.79),
-                new Zutat("Hähnchen", 2.12)
-        };
-
-        Zutat[] BrokkoliAuflauf = {
-                new Zutat("Brokkoli", 1.21),
-                new Zutat("Sahne", 0.95),
-                new Zutat("Käse", 1.45),
-                new Zutat("Kartoffeln", 1.02)
-        };
-
-        Zutat[] GyrosMitZaziki = {
-                new Zutat("Schweinefleisch", 2.38),
-                new Zutat("Zaziki", 1.15),
-                new Zutat("Zwiebeln", 0.29),
-                new Zutat("Reis", 1.00)
-        };
-
-        Zutat[] FrikadellenMitKartoffelsalat = {
-                new Zutat("Hackfleisch", 2.25),
-                new Zutat("Kartoffelsalat", 1.33),
-                new Zutat("Senf", 0.45),
-                new Zutat("Zwiebel", 0.34)
-        };
-
-        Zutat[] SüßSaureEier = {
-                new Zutat("Eier", 0.76),
-                new Zutat("Essig", 0.38),
-                new Zutat("Zucker", 0.24),
-                new Zutat("Mehl", 0.42)
-        };
-
-        Zutat[] PellkartoffelnMitQuark = {
-                new Zutat("Kartoffeln", 1.12),
-                new Zutat("Quark", 1.06),
-                new Zutat("Schnittlauch", 0.49),
-                new Zutat("Butter", 0.62)
-        };
-
-        Zutat[] AuberginenCurry = {
-                new Zutat("Aubergine", 1.16),
-                new Zutat("Kokosmilch", 1.47),
-                new Zutat("Currypaste", 1.22),
-                new Zutat("Tomaten", 0.89)
-        };
-
-        Zutat[] BratwurstMitSauerkraut = {
-                new Zutat("Bratwurst", 2.35),
-                new Zutat("Sauerkraut", 1.18),
-                new Zutat("Kartoffeln", 0.98),
-                new Zutat("Senf", 0.56)
-        };
-
-        Zutat[] SpaghettiCarbonara = {
-                new Zutat("Spaghetti", 1.08),
-                new Zutat("Speck", 1.67),
-                new Zutat("Ei", 0.37),
-                new Zutat("Parmesan", 1.72)
-        };
-
-        Zutat[] Kartoffelgratin = {
-                new Zutat("Kartoffeln", 1.16),
-                new Zutat("Sahne", 0.94),
-                new Zutat("Knoblauch", 0.31),
-                new Zutat("Käse", 1.40)
-        };
-
-        Zutat[] ZanderfiletMitGemüse = {
-                new Zutat("Zanderfilet", 3.75),
-                new Zutat("Karotten", 0.57),
-                new Zutat("Zucchini", 0.88),
-                new Zutat("Butter", 0.64)
-        };
-
-        Zutat[] RöstiMitLachs = {
-                new Zutat("Rösti", 1.49),
-                new Zutat("Räucherlachs", 2.94),
-                new Zutat("Sauerrahm", 1.07),
-                new Zutat("Dill", 0.39)
-        };
-
-        Zutat[] Kürbissuppe = {
-                new Zutat("Kürbis", 1.26),
-                new Zutat("Ingwer", 0.62),
-                new Zutat("Zwiebel", 0.33),
-                new Zutat("Kokosmilch", 1.21)
-        };
-
-        Zutat[] LauchQuiche = {
-                new Zutat("Lauch", 1.03),
-                new Zutat("Blätterteig", 1.41),
-                new Zutat("Sahne", 0.91),
-                new Zutat("Ei", 0.34)
-        };
-
-        Zutat[] PizzaMargherita = {
-                new Zutat("Pizzateig", 1.18),
-                new Zutat("Tomatensauce", 0.92),
-                new Zutat("Mozzarella", 1.57),
-                new Zutat("Basilikum", 0.43)
-        };
-
-        Kaltgetränk orangenlimo = new Kaltgetränk("Orangenlimo", 4.5, zutatenOrangenlimo,  0.4, false);
-        Kaltgetränk caipirinha = new Kaltgetränk("Caipirinha", 11, zutatenCaipirinha, 0.4, true);
 
     }
 
