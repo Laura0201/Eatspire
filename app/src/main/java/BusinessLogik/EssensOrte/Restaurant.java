@@ -22,22 +22,26 @@ public class Restaurant {
     public String website;
     private double latitude;
     private double longitude;
+    private Kategorien kategorie;
 
     private ArrayList<Hauptspeiße> listeHauptspeisen = new ArrayList<Hauptspeiße>();
     private ArrayList<Vorspeise> listeVorspeisen = new ArrayList<Vorspeise>();
     private ArrayList<Nachspeiße> listeNachspeisen = new ArrayList<Nachspeiße>();
     private ArrayList<Heißgetränk> listeHeißgetränke = new ArrayList<Heißgetränk>();
     private ArrayList<Kaltgetränk> listeKaltgetränke = new ArrayList<Kaltgetränk>();
-    public Restaurant() {
-
-
+    private boolean toGomöglich;
+    public Restaurant(Kategorien kategorie, boolean toGoMoeglich) {
+        this.kategorie = kategorie;
+        this.toGomöglich = toGoMoeglich;
     }
 
     //Methoden:
     public double getLatitude() {
         return latitude;
     }
-
+    public void setToGomöglich(boolean toGomöglich){
+        this.toGomöglich=toGomöglich;
+    }
     public double getLongitude() {
         return longitude;
     }
