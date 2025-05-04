@@ -20,8 +20,8 @@ public abstract class BasisEssen {
     private EssenTypen typ;
     BasisEssen(String name, double preis, Zutat[] zutaten, EssenTypen typ){
         this.name = name;
-        this.preis = preis;
         this.zutaten = zutaten;
+        this.preis = errechnePreis(zutaten);
         this.typ = typ;
     }
     public String gibZutatenAus(BasisEssen essen) {
@@ -42,10 +42,19 @@ public abstract class BasisEssen {
         return id;
     }
 
+    public void setPreis(double neuerPreis){
+        this.preis = neuerPreis;
+    }
     public double getPreis() {
         return preis;
     }
-
+    public double errechnePreis(Zutat[] zutaten){
+        double preis = 0;
+        for (Zutat zutat : zutaten) {
+            preis += zutat.getPreis();
+        }
+        return preis;
+    }
     public Zutat[] getZutaten() {
         return zutaten;
     }
