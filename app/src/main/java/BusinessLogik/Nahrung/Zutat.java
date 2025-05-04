@@ -8,7 +8,9 @@ public class Zutat {
         this.name = name;
         this.preis = preis;
     }
-
+    public double getPreis() {
+        return preis;
+    }
     public String getName() {
         return name;
     }

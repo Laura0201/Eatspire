@@ -7,5 +7,5 @@
 package BusinessLogik.Nahrung;
 
 public enum EssenTypen {
-    TEE, KAKAO, COCKTAIL, MOKTAIL, LIMO, PIZZA, PASTA
+    AKLOHOLFREI, SNACK, KAFFEE, PIZZA, PASTA, ASIATISCH
 }
