@@ -13,6 +13,7 @@ import BusinessLogik.EssensOrte.Kategorien;
 import BusinessLogik.EssensOrte.Restaurant;
 import BusinessLogik.Nahrung.BasisEssen;
 import BusinessLogik.Nahrung.Hauptspeiße;
+import BusinessLogik.Nahrung.Heißgetränk;
 import BusinessLogik.Nahrung.Kaltgetränk;
 import BusinessLogik.Nahrung.Nachspeiße;
 import BusinessLogik.Nahrung.Vorspeise;
@@ -85,6 +86,69 @@ public class DataManager {
                 new Zutat("Parmaschinken", 2.00),
                 new Zutat("Honigmelone", 1.50)
         };
+
+        // Kalt- und Heißgetränke für das Restaurant "Bella Napoli"
+        Zutat[] SanPellegrino = new Zutat[] {
+                new Zutat("Mineralwasser", 0.50),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Aranciata = new Zutat[] {
+                new Zutat("Orangensaft", 0.80),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Chinotto = new Zutat[] {
+                new Zutat("Chinotto-Extrakt", 1.00),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] EisteePfirsich = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.30),
+                new Zutat("Pfirsicharoma", 0.40),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] Espresso = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Cappuccino = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.40),
+                new Zutat("Milchschaum", 0.30)
+        };
+
+        Zutat[] LatteMacchiato = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.60),
+                new Zutat("Milchschaum", 0.30)
+        };
+
+        Zutat[] HeißeSchokolade = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.20)
+        };
+
+        // Listen erstellen und Getränke hinzufügen
+        ArrayList<Kaltgetränk> drinksBellaNapoli = new ArrayList<>();
+        drinksBellaNapoli.add(new Kaltgetränk("San Pellegrino", SanPellegrino, false));
+        drinksBellaNapoli.add(new Kaltgetränk("Aranciata", Aranciata, false));
+        drinksBellaNapoli.add(new Kaltgetränk("Chinotto", Chinotto, false));
+        drinksBellaNapoli.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich, false));
+
+        ArrayList<Heißgetränk> hotDrinksBellaNapoli = new ArrayList<>();
+        hotDrinksBellaNapoli.add(new Heißgetränk("Espresso", Espresso));
+        hotDrinksBellaNapoli.add(new Heißgetränk("Cappuccino", Cappuccino));
+        hotDrinksBellaNapoli.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
+        hotDrinksBellaNapoli.add(new Heißgetränk("Heiße Schokolade", HeißeSchokolade));
         Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
         ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
         ArrayList<Vorspeise> listeBellaNapoliVorspeisen= new ArrayList<Vorspeise>();
@@ -99,6 +163,10 @@ public class DataManager {
         listeBellaNapoliHauptspeisen.add(VegetarischeLasagneEssen);
         BellaNapoli.setHauptspeisenListe(listeBellaNapoliHauptspeisen);
         BellaNapoli.setVorspeisenListe(listeBellaNapoliVorspeisen);
+        // Listen zum Restaurant hinzufügen
+        BellaNapoli.setKaltgetränkeListe(drinksBellaNapoli);
+        BellaNapoli.setHeißgetränkeListe(hotDrinksBellaNapoli);
+
         BellaNapoli.setName("Bella Napoli");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             BellaNapoli.setOeffnungszeiten(LocalTime.of(9, 30), LocalTime.of(22, 00));
@@ -222,6 +290,55 @@ public class DataManager {
                 new Zutat("Baguette", 1.00),
                 new Zutat("Trauben", 0.60)
         };
+
+        // Kaltgetränke für "La Provence"
+        Zutat[] Perrier = new Zutat[] {
+                new Zutat("Mineralwasser", 0.50),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Orangina = new Zutat[] {
+                new Zutat("Orangensaft", 0.80),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] CassisLimonade = new Zutat[] {
+                new Zutat("Johannisbeersirup", 0.60),
+                new Zutat("Zitronenlimonade", 0.80),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] EisteeLavendel = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.40),
+                new Zutat("Lavendelsirup", 0.50),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+// Heißgetränke für "La Provence"
+        Zutat[] CaféCrème = new Zutat[] {
+                new Zutat("Kaffeebohnen", 0.50),
+                new Zutat("Milch", 0.40)
+        };
+
+        Zutat[] ChocolatChaud = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.20)
+        };
+
+        Zutat[] ThéVert = new Zutat[] {
+                new Zutat("Grüner Tee", 0.30),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] CaféAuLait = new Zutat[] {
+                new Zutat("Kaffeebohnen", 0.50),
+                new Zutat("Milch", 0.60)
+        };
         Restaurant LaProvence = new Restaurant(Kategorien.FRANZÖSISCH, true);
         ArrayList<Hauptspeiße> listeLaProvenceHauptspeisen = new ArrayList<>();
         ArrayList<Vorspeise> listeLaProvenceVorspeisen = new ArrayList<>();
@@ -242,6 +359,26 @@ public class DataManager {
         listeLaProvenceHauptspeisen.add(new Hauptspeiße("Tarte Tatin", TarteTatin));
         LaProvence.setHauptspeisenListe(listeLaProvenceHauptspeisen);
         //Liste der Hauptspeisen übertragen
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksLaProvence = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksLaProvence = new ArrayList<>();
+
+        // Kaltgetränke hinzufügen
+        drinksLaProvence.add(new Kaltgetränk("Perrier", Perrier, false));
+        drinksLaProvence.add(new Kaltgetränk("Orangina", Orangina, false));
+        drinksLaProvence.add(new Kaltgetränk("Cassis Limonade", CassisLimonade, false));
+        drinksLaProvence.add(new Kaltgetränk("Eistee Lavendel", EisteeLavendel, false));
+
+        // Heißgetränke hinzufügen
+        hotDrinksLaProvence.add(new Heißgetränk("Café Crème", CaféCrème));
+        hotDrinksLaProvence.add(new Heißgetränk("Chocolat Chaud", ChocolatChaud));
+        hotDrinksLaProvence.add(new Heißgetränk("Thé Vert", ThéVert));
+        hotDrinksLaProvence.add(new Heißgetränk("Café au Lait", CaféAuLait));
+
+
+        // Listen zum Restaurant hinzufügen
+        LaProvence.setKaltgetränkeListe(drinksLaProvence);
+        LaProvence.setHeißgetränkeListe(hotDrinksLaProvence);
         LaProvence.setName("La Provence");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LaProvence.setOeffnungszeiten(LocalTime.of(11, 0), LocalTime.of(23, 0));
@@ -491,6 +628,72 @@ public class DataManager {
                 new Zutat("Zimt", 0.20),
                 new Zutat("Schokosauce", 0.60)
         };
+        Zutat[] Cola = new Zutat[] {
+                new Zutat("Wasser", 0.20),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Kohlensäure", 0.10),
+                new Zutat("Cola-Aroma", 0.40)
+        };
+
+        Zutat[] Apfelschorle = new Zutat[] {
+                new Zutat("Apfelsaft", 0.60),
+                new Zutat("Mineralwasser", 0.40)
+        };
+
+        Zutat[] EisteePfirsich1 = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.30),
+                new Zutat("Pfirsicharoma", 0.40),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] Zitronenlimonade = new Zutat[] {
+                new Zutat("Zitronensaft", 0.50),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+// Heißgetränke für "SnackHaus 1"
+        Zutat[] Kaffee = new Zutat[] {
+                new Zutat("Kaffeepulver", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Kakao = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.20)
+        };
+
+        Zutat[] TeeKamille = new Zutat[] {
+                new Zutat("Kamillentee", 0.30),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Cappuccino1 = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.40),
+                new Zutat("Milchschaum", 0.30)
+        };
+
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksSnackHaus1 = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksSnackHaus1 = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksSnackHaus1.add(new Kaltgetränk("Cola", Cola, false));
+        drinksSnackHaus1.add(new Kaltgetränk("Apfelschorle", Apfelschorle, false));
+        drinksSnackHaus1.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich1, false));
+        drinksSnackHaus1.add(new Kaltgetränk("Zitronenlimonade", Zitronenlimonade, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksSnackHaus1.add(new Heißgetränk("Kaffee", Kaffee));
+        hotDrinksSnackHaus1.add(new Heißgetränk("Kakao", Kakao));
+        hotDrinksSnackHaus1.add(new Heißgetränk("Tee Kamille", TeeKamille));
+        hotDrinksSnackHaus1.add(new Heißgetränk("Cappuccino", Cappuccino1));
+
         Restaurant SnackHaus1 = new Restaurant(Kategorien.SNACKS, true);
         ArrayList<Hauptspeiße> speisenSnackHaus1 = new ArrayList<>();
         ArrayList<Nachspeiße> snackHaus1Nachspeisen = new ArrayList<>();
@@ -513,6 +716,8 @@ public class DataManager {
         snackHaus1Nachspeisen.add(new Nachspeiße("Mini Pancakes", MiniPancakes));
         snackHaus1Nachspeisen.add(new Nachspeiße("Churros mit Schokosauce", ChurrosMitSchokosauce));
         SnackHaus1.setNachspeisenListe(snackHaus1Nachspeisen);
+        SnackHaus1.setKaltgetränkeListe(drinksSnackHaus1);
+        SnackHaus1.setHeißgetränkeListe(hotDrinksSnackHaus1);
         SnackHaus1.setName("SnackHaus 1");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             SnackHaus1.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
@@ -674,11 +879,76 @@ public class DataManager {
                 new Zutat("Zucker", 0.30),
                 new Zutat("Vanille", 0.20)
         };
+        // Kaltgetränke für "Tokyo Zen"
+        Zutat[] Ramune = new Zutat[] {
+                new Zutat("Zitronenaroma", 0.40),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Kohlensäure", 0.10),
+                new Zutat("Wasser", 0.30)
+        };
+
+        Zutat[] GrünerTeeKalt = new Zutat[] {
+                new Zutat("Grüner Tee", 0.40),
+                new Zutat("Wasser", 0.20),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] YuzuLimonade = new Zutat[] {
+                new Zutat("Yuzu-Saft", 0.60),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Sodawasser", 0.40)
+        };
+
+        Zutat[] MatchaLatteCold = new Zutat[] {
+                new Zutat("Matcha", 0.50),
+                new Zutat("Milch", 0.70),
+                new Zutat("Eiswürfel", 0.10),
+                new Zutat("Zucker", 0.30)
+        };
+
+// Heißgetränke für "Tokyo Zen"
+        Zutat[] GrünerTeeHeiß = new Zutat[] {
+                new Zutat("Grüner Tee", 0.40),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] MatchaLatte = new Zutat[] {
+                new Zutat("Matcha", 0.50),
+                new Zutat("Milch", 0.70),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] IngwerTee = new Zutat[] {
+                new Zutat("Ingwer", 0.50),
+                new Zutat("Honig", 0.30),
+                new Zutat("Zitronensaft", 0.20),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] JasminTee = new Zutat[] {
+                new Zutat("Jasmintee", 0.40),
+                new Zutat("Wasser", 0.10)
+        };
         // Erstellen des Restaurants und Befüllen der Gerichte-Liste
         Restaurant TokyoZen = new Restaurant(Kategorien.ASIATISCH, true);
         ArrayList<Hauptspeiße> listeTokyoZenHauptspeisen = new ArrayList<Hauptspeiße>();
         ArrayList<Nachspeiße> listeTokyoZenNachspeisen = new ArrayList<Nachspeiße>();
         ArrayList<Vorspeise> listeTokyoZenVorspeisen = new ArrayList<Vorspeise>();
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksTokyoZen = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksTokyoZen = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksTokyoZen.add(new Kaltgetränk("Ramune", Ramune, false));
+        drinksTokyoZen.add(new Kaltgetränk("Grüner Tee (kalt)", GrünerTeeKalt, false));
+        drinksTokyoZen.add(new Kaltgetränk("Yuzu Limonade", YuzuLimonade, false));
+        drinksTokyoZen.add(new Kaltgetränk("Matcha Latte (kalt)", MatchaLatteCold, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksTokyoZen.add(new Heißgetränk("Grüner Tee (heiß)", GrünerTeeHeiß));
+        hotDrinksTokyoZen.add(new Heißgetränk("Matcha Latte", MatchaLatte));
+        hotDrinksTokyoZen.add(new Heißgetränk("Ingwertee", IngwerTee));
+        hotDrinksTokyoZen.add(new Heißgetränk("Jasmintee", JasminTee));
         listeTokyoZenVorspeisen.add(new Vorspeise("Edamame", Edamame));
         listeTokyoZenVorspeisen.add(new Vorspeise("Gyoza", Gyoza));
         listeTokyoZenVorspeisen.add(new Vorspeise("Miso Suppe", Misosuppe));
@@ -705,6 +975,9 @@ public class DataManager {
         listeTokyoZenHauptspeisen.add(GemüseTempura);
         listeTokyoZenHauptspeisen.add(MisoSuppe);
         TokyoZen.setHauptspeisenListe(listeTokyoZenHauptspeisen);
+        // Listen zum Restaurant hinzufügen
+        TokyoZen.setKaltgetränkeListe(drinksTokyoZen);
+        TokyoZen.setHeißgetränkeListe(hotDrinksTokyoZen);
         TokyoZen.setName("Tokyo Zen");
         // Öffnungszeiten setzen (mit API Level Überprüfung)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -1050,10 +1323,73 @@ public class DataManager {
                 new Zutat("Zucker", 0.30),
                 new Zutat("Vanille", 0.20)
         };
+
+        // Kaltgetränke für "Ristorante Amore"
+        Zutat[] SanPellegrino2 = new Zutat[] {
+                new Zutat("Mineralwasser", 0.50),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] AranciataRossa = new Zutat[] {
+                new Zutat("Blutorangensaft", 0.80),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Chinotto2 = new Zutat[] {
+                new Zutat("Chinotto-Extrakt", 1.00),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Limonata = new Zutat[] {
+                new Zutat("Zitronensaft", 0.60),
+                new Zutat("Zucker", 0.20),
+                new Zutat("Sodawasser", 0.30)
+        };
+
+// Heißgetränke für "Ristorante Amore"
+        Zutat[] Espresso2 = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Cappuccino2 = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.40),
+                new Zutat("Milchschaum", 0.30)
+        };
+
+        Zutat[] LatteMacchiato2 = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.60),
+                new Zutat("Milchschaum", 0.30)
+        };
+
+        Zutat[] CaffèCorretto = new Zutat[] {
+                new Zutat("Espresso", 0.50),
+                new Zutat("Grappa", 1.20)
+        };
         Restaurant TrattoriaRoma = new Restaurant(Kategorien.ITALIENISCH, true);
         ArrayList<Hauptspeiße> listeHauptspeisenRoma = new ArrayList<>();
         ArrayList<Vorspeise> listeVorspeisenRoma = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenRoma = new ArrayList<>();
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksRistoranteAmore = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksRistoranteAmore = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksRistoranteAmore.add(new Kaltgetränk("San Pellegrino", SanPellegrino, false));
+        drinksRistoranteAmore.add(new Kaltgetränk("Aranciata Rossa", AranciataRossa, false));
+        drinksRistoranteAmore.add(new Kaltgetränk("Chinotto", Chinotto, false));
+        drinksRistoranteAmore.add(new Kaltgetränk("Limonata", Limonata, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksRistoranteAmore.add(new Heißgetränk("Espresso", Espresso));
+        hotDrinksRistoranteAmore.add(new Heißgetränk("Cappuccino", Cappuccino));
+        hotDrinksRistoranteAmore.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
+        hotDrinksRistoranteAmore.add(new Heißgetränk("Caffè Corretto", CaffèCorretto));
         listeHauptspeisenRoma.add(new Hauptspeiße("Penne Arrabbiata", PenneArrabbiata));
         listeHauptspeisenRoma.add(new Hauptspeiße("Pizza Quattro Stagioni", PizzaQuattroStagioni));
         listeHauptspeisenRoma.add(new Hauptspeiße("Fettuccine Alfredo", FettuccineAlfredo));
@@ -1077,6 +1413,9 @@ public class DataManager {
         listeNachspeisenRoma.add(new Nachspeiße("Gelato", Gelato2));
         listeNachspeisenRoma.add(new Nachspeiße("Zabaione", Zabaione2));
         TrattoriaRoma.setNachspeisenListe(listeNachspeisenRoma);
+        // Listen zum Restaurant hinzufügen
+        RistoranteAmore.setKaltgetränkeListe(drinksRistoranteAmore);
+        RistoranteAmore.setHeißgetränkeListe(hotDrinksRistoranteAmore);
         TrattoriaRoma.setName("Trattoria Roma");
         TrattoriaRoma.website = "www.trattoria-roma.it";
         TrattoriaRoma.beschreibung = "Traditionelle Trattoria mit Holzofenpizza und mediterranem Flair.";
@@ -1353,8 +1692,73 @@ public class DataManager {
                 new Zutat("Kochbananen", 0.80),
                 new Zutat("Palmzucker", 0.50)
         };
+        // Kaltgetränke für "Sakura Sushi Bar"
+        Zutat[] RamuneSakura = new Zutat[] {
+                new Zutat("Zitronenaroma", 0.40),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Kohlensäure", 0.10),
+                new Zutat("Wasser", 0.30)
+        };
+
+        Zutat[] GrünerTeeKaltSakura = new Zutat[] {
+                new Zutat("Grüner Tee", 0.40),
+                new Zutat("Wasser", 0.20),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] SakuraLimo = new Zutat[] {
+                new Zutat("Kirschblütensirup", 0.70),
+                new Zutat("Sodawasser", 0.40),
+                new Zutat("Zitrone", 0.20)
+        };
+
+        Zutat[] MatchaIcedLatte = new Zutat[] {
+                new Zutat("Matcha", 0.50),
+                new Zutat("Milch", 0.70),
+                new Zutat("Eiswürfel", 0.10),
+                new Zutat("Zucker", 0.30)
+        };
+
+// Heißgetränke für "Sakura Sushi Bar"
+        Zutat[] GrünerTeeHeißSakura = new Zutat[] {
+                new Zutat("Grüner Tee", 0.40),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] MatchaLatteHeiß = new Zutat[] {
+                new Zutat("Matcha", 0.50),
+                new Zutat("Milch", 0.70),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] Hojicha = new Zutat[] {
+                new Zutat("Gerösteter Grüntee", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] IngwerZitroneTee = new Zutat[] {
+                new Zutat("Ingwer", 0.40),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Honig", 0.30),
+                new Zutat("Wasser", 0.10)
+        };
         Restaurant WokDynasty = new Restaurant(Kategorien.ASIATISCH, true);
         ArrayList<Hauptspeiße> listeWok = new ArrayList<>();
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksSakuraSushi = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksSakuraSushi = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksSakuraSushi.add(new Kaltgetränk("Ramune", RamuneSakura, false));
+        drinksSakuraSushi.add(new Kaltgetränk("Grüner Tee (kalt)", GrünerTeeKaltSakura, false));
+        drinksSakuraSushi.add(new Kaltgetränk("Sakura Limo", SakuraLimo, false));
+        drinksSakuraSushi.add(new Kaltgetränk("Matcha Iced Latte", MatchaIcedLatte, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksSakuraSushi.add(new Heißgetränk("Grüner Tee (heiß)", GrünerTeeHeißSakura));
+        hotDrinksSakuraSushi.add(new Heißgetränk("Matcha Latte", MatchaLatteHeiß));
+        hotDrinksSakuraSushi.add(new Heißgetränk("Hōjicha", Hojicha));
+        hotDrinksSakuraSushi.add(new Heißgetränk("Ingwer-Zitrone-Tee", IngwerZitroneTee));
         listeWok.add(new Hauptspeiße("Gebratener Reis mit Gemüse", WokGemüseReis));
         listeWok.add(new Hauptspeiße("Thai-Curry mit Hähnchen", ThaiCurry));
         listeWok.add(new Hauptspeiße("Jakobsmuscheln mit Safransauce", JakobsmuschelnmitSafransauce));
@@ -1374,6 +1778,9 @@ public class DataManager {
         WokDynasty.setVorspeisenListe(listeVorspeisenWok);
         WokDynasty.setNachspeisenListe(listeNachspeisenWok);
         WokDynasty.setHauptspeisenListe(listeWok);
+        // Listen zum Restaurant hinzufügen
+        SakuraSushi.setKaltgetränkeListe(drinksSakuraSushi);
+        SakuraSushi.setHeißgetränkeListe(hotDrinksSakuraSushi);
         WokDynasty.setName("Wok Dynasty");
         WokDynasty.website = "www.wokdynasty.de";
         WokDynasty.beschreibung = "Authentische asiatische Wok-Gerichte – frisch und schnell zubereitet.";
@@ -1468,6 +1875,57 @@ public class DataManager {
                 new Zutat("Hefe", 0.20),
                 new Zutat("Schokolade", 1.00)
         };
+        // Kaltgetränke für "Burger Factory"
+        Zutat[] Cola3 = new Zutat[] {
+                new Zutat("Wasser", 0.20),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Cola-Aroma", 0.40),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] EisteeZitrone = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.30),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] MilkshakeSchoko = new Zutat[] {
+                new Zutat("Schokoladeneis", 1.00),
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.30),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] LimonadeHausgemacht = new Zutat[] {
+                new Zutat("Zitronensaft", 0.50),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Minze", 0.20)
+        };
+
+// Heißgetränke für "Burger Factory"
+        Zutat[] Filterkaffee = new Zutat[] {
+                new Zutat("Kaffeepulver", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] HeißeSchokolade3 = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] TeePfefferminz = new Zutat[] {
+                new Zutat("Pfefferminztee", 0.30),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Cappuccino3 = new Zutat[] {
+                new Zutat("Espressobohnen", 0.50),
+                new Zutat("Milch", 0.40),
+                new Zutat("Milchschaum", 0.30)
+        };
         Restaurant BurgerFactory = new Restaurant(Kategorien.FASTFOOD, true);
         ArrayList<Hauptspeiße> listeHauptspeisenBurger = new ArrayList<>();
         listeHauptspeisenBurger.add(new Hauptspeiße("Cheeseburger", Cheeseburger));
@@ -1483,9 +1941,28 @@ public class DataManager {
         listeNachspeisenBurger.add(new Nachspeiße("Apfelstrudel", Apfelstrudel));
         listeNachspeisenBurger.add(new Nachspeiße("Milkshake Vanille", MilkshakeVanille));
         listeNachspeisenBurger.add(new Nachspeiße("Donuts", Donuts));
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksBurgerFactory = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksBurgerFactory = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksBurgerFactory.add(new Kaltgetränk("Cola", Cola3, false));
+        drinksBurgerFactory.add(new Kaltgetränk("Eistee Zitrone", EisteeZitrone, false));
+        drinksBurgerFactory.add(new Kaltgetränk("Milkshake Schoko", MilkshakeSchoko, false));
+        drinksBurgerFactory.add(new Kaltgetränk("Hausgemachte Limonade", LimonadeHausgemacht, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksBurgerFactory.add(new Heißgetränk("Filterkaffee", Filterkaffee));
+        hotDrinksBurgerFactory.add(new Heißgetränk("Heiße Schokolade", HeißeSchokolade3));
+        hotDrinksBurgerFactory.add(new Heißgetränk("Pfefferminztee", TeePfefferminz));
+        hotDrinksBurgerFactory.add(new Heißgetränk("Cappuccino", Cappuccino3));
+
         BurgerFactory.setHauptspeisenListe(listeHauptspeisenBurger);
         BurgerFactory.setNachspeisenListe(listeNachspeisenBurger);
         BurgerFactory.setHauptspeisenListe(listeHauptspeisenBurger);
+        // Listen zum Restaurant hinzufügen
+        BurgerFactory.setKaltgetränkeListe(drinksBurgerFactory);
+        BurgerFactory.setHeißgetränkeListe(hotDrinksBurgerFactory);
         BurgerFactory.setName("Burger Factory");
         BurgerFactory.website = "www.burgerfactory.de";
         BurgerFactory.beschreibung = "Handgemachte Burger mit hochwertigen Zutaten – klassisch oder vegan!";
@@ -1565,6 +2042,71 @@ public class DataManager {
                 new Zutat("Zimt", 0.20),
                 new Zutat("Rosinen", 0.40)
         };
+        // Kaltgetränke für "Frittenkönig"
+        Zutat[] ColaFritten = new Zutat[] {
+                new Zutat("Wasser", 0.20),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Cola-Aroma", 0.40),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] FantaFritten = new Zutat[] {
+                new Zutat("Orangensaftkonzentrat", 0.40),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Kohlensäure", 0.10),
+                new Zutat("Wasser", 0.30)
+        };
+
+        Zutat[] SpeziFritten = new Zutat[] {
+                new Zutat("Cola", 0.40),
+                new Zutat("Orangenlimonade", 0.40),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] ApfelschorleFritten = new Zutat[] {
+                new Zutat("Apfelsaft", 0.60),
+                new Zutat("Mineralwasser", 0.40)
+        };
+
+// Heißgetränke für "Frittenkönig"
+        Zutat[] KaffeeFritten = new Zutat[] {
+                new Zutat("Kaffeepulver", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] KakaoFritten = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] TeeZitroneFritten = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.30),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Wasser", 0.10),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] CappuccinoFritten = new Zutat[] {
+                new Zutat("Espressopulver", 0.50),
+                new Zutat("Milch", 0.40),
+                new Zutat("Milchschaum", 0.30)
+        };
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksFrittenkoenig = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksFrittenkoenig = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksFrittenkoenig.add(new Kaltgetränk("Cola", ColaFritten, false));
+        drinksFrittenkoenig.add(new Kaltgetränk("Fanta", FantaFritten, false));
+        drinksFrittenkoenig.add(new Kaltgetränk("Spezi", SpeziFritten, false));
+        drinksFrittenkoenig.add(new Kaltgetränk("Apfelschorle", ApfelschorleFritten, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksFrittenkoenig.add(new Heißgetränk("Kaffee", KaffeeFritten));
+        hotDrinksFrittenkoenig.add(new Heißgetränk("Kakao", KakaoFritten));
+        hotDrinksFrittenkoenig.add(new Heißgetränk("Tee mit Zitrone", TeeZitroneFritten));
+        hotDrinksFrittenkoenig.add(new Heißgetränk("Cappuccino", CappuccinoFritten));
         Restaurant Frittenkoenig = new Restaurant(Kategorien.FASTFOOD, true);
         ArrayList<Hauptspeiße> listeHauptspeisenFrittenkönig = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenFrittenkönig = new ArrayList<>();
@@ -1582,6 +2124,9 @@ public class DataManager {
         listeNachspeisenFrittenkönig.add(new Nachspeiße("Apfelstrudel", Apfelstrudel1));
         Frittenkoenig.setHauptspeisenListe(listeHauptspeisenFrittenkönig);
         Frittenkoenig.setNachspeisenListe(listeNachspeisenFrittenkönig);
+        // Listen zum Restaurant hinzufügen
+        Frittenkoenig.setKaltgetränkeListe(drinksFrittenkoenig);
+        Frittenkoenig.setHeißgetränkeListe(hotDrinksFrittenkoenig);
         Frittenkoenig.setName("Frittenkönig");
         Frittenkoenig.website = "www.frittenkoenig.de";
         Frittenkoenig.beschreibung = "Deftiges Fastfood mit Kultcharakter – schnell, günstig, lecker.";
@@ -1690,6 +2235,52 @@ public class DataManager {
                 new Zutat("Mandeln", 0.30),
                 new Zutat("Zucker", 0.20)
         };
+        // Kaltgetränke für "Hausmannskost"
+        Zutat[] ApfelsaftSchorle = new Zutat[] {
+                new Zutat("Apfelsaft", 0.60),
+                new Zutat("Mineralwasser", 0.40)
+        };
+
+        Zutat[] Fassbrause = new Zutat[] {
+                new Zutat("Malzextrakt", 0.50),
+                new Zutat("Kohlensäure", 0.10),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] ColaMix = new Zutat[] {
+                new Zutat("Cola", 0.40),
+                new Zutat("Orangenlimonade", 0.40),
+                new Zutat("Kohlensäure", 0.10)
+        };
+
+        Zutat[] Rhabarberschorle = new Zutat[] {
+                new Zutat("Rhabarbersaft", 0.60),
+                new Zutat("Sprudelwasser", 0.40)
+        };
+
+// Heißgetränke für "Hausmannskost"
+        Zutat[] FilterkaffeeHausmann = new Zutat[] {
+                new Zutat("Filterkaffee", 0.50),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] Kräutertee = new Zutat[] {
+                new Zutat("Kräutermischung", 0.40),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] HeißeZitrone = new Zutat[] {
+                new Zutat("Zitronensaft", 0.40),
+                new Zutat("Honig", 0.30),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] KakaoHausmann = new Zutat[] {
+                new Zutat("Milch", 0.50),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Zucker", 0.30)
+        };
         Restaurant Hausmannskost = new Restaurant(Kategorien.DEUTSCH, false);
         ArrayList<Hauptspeiße> listeHM = new ArrayList<>();
         listeHM.add(new Hauptspeiße("Entenbrust auf Orangenspiegel", EntenbrustaufOrangenspiegel));
@@ -1711,6 +2302,26 @@ public class DataManager {
         listeNachspeisenHausmannskost.add(new Nachspeiße("Rote Grütze", RoteGrütze));
         listeNachspeisenHausmannskost.add(new Nachspeiße("Bienenstich", Bienenstich));
         Hausmannskost.setNachspeisenListe(listeNachspeisenHausmannskost);
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksHausmannskost = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksHausmannskost = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksHausmannskost.add(new Kaltgetränk("Apfelsaftschorle", ApfelsaftSchorle, false));
+        drinksHausmannskost.add(new Kaltgetränk("Fassbrause", Fassbrause, false));
+        drinksHausmannskost.add(new Kaltgetränk("Cola-Mix", ColaMix, false));
+        drinksHausmannskost.add(new Kaltgetränk("Rhabarberschorle", Rhabarberschorle, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksHausmannskost.add(new Heißgetränk("Filterkaffee", FilterkaffeeHausmann));
+        hotDrinksHausmannskost.add(new Heißgetränk("Kräutertee", Kräutertee));
+        hotDrinksHausmannskost.add(new Heißgetränk("Heiße Zitrone", HeißeZitrone));
+        hotDrinksHausmannskost.add(new Heißgetränk("Kakao", KakaoHausmann));
+
+// Listen zum Restaurant hinzufügen
+        Hausmannskost.setKaltgetränkeListe(drinksHausmannskost);
+        Hausmannskost.setHeißgetränkeListe(hotDrinksHausmannskost);
+
         Hausmannskost.setName("Hausmannskost");
         Hausmannskost.website = "www.Hausmannskost.de";
         Hausmannskost.beschreibung = "Echt deutsche Kost zu echten deutschen Preisen – hier gibt es alles, was das Herz begehrt.";
@@ -1789,6 +2400,61 @@ public class DataManager {
                 new Zutat("Rosinen", 0.40),
                 new Zutat("Agavendicksaft", 0.30)
         };
+        // Kaltgetränke für "Veganuss"
+        Zutat[] IngwerZitronenLimo = new Zutat[] {
+                new Zutat("Zitronensaft", 0.50),
+                new Zutat("Ingwer", 0.30),
+                new Zutat("Agavendicksaft", 0.30),
+                new Zutat("Sprudelwasser", 0.30)
+        };
+
+        Zutat[] MatchaEistee = new Zutat[] {
+                new Zutat("Matcha", 0.50),
+                new Zutat("Minze", 0.30),
+                new Zutat("Agavendicksaft", 0.30),
+                new Zutat("Wasser", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] BeerenSmoothie = new Zutat[] {
+                new Zutat("Beerenmix", 0.80),
+                new Zutat("Bananen", 0.70),
+                new Zutat("Haferdrink", 0.60),
+                new Zutat("Chiasamen", 0.30)
+        };
+
+        Zutat[] GurkenMinzWasser = new Zutat[] {
+                new Zutat("Gurkenscheiben", 0.30),
+                new Zutat("Minze", 0.20),
+                new Zutat("Zitronensaft", 0.30),
+                new Zutat("Wasser", 0.20)
+        };
+
+// Heißgetränke für "Veganuss"
+        Zutat[] HaferCappuccino = new Zutat[] {
+                new Zutat("Espressopulver", 0.50),
+                new Zutat("Haferdrink", 0.60),
+                new Zutat("Milchschaum (vegan)", 0.40)
+        };
+
+        Zutat[] KurkumaLatte = new Zutat[] {
+                new Zutat("Haferdrink", 0.60),
+                new Zutat("Kurkuma", 0.30),
+                new Zutat("Ingwer", 0.20),
+                new Zutat("Zimt", 0.10),
+                new Zutat("Agavendicksaft", 0.30)
+        };
+
+        Zutat[] KakaoVegan = new Zutat[] {
+                new Zutat("Haferdrink", 0.60),
+                new Zutat("Kakaopulver", 0.40),
+                new Zutat("Agavendicksaft", 0.30)
+        };
+
+        Zutat[] KräuterteeBio = new Zutat[] {
+                new Zutat("Kräutermischung (Bio)", 0.40),
+                new Zutat("Wasser", 0.10)
+        };
         Restaurant Veganuss = new Restaurant(Kategorien.DEUTSCH, true);
         ArrayList<Hauptspeiße> listeVeganuss = new ArrayList<>();
         listeVeganuss.add(new Hauptspeiße("Tortellini mit Ricotta und Spinat", TortellinimitRicottaundSpinat));
@@ -1804,6 +2470,26 @@ public class DataManager {
         listeNachspeisenVeganuss.add(new Nachspeiße("Veganer Zabaione", VeganeZabaione));
         listeNachspeisenVeganuss.add(new Nachspeiße("Veganer Apfelstrudel", VeganerApfelstrudel));
         Veganuss.setNachspeisenListe(listeNachspeisenVeganuss);
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksVeganuss = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksVeganuss = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksVeganuss.add(new Kaltgetränk("Ingwer-Zitronen-Limo", IngwerZitronenLimo, false));
+        drinksVeganuss.add(new Kaltgetränk("Matcha Eistee", MatchaEistee, false));
+        drinksVeganuss.add(new Kaltgetränk("Beeren Smoothie", BeerenSmoothie, false));
+        drinksVeganuss.add(new Kaltgetränk("Gurken-Minz-Wasser", GurkenMinzWasser, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksVeganuss.add(new Heißgetränk("Hafer-Cappuccino", HaferCappuccino));
+        hotDrinksVeganuss.add(new Heißgetränk("Kurkuma Latte", KurkumaLatte));
+        hotDrinksVeganuss.add(new Heißgetränk("Veganer Kakao", KakaoVegan));
+        hotDrinksVeganuss.add(new Heißgetränk("Kräutertee (Bio)", KräuterteeBio));
+
+// Listen zum Restaurant hinzufügen
+        Veganuss.setKaltgetränkeListe(drinksVeganuss);
+        Veganuss.setHeißgetränkeListe(hotDrinksVeganuss);
+
         Veganuss.setName("Veganuss");
         Veganuss.website = "www.Veganuss.de";
         Veganuss.beschreibung = "Die leckersten Veganen gerichte - frei von Tierleid, gut für Mensch und Umwelt." +
@@ -1875,6 +2561,58 @@ public class DataManager {
                 new Zutat("Frische Beeren (Erdbeeren, Himbeeren)", 0.80),
                 new Zutat("Puderzucker", 0.20)
         };
+        // Kaltgetränke für "Snack & Chill"
+        Zutat[] EisteePfirsich4 = new Zutat[] {
+                new Zutat("Schwarzer Tee", 0.30),
+                new Zutat("Pfirsichsaft", 0.50),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+        Zutat[] HimbeerLimo = new Zutat[] {
+                new Zutat("Himbeersirup", 0.60),
+                new Zutat("Zitrone", 0.30),
+                new Zutat("Sprudelwasser", 0.30),
+                new Zutat("Minze", 0.20)
+        };
+
+        Zutat[] KokoswasserMix = new Zutat[] {
+                new Zutat("Kokoswasser", 0.80),
+                new Zutat("Ananassaft", 0.60),
+                new Zutat("Limette", 0.30)
+        };
+
+        Zutat[] IcedChaiLatte = new Zutat[] {
+                new Zutat("Chai-Gewürz", 0.50),
+                new Zutat("Pflanzenmilch", 0.50),
+                new Zutat("Zucker", 0.30),
+                new Zutat("Eiswürfel", 0.10)
+        };
+
+// Heißgetränke für "Snack & Chill"
+        Zutat[] ChaiLatteHeiß = new Zutat[] {
+                new Zutat("Chai-Gewürz", 0.50),
+                new Zutat("Pflanzenmilch", 0.50),
+                new Zutat("Zucker", 0.30)
+        };
+
+        Zutat[] EspressoSnackChill = new Zutat[] {
+                new Zutat("Espressopulver", 0.60),
+                new Zutat("Wasser", 0.10)
+        };
+
+        Zutat[] HaferCappuccinoChill = new Zutat[] {
+                new Zutat("Espressopulver", 0.50),
+                new Zutat("Hafermilch", 0.60),
+                new Zutat("Milchschaum", 0.40)
+        };
+
+        Zutat[] HeißeSchokoladeChill = new Zutat[] {
+                new Zutat("Pflanzenmilch", 0.60),
+                new Zutat("Kakaopulver", 0.50),
+                new Zutat("Zucker", 0.30)
+        };
+
         Restaurant SnackChill = new Restaurant(Kategorien.FASTFOOD, true);
         ArrayList<Hauptspeiße> listeSnack = new ArrayList<>();
         listeSnack.add(new Hauptspeiße("Brioche mit Ziegenkäse", BriochemitZiegenkäse));
@@ -1889,6 +2627,26 @@ public class DataManager {
         listeNachspeisenSnackChill.add(new Nachspeiße("Apfelchips mit Zimt", ApfelchipsMitZimt));
         listeNachspeisenSnackChill.add(new Nachspeiße("Waffeln mit Beeren", WaffelnMitBeeren));
         SnackChill.setNachspeisenListe(listeNachspeisenSnackChill);
+        // Getränke-Listen anlegen
+        ArrayList<Kaltgetränk> drinksSnackChill = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksSnackChill = new ArrayList<>();
+
+// Kaltgetränke hinzufügen
+        drinksSnackChill.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich4, false));
+        drinksSnackChill.add(new Kaltgetränk("Himbeer-Limonade", HimbeerLimo, false));
+        drinksSnackChill.add(new Kaltgetränk("Kokoswasser-Ananas-Mix", KokoswasserMix, false));
+        drinksSnackChill.add(new Kaltgetränk("Iced Chai Latte", IcedChaiLatte, false));
+
+// Heißgetränke hinzufügen
+        hotDrinksSnackChill.add(new Heißgetränk("Chai Latte (heiß)", ChaiLatteHeiß));
+        hotDrinksSnackChill.add(new Heißgetränk("Espresso", EspressoSnackChill));
+        hotDrinksSnackChill.add(new Heißgetränk("Hafer-Cappuccino", HaferCappuccinoChill));
+        hotDrinksSnackChill.add(new Heißgetränk("Heiße Schokolade", HeißeSchokoladeChill));
+
+// Listen zum Restaurant hinzufügen
+        SnackChill.setKaltgetränkeListe(drinksSnackChill);
+        SnackChill.setHeißgetränkeListe(hotDrinksSnackChill);
+
         SnackChill.setName("Snack & Chill");
         SnackChill.website = "www.snackandchill.de";
         SnackChill.beschreibung = "Kreative Snacks und Fingerfood für jeden Anlass – frisch zubereitet und zum Mitnehmen.";
