@@ -9,7 +9,7 @@ package BusinessLogik.Nahrung;
 
 public class Hauptspeiße extends BasisEssen {
     public Hauptspeiße(String name, Zutat[] zutaten) {
-        super(name, preis, zutaten);
+        super(name, zutaten);
     }
 }
 

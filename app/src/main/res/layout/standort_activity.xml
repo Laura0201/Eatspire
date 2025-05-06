@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:gravity="center_horizontal"
-    android:background="#004d00">
+    >
 
     <TextView
         android:id="@+id/textViewAdresse"
@@ -13,9 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Adresse wird geladen..."
         android:textSize="18sp"
-        android:textColor="#FFFFFF"
         android:padding="12dp"
-        android:background="#004700"
         android:layout_marginBottom="24dp" />
 
     <Button
