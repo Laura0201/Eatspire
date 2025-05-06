@@ -29,11 +29,11 @@ public class MVCView {
     /**
      * Zeigt die aktuelle Adresse im Layout an.
      */
-    public void zeigeAdresseAn(String adresse) {
+    /*public void zeigeAdresseAn(String adresse) {
         if (activity instanceof MVC) {
             ((MVC) activity).zeigeAdresseAn(adresse);
         }
-    }
+    }*/
 
     /**
      * Startet eine neue Activity (wenn du z.B. später eine Hauptseite hast).
