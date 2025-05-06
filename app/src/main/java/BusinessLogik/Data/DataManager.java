@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import BusinessLogik.EssensOrte.Kategorien;
 import BusinessLogik.EssensOrte.Restaurant;
 import BusinessLogik.Nahrung.BasisEssen;
+import BusinessLogik.Nahrung.BasisGetränk;
 import BusinessLogik.Nahrung.Hauptspeiße;
 import BusinessLogik.Nahrung.Kaltgetränk;
 import BusinessLogik.Nahrung.Nachspeiße;
@@ -29,6 +30,12 @@ public class DataManager {
         }
         return listeRestaurants;
     }
+    //Liste mit allen Gerichten, sodass man diese durchsuchen könnte, wenn die nötige Logik
+    // implementiert wäre
+    //dazu muss man nochmal durch alle restaurants und die entsprechenden Gerichte und Getränke
+    //in die Listen aufnehmen
+    private ArrayList<BasisEssen> gerichte = new ArrayList<BasisEssen>();
+    private ArrayList<BasisGetränk> getränke = new ArrayList<BasisGetränk>();
     public void initGerichteAlsZutatenArrays() {
 
         //Initialisierung Bella Napoli

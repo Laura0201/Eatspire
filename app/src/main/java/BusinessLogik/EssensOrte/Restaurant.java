@@ -24,6 +24,8 @@ public class Restaurant {
     private double longitude;
     private Kategorien kategorie;
 
+    private ArrayList<Bewertung> bewertungen = new ArrayList<Bewertung>();
+
     private boolean hatVegetarisch = false;
 
     private ArrayList<Hauptspeiße> listeHauptspeisen = new ArrayList<Hauptspeiße>();
