@@ -22,9 +22,8 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/example_profile"
         android:scaleType="centerCrop"
-        android:src="@drawable/example_profile" />
+         />
 
     <!-- Name Field -->
     <TextView
@@ -104,7 +103,6 @@
             android:id="@+id/password_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-        <!--            android:src="@drawable/ic_eye" das wäre um das Passwort sichtbar zu machen-->
         android:layout_gravity="center_vertical"/>
     </LinearLayout>
 

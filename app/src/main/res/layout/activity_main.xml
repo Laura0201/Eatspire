@@ -1,38 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:background="#F1FFF1"
+    tools:context=".MainActivity1">
 
-    <!-- Willkommens-Text -->
-    <TextView
-        android:id="@+id/textViewWillkommen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Willkommen!"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+    <!-- Refresh-Button oben links -->
+<Button
+    android:id="@+id/buttonRefresh"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Refresh"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_margin="16dp"
+    android:background="#004700"
+    android:textColor="#FFFFFF" />
 
-    <!-- Standort-Information -->
-    <TextView
-        android:id="@+id/textViewStandortInfo"
+    <Button
+        android:id="@+id/buttonCurrentLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Standort wird geladen..."
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:padding="16dp"
-        android:background="#EEEEEE"/>
-    <Button
-        android:id="@+id/buttonStandortAktualisieren"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Standort aktualisieren"
-        android:layout_marginTop="24dp"
-        android:padding="12dp"/>
+        android:layout_toEndOf="@id/buttonRefresh"
+        android:layout_alignTop="@id/buttonRefresh"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="aktueller Standort"
+        android:textColor="#FFFFFF" />
 
+
+    <!-- Container für diverse Daten: Bild und mehrere Texte -->
+<RelativeLayout
+android:id="@+id/dataContainer"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_below="@id/buttonRefresh"
+android:layout_margin="16dp"
+android:background="#E0F2F1"
+android:padding="8dp">
+
+<!-- Beispielhaftes Bild -->
+<ImageView
+    android:id="@+id/imageData"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:src="@drawable/ic_launcher_foreground"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true" />
+
+<!-- Beispielhafter Titel (Text) -->
+<TextView
+    android:id="@+id/textTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Titel der Daten"
+    android:textColor="#006400"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_toEndOf="@id/imageData"
+    android:layout_marginStart="8dp"
+    android:layout_alignTop="@id/imageData" />
+
+<!-- Beispielhafter Beschreibungstext -->
+<TextView
+    android:id="@+id/textDescription"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Beschreibung oder weitere Informationen werden hier angezeigt."
+    android:textColor="#228B22"
+    android:layout_below="@id/textTitle"
+    android:layout_alignStart="@id/textTitle"
+    android:layout_marginTop="4dp" />
+</RelativeLayout>
+
+    <!-- ScrollView für dynamische Elemente (z. B. Liste von Views, Daten etc.) -->
+<ScrollView
+android:id="@+id/scrollContainer"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_below="@id/dataContainer"
+android:layout_above="@id/bottomButtonContainer"
+android:layout_marginTop="16dp"
+android:layout_marginBottom="16dp">
+
+<!-- Container für die dynamischen Inhalte -->
+<LinearLayout
+    android:id="@+id/linearLayoutElements"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <!-- Hier können später weitere Elemente (z. B. Listeneinträge) programmgesteuert eingefügt werden -->
 </LinearLayout>
+</ScrollView>
+
+    <!-- Unterer Bereich: Leiste mit 2 Buttons nebeneinander -->
+<LinearLayout
+android:id="@+id/bottomButtonContainer"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+android:orientation="horizontal"
+android:weightSum="2"
+android:background="#A5D6A7">
+
+<Button
+    android:id="@+id/buttonEinstellungen"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Einstellungen"
+    android:background="#4CAF50"
+    android:textColor="#FFFFFF" />
+
+<Button
+    android:id="@+id/buttonFilterSortieren"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Filter/Sortieren"
+    android:background="#4CAF50"
+    android:textColor="#FFFFFF" />
+</LinearLayout>
+
+    </RelativeLayout>
