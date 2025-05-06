@@ -1,15 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F1FFF1">
 
+    <!-- Bild des Restaurants oben -->
+    <ImageView
+        android:id="@+id/imageRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/textRestaurantName"
+        android:src="@drawable/ic_placeholder_restaurant" />
 
+    <!-- Name des Restaurants -->
     <TextView
-        android:id="@+id/textViewRestaurantName"
-        android:layout_width="0dp"
+        android:id="@+id/textRestaurantName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Restaurant Name"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:layout_alignParentTop="true"
+        android:text="Name des Restaurants"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#006400" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Container für die Buttons -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imageRestaurant"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <!-- Button: Vorspeisen -->
+        <Button
+            android:id="@+id/buttonVorspeisen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Vorspeisen"
+            android:background="#4CAF50"
+            android:textColor="#FFFFFF" />
+
+        <!-- Button: Nachspeisen -->
+        <Button
+            android:id="@+id/buttonNachspeisen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Nachspeisen"
+            android:background="#388E3C"
+            android:textColor="#FFFFFF" />
+
+        <!-- Button: Desserts -->
+        <Button
+            android:id="@+id/buttonDesserts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Desserts"
+            android:background="#2E7D32"
+            android:textColor="#FFFFFF" />
+
+        <!-- Button: Kaltgetränke -->
+        <Button
+            android:id="@+id/buttonKaltgetraenke"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Kaltgetränke"
+            android:background="#1B5E20"
+            android:textColor="#FFFFFF" />
+
+        <!-- Button: Heißgetränke -->
+        <Button
+            android:id="@+id/buttonHeissgetraenke"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Heißgetränke"
+            android:background="#004D00"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</RelativeLayout>

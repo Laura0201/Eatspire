@@ -52,6 +52,9 @@ public class Restaurant {
     public void setName(String Name){
         name=Name;
     }
+    public String getName(){
+        return name;
+    }
     public void setAdresse(String Adresse){
         adressfeld=Adresse;
     }
@@ -88,6 +91,30 @@ public class Restaurant {
 
     public boolean isHatVegetarisch() {
         return hatVegetarisch;
+    }
+
+    public String getBeschreibung(){
+        return beschreibung;
+    }
+
+    public String getAdressfeld() {
+        return adressfeld;
+    }
+
+    public String getTelefonnummer() {
+        return telefonnummer;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public Kategorien getKategorie() {
+        return kategorie;
     }
 
     public void setHatVegetarisch(boolean hatVegetarisch) {

@@ -11,7 +11,7 @@ import BusinessLogik.UserStuff.User;
 public class MVCController {
 
     private MVCView view;
-    private MVCModel model;
+    public MVCModel model;
     private UserVerwaltung userVerwaltung;
     private User aktuellerUser;
 
@@ -36,7 +36,7 @@ public class MVCController {
      * Initialisiert User- und Datenmodelle beim Start.
      */
     private void initApp() {
-        model.datamanager.initDaten();
+        model.datamanager.initGerichteAlsZutatenArrays();
 
         // Test-User erstellen, wenn noch kein User existiert
         if (userVerwaltung.getAktuellenUser() == null) {
@@ -84,9 +84,7 @@ public class MVCController {
     /**
      * Beispiel für weitere Benutzeraktionen (Rezeptverwaltung etc.).
      */
-    public void legeRezeptan() {
-        model.essenverwaltung.zeigeGerichteAn(EssenTypen.COCKTAIL);
-    }
+
 
     /**
      * Getter für Activity.

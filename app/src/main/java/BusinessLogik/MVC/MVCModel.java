@@ -10,20 +10,17 @@ package BusinessLogik.MVC;
 import BusinessLogik.Data.DataManager;
 
 public class MVCModel {
-
-    EssenVerwaltung essenverwaltung;
-
     DataManager datamanager;
-
     public MVCModel() {
 
         init();
 
     }
+    public DataManager getDatamanager() {
+        return datamanager;
+    }
 
     public void init() {
-
-        essenverwaltung = new EssenVerwaltung();
 
         datamanager = new DataManager();
         System.out.println("Initialisieren des Datenmodells abgeschlossen");
