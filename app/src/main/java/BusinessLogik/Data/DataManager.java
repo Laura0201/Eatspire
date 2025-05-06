@@ -24,6 +24,12 @@ public class DataManager {
         initGerichteAlsZutatenArrays();
     }
     private ArrayList<Restaurant> listeAllerRestaurants = new ArrayList<Restaurant>();
+    public Restaurant getRestaurant(int index) {
+        if (index < 0 || index >= listeAllerRestaurants.size()) {
+            return null;
+        }
+        return listeAllerRestaurants.get(index);
+    }
     public Restaurant[] getListeAllerRestaurants() {
         Restaurant[] listeRestaurants = new Restaurant[listeAllerRestaurants.size()];
         for (int i = 0; i < listeAllerRestaurants.size(); i++) {
@@ -150,13 +156,19 @@ public class DataManager {
         drinksBellaNapoli.add(new Kaltgetränk("Aranciata", Aranciata, false));
         drinksBellaNapoli.add(new Kaltgetränk("Chinotto", Chinotto, false));
         drinksBellaNapoli.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich, false));
-
+        for(int i = 0; i < drinksBellaNapoli.size(); i++) {
+            getränke.add(drinksBellaNapoli.get(i));
+        }
         ArrayList<Heißgetränk> hotDrinksBellaNapoli = new ArrayList<>();
         hotDrinksBellaNapoli.add(new Heißgetränk("Espresso", Espresso));
         hotDrinksBellaNapoli.add(new Heißgetränk("Cappuccino", Cappuccino));
         hotDrinksBellaNapoli.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
         hotDrinksBellaNapoli.add(new Heißgetränk("Heiße Schokolade", HeißeSchokolade));
+        for(int i = 0; i < hotDrinksBellaNapoli.size(); i++) {
+            getränke.add(hotDrinksBellaNapoli.get(i));
+        }
         Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
+        listeAllerRestaurants.add(BellaNapoli);
         ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
         ArrayList<Vorspeise> listeBellaNapoliVorspeisen= new ArrayList<Vorspeise>();
         listeBellaNapoliVorspeisen.add(new Vorspeise("Käseplatte", Käseplatte));
