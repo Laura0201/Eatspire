@@ -116,6 +116,13 @@ public class Restaurant {
     public Kategorien getKategorie() {
         return kategorie;
     }
+    public Hauptspeiße zufälligesGericht(Restaurant restaurant){
+        for(int i=0; i<restaurant.listeHauptspeisen.size(); i++){
+            int zufallszahl = (int) (Math.random() * restaurant.listeHauptspeisen.size());
+            return restaurant.listeHauptspeisen.get(zufallszahl);
+        }
+        return null;
+    }
 
     public void setHatVegetarisch(boolean hatVegetarisch) {
         this.hatVegetarisch = hatVegetarisch;

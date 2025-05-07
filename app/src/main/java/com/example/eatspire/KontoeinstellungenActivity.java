@@ -14,7 +14,7 @@ public class KontoeinstellungenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.KontoeinstellungenActivity); // Name deiner XML-Datei
+        setContentView(R.layout.ansicht_kontoeinstellungen); // Name deiner XML-Datei
 
         // Buttons initialisieren
         buttonBackTop = findViewById(R.id.buttonBackTop);
@@ -31,12 +31,14 @@ public class KontoeinstellungenActivity extends AppCompatActivity {
         // Zurück-Button unten
         speichernButton.setOnClickListener(v -> finish());
 
+        buttonUsername.setText("Benutzername ("+getBenutzername()+")");
         // Benutzername bearbeiten
         buttonUsername.setOnClickListener(v -> {
-            Intent intent = new Intent(KontoeinstellungenActivity.this, BenutzernameEinstellenActivity.class);
+            Intent intent = new Intent(KontoeinstellungenActivity.this, BenutzernameÄndernActivity.class);
             startActivity(intent);
         });
 
+        buttonEmail.setText("Email: "+getEmail()+")");
         /* Email bearbeiten
         buttonEmail.setOnClickListener(v -> {
             Intent intent = new Intent(KontoeinstellungenActivity.this, EmailEinstellenActivity.class);
@@ -49,6 +51,7 @@ public class KontoeinstellungenActivity extends AppCompatActivity {
             startActivity(intent);
         });*/
 
+        buttonPhoneNumber.setText("Telefonnummer: "+getTelefonnummer()+")");
         /* Telefonnummer bearbeiten
         buttonPhoneNumber.setOnClickListener(v -> {
             Intent intent = new Intent(KontoeinstellungenActivity.this, TelefonnummerEinstellenActivity.class);
@@ -60,5 +63,15 @@ public class KontoeinstellungenActivity extends AppCompatActivity {
             Intent intent = new Intent(KontoeinstellungenActivity.this, PräferenzenEinstellenActivity.class);
             startActivity(intent);
         });*/
+
+        }
+        private String getBenutzername(){
+        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getUsername();
+    }
+    private String getEmail(){
+        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getEmail();
+    }
+    private String getTelefonnummer(){
+        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getTelefonnummer();
     }
 }
