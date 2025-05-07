@@ -24,6 +24,11 @@ public class DataManager {
         initGerichteAlsZutatenArrays();
     }
     private ArrayList<Restaurant> listeAllerRestaurants = new ArrayList<Restaurant>();
+
+    private UserVerwaltung userVerwaltung = new UserVerwaltung();
+    public UserVerwaltung getUserVerwaltung() {
+        return userVerwaltung;
+    }
     public Restaurant getRestaurant(int index) {
         if (index < 0 || index >= listeAllerRestaurants.size()) {
             return null;
@@ -37,6 +42,7 @@ public class DataManager {
         }
         return listeRestaurants;
     }
+
     //Liste mit allen Gerichten, sodass man diese durchsuchen könnte, wenn die nötige Logik
     // implementiert wäre
     //dazu muss man nochmal durch alle restaurants und die entsprechenden Gerichte und Getränke
