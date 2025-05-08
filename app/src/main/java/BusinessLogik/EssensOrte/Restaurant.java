@@ -23,6 +23,8 @@ public class Restaurant {
     private double latitude;
     private double longitude;
     private Kategorien kategorie;
+    private static int idCounter=-1;
+    private int idDesRestaurants;
 
     private ArrayList<Bewertung> bewertungen = new ArrayList<Bewertung>();
 
@@ -37,6 +39,8 @@ public class Restaurant {
     public Restaurant(Kategorien kategorie, boolean toGoMoeglich) {
         this.kategorie = kategorie;
         this.toGomöglich = toGoMoeglich;
+        idDesRestaurants=idCounter;
+        idCounter++;
     }
 
     //Methoden:
@@ -123,7 +127,9 @@ public class Restaurant {
         }
         return null;
     }
-
+    public int getIdDesRestaurants(){
+        return idDesRestaurants;
+    }
     public void setHatVegetarisch(boolean hatVegetarisch) {
         this.hatVegetarisch = hatVegetarisch;
     }

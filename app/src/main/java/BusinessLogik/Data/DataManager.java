@@ -29,7 +29,11 @@ public class DataManager {
     public UserVerwaltung getUserVerwaltung() {
         return userVerwaltung;
     }
-    public Restaurant getRestaurant(int index) {
+    private ArrayList<String> imageRestaurantsPaths= new ArrayList<String>();
+    public String getPfadFürImageDesRestaurants(int index){
+        return imageRestaurantsPaths.get(index);
+    }
+     public Restaurant getRestaurant(int index) {
         if (index < 0 || index >= listeAllerRestaurants.size()) {
             return null;
         }
@@ -175,6 +179,8 @@ public class DataManager {
         }
         Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
         listeAllerRestaurants.add(BellaNapoli);
+        //id des Restaurants is 0
+        imageRestaurantsPaths.set(BellaNapoli.getIdDesRestaurants(), "/sdcard/Download/Restaurant.jfif");
         ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
         ArrayList<Vorspeise> listeBellaNapoliVorspeisen= new ArrayList<Vorspeise>();
         listeBellaNapoliVorspeisen.add(new Vorspeise("Käseplatte", Käseplatte));
