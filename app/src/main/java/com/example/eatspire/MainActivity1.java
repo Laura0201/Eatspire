@@ -46,11 +46,11 @@ public class MainActivity1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(controller.model.getUserVerwaltung().getAktuellenUser()==null){
-            startActivity(new Intent(this, UserLoginActivity.class));
-            finish();
-            return;
-        }
+//        if(controller.model.getUserVerwaltung().getAktuellenUser()==null){
+//            startActivity(new Intent(this, UserLoginActivity.class));
+//            finish();
+//            return;
+//        }
         setContentView(R.layout.activity_main);
         empfehlungContainer = findViewById(R.id.dataContainer);
         bildDesGerichts = findViewById(R.id.imageData);
