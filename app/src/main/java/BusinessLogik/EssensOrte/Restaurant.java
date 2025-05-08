@@ -65,17 +65,32 @@ public class Restaurant {
     public void setHauptspeisenListe(ArrayList<Hauptspeiße> listeGerichte){
         this.listeHauptspeisen=listeGerichte;
     }
+    public ArrayList<Hauptspeiße> getHauptspeisenListe(){
+        return listeHauptspeisen;
+    }
     public void setVorspeisenListe(ArrayList<Vorspeise> listeGerichte){
         this.listeVorspeisen=listeGerichte;
+    }
+    public ArrayList<Vorspeise> getVorspeisenListe(){
+        return listeVorspeisen;
     }
     public void setNachspeisenListe(ArrayList<Nachspeiße> listeGerichte){
         this.listeNachspeisen=listeGerichte;
     }
+    public ArrayList<Nachspeiße> getNachspeisenListe(){
+        return listeNachspeisen;
+    }
     public void setHeißgetränkeListe(ArrayList<Heißgetränk> listeGerichte){
         this.listeHeißgetränke=listeGerichte;
     }
+    public ArrayList<Heißgetränk> getHeißgetränkeListe(){
+        return listeHeißgetränke;
+    }
     public void setKaltgetränkeListe(ArrayList<Kaltgetränk> listeGerichte){
         this.listeKaltgetränke=listeGerichte;
+    }
+    public ArrayList<Kaltgetränk> getKaltgetränkeListe(){
+        return listeKaltgetränke;
     }
     //....
     private LocalTime oeffnungszeit;
