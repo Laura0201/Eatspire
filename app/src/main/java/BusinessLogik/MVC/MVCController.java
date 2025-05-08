@@ -62,7 +62,7 @@ public class MVCController {
         if (aktuellerUser != null) {
             aktuellerUser.getStandort().holeAutomatischStandort(activity, (latitude, longitude, adresse) -> {
                 aktuellerUser.setStandortDaten(latitude, longitude, adresse);
-                view.zeigeAdresseAn(adresse);
+//                view.zeigeAdresseAn(adresse);
                 System.out.println("Automatisch Standort gesetzt: " + adresse);
             });
         }
@@ -75,7 +75,7 @@ public class MVCController {
         if (aktuellerUser != null) {
             aktuellerUser.getStandort().verarbeiteManuelleAdresse(activity, adresseInput, (latitude, longitude, adresse) -> {
                 aktuellerUser.setStandortDaten(latitude, longitude, adresse);
-                view.zeigeAdresseAn(adresse);
+//                view.zeigeAdresseAn(adresse);
                 System.out.println("Manuelle Adresse gesetzt: " + adresse);
             });
         }

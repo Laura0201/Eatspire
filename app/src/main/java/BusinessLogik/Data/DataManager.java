@@ -183,7 +183,7 @@ public class DataManager {
         Restaurant BellaNapoli = new Restaurant(Kategorien.FASTFOOD, true);
         listeAllerRestaurants.add(BellaNapoli);
         //id des Restaurants is 0
-        imageRestaurantsPaths.set(BellaNapoli.getIdDesRestaurants(), "/sdcard/Download/Restaurant.jfif");
+//        imageRestaurantsPaths.set(BellaNapoli.getIdDesRestaurants(), "/sdcard/Download/Restaurant.jfif");
         ArrayList<Hauptspeiße> listeBellaNapoliHauptspeisen= new ArrayList<Hauptspeiße>();
         ArrayList<Vorspeise> listeBellaNapoliVorspeisen= new ArrayList<Vorspeise>();
         listeBellaNapoliVorspeisen.add(new Vorspeise("Käseplatte", Käseplatte));
