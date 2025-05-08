@@ -23,7 +23,7 @@ public class Restaurant {
     private double latitude;
     private double longitude;
     private Kategorien kategorie;
-    private static int idCounter=-1;
+    private static int idCounter=0;
     private int idDesRestaurants;
 
     private ArrayList<Bewertung> bewertungen = new ArrayList<Bewertung>();

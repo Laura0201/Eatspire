@@ -19,9 +19,12 @@ import BusinessLogik.Nahrung.Kaltgetränk;
 import BusinessLogik.Nahrung.Nachspeiße;
 import BusinessLogik.Nahrung.Vorspeise;
 import BusinessLogik.Nahrung.Zutat;
+import BusinessLogik.UserStuff.User;
+
 public class DataManager {
     public DataManager() {
         initGerichteAlsZutatenArrays();
+        userVerwaltung.nehmeUserAuf(new User("User", "123"));
     }
     private ArrayList<Restaurant> listeAllerRestaurants = new ArrayList<Restaurant>();
 

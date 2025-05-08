@@ -1,6 +1,9 @@
 package BusinessLogik.UserStuff;
 
+import android.app.Activity;
 import android.os.Build;
+
+import com.example.eatspire.MainActivity1;
 
 import java.time.LocalTime;
 
@@ -68,6 +71,19 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
         this.adresse = adresse;
+    }
+    public void setStandort(Standort standort) {
+        this.standort = standort;
+    }
+    public void holeAutomatischenStandort(Activity activity, Standort.StandortCallback callback) {
+        Standort standort = new Standort();
+        standort.holeAutomatischStandort(activity, (lat, lon, adresse) -> {
+            User user = MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser();
+            if (user != null) {
+                user.setStandort(standort);
+                callback.onStandortGefunden(lat, lon, adresse);
+            }
+        });
     }
     public void setAktuelleUhrzeit(){
         aktuelleUhrzeit=getAktuelleUhrzeit();
