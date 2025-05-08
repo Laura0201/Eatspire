@@ -32,7 +32,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 if (benutzername.isEmpty() || passwort.isEmpty()) {
                     Toast.makeText(UserLoginActivity.this, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (benutzername.equals("test") && passwort.equals("1234")) {
+                    if (MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().getUsername().equals(benutzername) && MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().getPassword().equals(passwort)) {
                         Toast.makeText(UserLoginActivity.this, "Login erfolgreich", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UserLoginActivity.this, MainActivity1.class);
                         startActivity(intent);

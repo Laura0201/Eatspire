@@ -3,6 +3,7 @@ package BusinessLogik.MVC;
 import android.app.Activity;
 
 import BusinessLogik.Data.UserVerwaltung;
+import BusinessLogik.UserStuff.Standort;
 import BusinessLogik.UserStuff.User;
 
 /**
@@ -21,7 +22,6 @@ public class MVCController {
         this.model = new MVCModel();
         this.userVerwaltung = new UserVerwaltung();
     }
-
     /**
      * Muss aufgerufen werden, sobald die Activity bereit ist.
      */
@@ -79,6 +79,16 @@ public class MVCController {
                 System.out.println("Manuelle Adresse gesetzt: " + adresse);
             });
         }
+    }
+    public void setzeManuellenStandort(Activity activity, String adresse, Standort.StandortCallback callback) {
+        Standort standort = new Standort();
+        standort.verarbeiteManuelleAdresse(activity, adresse, (lat, lon, resolvedAdresse) -> {
+            User user = model.getUserVerwaltung().getAktuellenUser();
+            if (user != null) {
+                user.setStandort(standort);
+                callback.onStandortGefunden(lat, lon, resolvedAdresse);
+            }
+        });
     }
 
     /**
