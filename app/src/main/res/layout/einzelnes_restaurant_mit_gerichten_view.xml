@@ -27,6 +27,7 @@
         android:textColor="#006400" />
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/textRestaurantDescription"
         android:layout_height="wrap_content"
         android:layout_below="@id/textRestaurantName"
         android:text="Beschreibung des Restaurants"
@@ -53,11 +54,11 @@
 
         <!-- Button: Nachspeisen -->
         <Button
-            android:id="@+id/buttonNachspeisen"
+            android:id="@+id/buttonHauptspeisen"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Nachspeisen"
+            android:text="Hauptspeisen"
             android:background="#388E3C"
             android:textColor="#FFFFFF" />
 
