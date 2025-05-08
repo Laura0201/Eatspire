@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1FFF1">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Bild des Restaurants oben -->
+    <!-- Bild oben -->
     <ImageView
-        android:id="@+id/imageRestaurant"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:layout_below="@+id/textRestaurantName"
-        android:src="@drawable/ic_placeholder_restaurant" />
+        android:id="@+id/image_logo"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/image_logo" />
 
     <!-- Name des Restaurants -->
     <TextView
-        android:id="@+id/textRestaurantName"
-        android:layout_width="match_parent"
+        android:id="@+id/restaurantName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_alignParentTop="true"
-        android:text="Name des Restaurants"
-        android:textSize="20sp"
+        android:text="Restaurant Name"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textColor="#006400" />
-    <TextView
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Menüauswahl -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textRestaurantName"
-        android:text="Beschreibung des Restaurants"
-        />
-
-    <!-- Container für die Buttons -->
-    <LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/imageRestaurant"
         android:orientation="vertical"
-        android:weightSum="5">
+        android:layout_marginTop="16dp">
+
 
         <!-- Button: Vorspeisen -->
         <Button
@@ -92,4 +86,4 @@
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
