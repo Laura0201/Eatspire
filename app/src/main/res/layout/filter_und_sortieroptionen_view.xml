@@ -25,8 +25,8 @@ android:background="#004d00"> <!-- Dunkelgrüner Hintergrund -->
     android:layout_margin="16dp"
     android:background="#1b5e20"
     android:spinnerMode="dropdown"
-    android:popupBackground="#004700"/>
-<!--    android:prompt="Sortieren nach" />-->
+    android:popupBackground="#004700"
+    android:prompt="@string/prompt_sortieren_nach"/>
     <CheckBox
         android:id="@+id/checkboxToGo"
         android:layout_width="match_parent"

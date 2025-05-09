@@ -41,15 +41,17 @@ android:layout_margin="16dp"
 android:background="#E0F2F1"
 android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/imageData"
-        android:layout_width="98dp"
-        android:layout_height="94dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="6dp"
-        android:src="@drawable/ic_launcher_foreground" />
+<!-- Beispielhaftes Bild -->
+<ImageView
+    android:id="@+id/imageData"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:src="@drawable/ic_launcher_foreground"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true" />
 
-    <TextView
+<!-- Beispielhafter Titel (Text) -->
+<TextView
     android:id="@+id/textTitle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -61,7 +63,8 @@ android:padding="8dp">
     android:layout_marginStart="8dp"
     android:layout_alignTop="@id/imageData" />
 
-    <TextView
+<!-- Beispielhafter Beschreibungstext -->
+<TextView
     android:id="@+id/textDescription"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -70,38 +73,38 @@ android:padding="8dp">
     android:layout_below="@id/textTitle"
     android:layout_alignStart="@id/textTitle"
     android:layout_marginTop="4dp" />
-
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="30dp"
-    android:id="@+id/buttonRestaurantDerEmpfehlung"
-    android:layout_below="@id/textDescription"
-    android:layout_alignRight="@id/textDescription"
-    android:text="Restaurantname des Gerichts"
-    />
-
-
-
 </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/restaurants_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/dataContainer"
-        android:layout_above="@+id/bottomButtonContainer"
 
-    />
+    <!-- ScrollView für dynamische Elemente (z. B. Liste von Views, Daten etc.) -->
+<ScrollView
+android:id="@+id/scrollContainer"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_below="@id/dataContainer"
+android:layout_above="@id/bottomButtonContainer"
+android:layout_marginTop="16dp"
+android:layout_marginBottom="16dp">
 
-
-
-    <LinearLayout
-    android:id="@+id/bottomButtonContainer"
+<!-- Container für die dynamischen Inhalte -->
+<LinearLayout
+    android:id="@+id/linearLayoutElements"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:orientation="horizontal"
-    android:weightSum="2"
-    android:background="#A5D6A7">
+    android:orientation="vertical"
+    android:padding="16dp">
+    <!-- Hier können später weitere Elemente (z. B. Listeneinträge) programmgesteuert eingefügt werden -->
+</LinearLayout>
+</ScrollView>
+
+    <!-- Unterer Bereich: Leiste mit 2 Buttons nebeneinander -->
+<LinearLayout
+android:id="@+id/bottomButtonContainer"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+android:orientation="horizontal"
+android:weightSum="2"
+android:background="#A5D6A7">
 
 <Button
     android:id="@+id/buttonEinstellungen"

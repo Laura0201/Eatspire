@@ -14,7 +14,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/image_logo" />
+         />
 
     <TextView
         android:id="@+id/header"
@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:minHeight="48dp"
         android:hint="Username/Email"
         android:inputType="textEmailAddress" />
 
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Passwort"
+            android:minHeight="48dp"
             android:inputType="textPassword" />
 
     </RelativeLayout>
