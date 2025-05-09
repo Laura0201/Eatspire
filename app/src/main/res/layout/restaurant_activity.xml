@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/restaurantLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/textViewRestaurantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurantname"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/buttonVorspeisen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🥗 Vorspeisen"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/buttonHauptspeisen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🍝 Hauptspeisen"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/buttonNachspeisen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🍰 Nachspeisen"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/buttonGetraenke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🥤 Getränke" />
+
+</LinearLayout>

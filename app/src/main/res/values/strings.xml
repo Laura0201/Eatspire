@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Eatspire</string>
+    <string name="prompt_sortieren_nach">Sortieren nach</string>
+    <string name="restaurant_list_description">Liste aller Restaurants in Ihrer Nähe</string>
 </resources>

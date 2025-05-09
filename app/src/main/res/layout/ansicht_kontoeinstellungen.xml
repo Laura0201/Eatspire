@@ -7,20 +7,17 @@
     <!-- Zurück-Button oben links -->
     <Button
         android:id="@+id/buttonBackTop"
-        android:layout_width="52dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:background="#004700"
-        android:textColor="#FFFFFF"
         android:text="Zurück"
-        android:textSize="10dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:contentDescription="Zurück zur vorherigen Ansicht" />
 
     <TextView
         android:id="@+id/textViewHeader"

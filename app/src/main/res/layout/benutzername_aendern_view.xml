@@ -22,14 +22,17 @@
         android:layout_height="wrap_content"
         android:hint="Neues Passwort"
         android:inputType="textPassword"
+        android:padding="12dp"
         android:layout_marginBottom="16dp" />
 
     <EditText
         android:id="@+id/change_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:hint="Neue E-Mail"
         android:inputType="textEmailAddress"
+        android:padding="12dp"
         android:layout_marginBottom="16dp" />
 
     <Button
