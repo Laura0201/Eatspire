@@ -20,11 +20,9 @@ public class AppController {
 
         public AppController() {}
 
+        private static final AppController controller = new AppController(); // Direkte Instanziierung
         public static AppController getInstance() {
-            if (instance == null) {
-                instance = new AppController();
-            }
-            return instance;
+            return controller; // Gibt immer dieselbe Instanz zurück
         }
 
     // === User & Standort ===
