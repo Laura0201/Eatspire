@@ -1,7 +1,6 @@
 package com.example.eatspire.model.UserStuff;
 
 import android.os.Build;
-
 import java.time.LocalTime;
 
 public class User {
@@ -10,51 +9,26 @@ public class User {
     private int userId;
     private String username;
     private String password;
-    private LocalTime aktuelleUhrzeit;
-    private double latitude;
-    private double longitude;
-    private String adresse;
-
-    private Standort standort; // → neues Feld für eigenen Standort-Service
+    private Standort standort; // Nur Standortobjekt, keine separaten Koordinaten
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.userId = anzahlNutzer++;
-        this.aktuelleUhrzeit=getAktuelleUhrzeit();
-        this.standort = new Standort(); // Standort gleich anlegen
+        this.standort = new Standort();
     }
 
     // Getter und Setter
     public int getUserId() { return userId; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
-
-    public double getLatitude() { return latitude; }
-    public double getLongitude() { return longitude; }
-    public String getAdresse() { return adresse; }
-
-    public Standort getStandort() {
-        return standort;
-    }
-
-    public void setStandortDaten(double latitude, double longitude, String adresse) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.adresse = adresse;
-    }
-    public void setAktuelleUhrzeit(){
-        aktuelleUhrzeit=getAktuelleUhrzeit();
-    }
+    public Standort getStandort() { return standort; }
+    public void setStandort(Standort standort) { this.standort = standort; }
 
     public LocalTime getAktuelleUhrzeit() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return LocalTime.now();
         }
-        return null; // Fallback für ältere Android-Versionen
-    }
-
-    public void setStandort(Standort standort) {
-        this.standort = standort;
+        return null;
     }
 }

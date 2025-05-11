@@ -1,6 +1,16 @@
 package com.example.eatspire.controller;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Looper;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.eatspire.model.Data.DataManager;
 import com.example.eatspire.model.Data.UserVerwaltung;
@@ -8,24 +18,20 @@ import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
 import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
+import com.google.android.gms.location.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class AppController {
 
-        private static AppController instance;
-        private final DataManager dataManager = new DataManager();
+    private static final AppController controller = new AppController();
+    public static AppController getInstance() { return controller; }
 
-        public AppController() {}
-
-        private static final AppController controller = new AppController(); // Direkte Instanziierung
-        public static AppController getInstance() {
-            return controller; // Gibt immer dieselbe Instanz zurück
-        }
-
-    // === User & Standort ===
+    private final DataManager dataManager = new DataManager();
 
     public boolean login(String username, String password) {
         return UserVerwaltung.isValidLogin(username, password);
@@ -39,30 +45,76 @@ public class AppController {
         UserVerwaltung.logout();
     }
 
-    public void setzeManuellenStandort(Activity activity, String adresse, Standort.StandortCallback callback) {
-        Standort standort = new Standort();
-        standort.verarbeiteManuelleAdresse(activity, adresse, (lat, lon, resolvedAdresse) -> {
-            User user = getAktuellerUser();
-            if (user != null) {
-                user.setStandort(standort);
-                callback.onStandortGefunden(lat, lon, resolvedAdresse);
-            }
-        });
+    public void holeAutomatischenStandort(Activity activity, StandortCallback callback) {
+        FusedLocationProviderClient fusedClient = LocationServices.getFusedLocationProviderClient(activity);
+        if (!hatBerechtigung(activity)) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
+            return;
+        }
+
+        starteNeueStandortabfrage(activity, fusedClient, callback);
+
     }
 
-    public void holeAutomatischenStandort(Activity activity, Standort.StandortCallback callback) {
-        Standort standort = new Standort();
-        standort.holeAutomatischStandort(activity, (lat, lon, adresse) -> {
-            User user = getAktuellerUser();
-            if (user != null) {
-                user.setStandort(standort);
-                callback.onStandortGefunden(lat, lon, adresse);
+    private void starteNeueStandortabfrage(Activity activity, FusedLocationProviderClient client, StandortCallback callback) {
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(3000);
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult result) {
+                Location location = result.getLastLocation();
+                if (location != null) {
+                    updateStandortMitLocation(activity, location, callback);
+                    client.removeLocationUpdates(this);
+                }
             }
-        });
+        };
+
+        try {
+            client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+        } catch (SecurityException e) {
+            Toast.makeText(activity, "Keine Berechtigung", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateStandortMitLocation(Activity activity, Location location, StandortCallback callback) {
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+        String adresse = aufloesenAdresse(activity, lat, lon);
+
+        User user = getAktuellerUser();
+        if (user != null) {
+            user.getStandort().setDaten(lat, lon, adresse);
+            callback.onStandortGefunden(lat, lon, adresse);
+        }
+    }
+
+    private String aufloesenAdresse(Activity activity, double lat, double lon) {
+        Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lon, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                return addresses.get(0).getAddressLine(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Unbekannte Adresse";
+    }
+
+    private boolean hatBerechtigung(Activity activity) {
+        return ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    // Callback-Interface
+    public interface StandortCallback {
+        void onStandortGefunden(double latitude, double longitude, String adresse);
     }
 
     // === Restaurants ===
-
     public Restaurant[] getAlleRestaurants() {
         return dataManager.getAlleRestaurants();
     }
@@ -76,8 +128,6 @@ public class AppController {
         return null;
     }
 
-    // === Gerichte ===
-
     public List<BasisEssen> getAlleHauptspeisen() {
         List<BasisEssen> alle = new ArrayList<>();
         for (Restaurant r : dataManager.getAlleRestaurants()) {
@@ -86,15 +136,13 @@ public class AppController {
         return alle;
     }
 
-    // === Filter & Sortierung ===
-
     public List<Restaurant> filterNachUmkreis(float maxDistanzMeter) {
         User user = getAktuellerUser();
         if (user == null) return List.of();
 
         List<Restaurant> gefiltert = new ArrayList<>();
         for (Restaurant r : List.of(getAlleRestaurants())) {
-            float dist = berechneEntfernung(user, r);
+            float dist = berechneEntfernung(user.getStandort(), r);
             if (dist <= maxDistanzMeter) {
                 gefiltert.add(r);
             }
@@ -107,20 +155,19 @@ public class AppController {
         if (user == null) return List.of();
 
         List<Restaurant> sortiert = new ArrayList<>(List.of(getAlleRestaurants()));
-        sortiert.sort(Comparator.comparingDouble(r -> berechneEntfernung(user, r)));
+        sortiert.sort(Comparator.comparingDouble(r -> berechneEntfernung(user.getStandort(), r)));
         return sortiert;
     }
 
-    private float berechneEntfernung(User user, Restaurant restaurant) {
-        android.location.Location userLoc = new android.location.Location("User");
-        userLoc.setLatitude(user.getLatitude());
-        userLoc.setLongitude(user.getLongitude());
+    private float berechneEntfernung(Standort standort, Restaurant restaurant) {
+        Location userLoc = new Location("User");
+        userLoc.setLatitude(standort.getLatitude());
+        userLoc.setLongitude(standort.getLongitude());
 
-        android.location.Location rLoc = new android.location.Location("Restaurant");
+        Location rLoc = new Location("Restaurant");
         rLoc.setLatitude(restaurant.getLatitude());
         rLoc.setLongitude(restaurant.getLongitude());
 
         return userLoc.distanceTo(rLoc);
     }
-
 }

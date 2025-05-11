@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
 
-        controller = new AppController();
+        controller = AppController.getInstance();
 
         // UI
         buttonRefresh = findViewById(R.id.buttonRefresh);
@@ -67,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         zeigeRestaurants();
-        aktualisiereStandortanzeige();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         aktualisiereStandortanzeige();
     }
 
@@ -116,5 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
             linearLayoutElements.addView(itemView);
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        aktualisiereStandortanzeige();
     }
 }

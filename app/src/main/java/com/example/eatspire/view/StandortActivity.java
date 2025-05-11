@@ -13,7 +13,7 @@ import com.example.eatspire.model.UserStuff.Standort;
 
 /**
  * View-Klasse für die Standortauswahl (manuell oder automatisch).
- * Die Logik wird über den UserController abgewickelt.
+ * Die Logik wird über den AppController abgewickelt.
  */
 public class StandortActivity extends AppCompatActivity {
 
@@ -32,31 +32,33 @@ public class StandortActivity extends AppCompatActivity {
         buttonGPS = findViewById(R.id.buttonHoleStandort);
         buttonSetManuell = findViewById(R.id.buttonSetManuelleAdresse);
 
-        // Wenn bereits ein Standort vorhanden ist, zeige ihn an
+        // Aktuellen Standort anzeigen (falls vorhanden)
         Standort standort = MainActivity.controller.getAktuellerUser().getStandort();
         if (standort != null && standort.getAdresse() != null) {
             textViewAdresse.setText("Aktueller Standort: " + standort.getAdresse());
+        } else {
+            textViewAdresse.setText("Kein Standort gesetzt");
         }
 
-        // Button für manuelle Adresseingabe
+        // Manuelle Adresse setzen
         buttonSetManuell.setOnClickListener(v -> {
             String adresse = editTextAdresse.getText().toString().trim();
             if (!adresse.isEmpty()) {
-                // Verarbeite Eingabe über Controller
-                MainActivity.controller.setzeManuellenStandort(this, adresse, (lat, lon, resolvedAdresse) -> {
-                    Toast.makeText(this, "Adresse gespeichert: " + resolvedAdresse, Toast.LENGTH_SHORT).show();
-                    finish(); // Zurück zur MainActivity
-                });
+                // Geocoder läuft im Controller, User-Daten werden dort aktualisiert
+                Standort tempStandort = MainActivity.controller.getAktuellerUser().getStandort();
+                tempStandort.setDatenVonAdresse(this, adresse);
+                Toast.makeText(this, "Adresse gesetzt: " + tempStandort.getAdresse(), Toast.LENGTH_SHORT).show();
+                finish(); // zurück zur MainActivity
             } else {
                 Toast.makeText(this, "Bitte Adresse eingeben", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Button für automatische Standortermittlung per GPS
+        // GPS-Standort setzen über Controller
         buttonGPS.setOnClickListener(v -> {
             MainActivity.controller.holeAutomatischenStandort(this, (lat, lon, adresse) -> {
-                Toast.makeText(this, "Standort gefunden: " + adresse, Toast.LENGTH_SHORT).show();
-                finish(); // Zurück zur MainActivity
+                Toast.makeText(this, "GPS-Standort: " + adresse, Toast.LENGTH_SHORT).show();
+                finish(); // zurück zur MainActivity
             });
         });
     }
