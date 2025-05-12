@@ -47,7 +47,6 @@ public class StandortActivity extends AppCompatActivity {
                 // Geocoder läuft im Controller, User-Daten werden dort aktualisiert
                 Standort tempStandort = MainActivity.controller.getAktuellerUser().getStandort();
                 tempStandort.setDatenVonAdresse(this, adresse);
-                Toast.makeText(this, "Adresse gesetzt: " + tempStandort.getAdresse(), Toast.LENGTH_SHORT).show();
                 finish(); // zurück zur MainActivity
             } else {
                 Toast.makeText(this, "Bitte Adresse eingeben", Toast.LENGTH_SHORT).show();
@@ -57,7 +56,6 @@ public class StandortActivity extends AppCompatActivity {
         // GPS-Standort setzen über Controller
         buttonGPS.setOnClickListener(v -> {
             MainActivity.controller.holeAutomatischenStandort(this, (lat, lon, adresse) -> {
-                Toast.makeText(this, "GPS-Standort: " + adresse, Toast.LENGTH_SHORT).show();
                 finish(); // zurück zur MainActivity
             });
         });

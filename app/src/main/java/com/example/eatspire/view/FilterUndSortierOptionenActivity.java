@@ -36,24 +36,21 @@ public class FilterUndSortierOptionenActivity extends ComponentActivity {
                 new String[]{"Nächste", "Beste Bewertung"});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSortOptions.setAdapter(adapter);
-        spinnerSortOptions.setSelection(0);
+        spinnerSortOptions.setSelection(0); // noch nicht anwendbar
         spinnerSortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedOption = parent.getItemAtPosition(position).toString();
-                Toast.makeText(FilterUndSortierOptionenActivity.this,
-                        "Sortierung: " + selectedOption, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // Umkreis-SeekBar
+        // SeekBar + Text
         textRadiusLabel = findViewById(R.id.textRadiusLabel);
         seekBarRadius = findViewById(R.id.seekBarRadius);
-        updateRadiusLabel(seekBarRadius.getProgress());
-
         seekBarRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -64,12 +61,11 @@ public class FilterUndSortierOptionenActivity extends ComponentActivity {
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        // Allgemeine Filter
+        // Filter-Checkboxen
         checkboxToGo = findViewById(R.id.checkboxToGo);
         checkboxOpen = findViewById(R.id.checkboxOpen);
         checkboxVegetarian = findViewById(R.id.checkboxVegetarian);
 
-        // Kategorien
         checkboxItalian = findViewById(R.id.checkboxItalian);
         checkboxAsian = findViewById(R.id.checkboxAsian);
         checkboxFastFood = findViewById(R.id.checkboxFastFood);
@@ -77,6 +73,40 @@ public class FilterUndSortierOptionenActivity extends ComponentActivity {
         checkboxSpirits = findViewById(R.id.checkboxSpirits);
         checkboxFrench = findViewById(R.id.checkboxFrench);
         checkboxGerman = findViewById(R.id.checkboxGerman);
+
+        // 💾 Filterwerte aus vorheriger Sitzung laden
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            checkboxToGo.setChecked(extras.getBoolean("toGo", true));
+            checkboxOpen.setChecked(extras.getBoolean("open", true));
+            checkboxVegetarian.setChecked(extras.getBoolean("vegetarian", true));
+
+            checkboxItalian.setChecked(extras.getBoolean("italian", true));
+            checkboxAsian.setChecked(extras.getBoolean("asian", true));
+            checkboxFastFood.setChecked(extras.getBoolean("fastfood", true));
+            checkboxSnacks.setChecked(extras.getBoolean("snacks", true));
+            checkboxSpirits.setChecked(extras.getBoolean("spirits", true));
+            checkboxFrench.setChecked(extras.getBoolean("french", true));
+            checkboxGerman.setChecked(extras.getBoolean("german", true));
+
+            int umkreis = extras.getInt("umkreis", 0);
+            seekBarRadius.setProgress(umkreis / 5); // SeekBar-Wert in 5er-Schritten
+            updateRadiusLabel(umkreis / 5);
+        } else {
+            // Falls keine Extras vorhanden: Standardmäßig alles aktiv
+            checkboxToGo.setChecked(true);
+            checkboxOpen.setChecked(true);
+            checkboxVegetarian.setChecked(true);
+            checkboxItalian.setChecked(true);
+            checkboxAsian.setChecked(true);
+            checkboxFastFood.setChecked(true);
+            checkboxSnacks.setChecked(true);
+            checkboxSpirits.setChecked(true);
+            checkboxFrench.setChecked(true);
+            checkboxGerman.setChecked(true);
+            seekBarRadius.setProgress(0);
+            updateRadiusLabel(0);
+        }
 
         // Anwenden-Button
         Button buttonApply = findViewById(R.id.buttonApply);

@@ -243,6 +243,8 @@ public class RestaurantRepository {
         laProvence.setHauptspeisenListe(hauptspeisen);
         laProvence.setKaltgetränkeListe(kaltgetraenke);
         laProvence.setHeißgetränkeListe(heissgetraenke);
+        laProvence.setLatitude(53.548828);
+        laProvence.setLongitude(9.987170);
         laProvence.setWebsite ( "www.laprovence.fr");
         laProvence.setTelefonnummer ( "0456 789012");
         laProvence.setMail ( "info@laprovence.fr");
@@ -587,7 +589,9 @@ public class RestaurantRepository {
         SnackHaus.setNachspeisenListe(snackHausNachspeisen);
         SnackHaus.setKaltgetränkeListe(drinksSnackHaus);
         SnackHaus.setHeißgetränkeListe(hotDrinksSnackHaus);
-        SnackHaus.setName("SnackHaus 1");
+        bellaNapoli.setLatitude(50.937531);
+        bellaNapoli.setLongitude(6.960279);
+        SnackHaus.setName("SnackHaus");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             SnackHaus.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
         }
