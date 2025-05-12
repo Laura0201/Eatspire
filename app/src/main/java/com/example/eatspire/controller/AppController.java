@@ -142,9 +142,20 @@ public class AppController {
         if (r != null) return r.getHauptspeisen();
         return List.of();
     }
+    public int getRestaurantBildResIdAusName(Context context, String restaurantName) {
+        String resName = restaurantName.toLowerCase()
+                .replace("ä", "ae")
+                .replace("ö", "oe")
+                .replace("ü", "ue")
+                .replace("ß", "ss")
+                .replaceAll("[^a-z0-9]", "_"); // nur a-z, 0-9 und _
 
-    public int getBildResIdAusName(Context context, String gerichtName) {
-        String resName = gerichtName.toLowerCase()
+        return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+    }
+
+    public int getBildResIdAusName(Context context, String gerichtName, String restaurantName) {
+        String combinedName = restaurantName + "_" + gerichtName;
+        String resName = combinedName.toLowerCase()
                 .replace("ä", "ae")
                 .replace("ö", "oe")
                 .replace("ü", "ue")

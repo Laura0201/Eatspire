@@ -37,10 +37,10 @@ public class HauptspeisenActivity extends AppCompatActivity {
         textViewRestaurantName.setText(restaurantName);
 
         List<Hauptspeise> hauptspeisen = MainActivity.controller.getHauptspeisenVon(restaurantName);
-        zeigeHauptspeisen(hauptspeisen);
+        zeigeHauptspeisen(hauptspeisen, restaurantName);
     }
 
-    private void zeigeHauptspeisen(List<? extends BasisEssen> hauptspeisen) {
+    private void zeigeHauptspeisen(List<? extends BasisEssen> hauptspeisen, String restaurantName) {
         if (hauptspeisen == null || hauptspeisen.isEmpty()) {
             TextView leerText = new TextView(this);
             leerText.setText("Keine Hauptspeisen verfügbar.");
@@ -51,7 +51,6 @@ public class HauptspeisenActivity extends AppCompatActivity {
         for (int i = 0; i < hauptspeisen.size(); i++) {
             BasisEssen essen = hauptspeisen.get(i);
 
-            // Layout für Gerichtseintrag
             LinearLayout itemLayout = new LinearLayout(this);
             itemLayout.setOrientation(LinearLayout.HORIZONTAL);
             itemLayout.setPadding(24, 24, 24, 24);
@@ -60,38 +59,35 @@ public class HauptspeisenActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(0, 0, 0, 0); // kein zusätzlicher Abstand unten – die Linie übernimmt das
+            params.setMargins(0, 0, 0, 0);
             itemLayout.setLayoutParams(params);
 
-            // Bild dynamisch aus dem Namen ermitteln
-            int bildId = MainActivity.controller.getBildResIdAusName(this, essen.getName());
+            int bildId = MainActivity.controller.getBildResIdAusName(this, essen.getName(), restaurantName);
             ImageView imageView = new ImageView(this);
             imageView.setImageResource(bildId != 0 ? bildId : R.drawable.ic_placeholder_essen);
+
             LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(120, 120);
             imageParams.setMargins(0, 0, 24, 0);
             imageView.setLayoutParams(imageParams);
 
-            // Text: Name + Preis
             TextView textView = new TextView(this);
             textView.setText(essen.getName() + " (" + essen.getPreis() + " €)");
             textView.setTextSize(16);
             textView.setTextColor(0xFF004700);
 
-            // Zusammenfügen
             itemLayout.addView(imageView);
             itemLayout.addView(textView);
             containerHauptspeisen.addView(itemLayout);
 
-            // Optional: Linie NACH jedem Gericht (außer dem letzten)
             if (i < hauptspeisen.size() - 1) {
                 View trennlinie = new View(this);
                 LinearLayout.LayoutParams trennParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         2
                 );
-                trennParams.setMargins(0, 16, 0, 16); // Abstand oberhalb und unterhalb der Linie
+                trennParams.setMargins(0, 16, 0, 16);
                 trennlinie.setLayoutParams(trennParams);
-                trennlinie.setBackgroundColor(0xFFBDBDBD); // hellgrau
+                trennlinie.setBackgroundColor(0xFFBDBDBD);
                 containerHauptspeisen.addView(trennlinie);
             }
         }
