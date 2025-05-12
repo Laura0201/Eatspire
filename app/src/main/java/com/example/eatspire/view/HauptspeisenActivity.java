@@ -1,22 +1,19 @@
 package com.example.eatspire.view;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
-import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
+import com.example.eatspire.model.Nahrung.Hauptspeise;
 
 import java.util.List;
 
-/**
- * Activity zur Anzeige aller Hauptspeisen mit Buttons.
- */
 public class HauptspeisenActivity extends AppCompatActivity {
 
     private LinearLayout containerHauptspeisen;
@@ -30,27 +27,19 @@ public class HauptspeisenActivity extends AppCompatActivity {
         containerHauptspeisen = findViewById(R.id.containerHauptspeisen);
         textViewRestaurantName = findViewById(R.id.textViewRestaurantName);
 
-        // Intent-Daten prüfen
         String restaurantName = getIntent().getStringExtra("restaurant_name");
+
         if (restaurantName == null || restaurantName.trim().isEmpty()) {
             textViewRestaurantName.setText("Kein Restaurant angegeben");
             return;
         }
 
-        // Restaurant suchen
-        Restaurant restaurant = MainActivity.controller.getRestaurantByName(restaurantName);
+        textViewRestaurantName.setText(restaurantName);
 
-        if (restaurant != null) {
-            textViewRestaurantName.setText(restaurant.getName());
-            zeigeHauptspeisen(restaurant.getHauptspeisen());
-        } else {
-            textViewRestaurantName.setText("Restaurant nicht gefunden");
-        }
+        List<Hauptspeise> hauptspeisen = MainActivity.controller.getHauptspeisenVon(restaurantName);
+        zeigeHauptspeisen(hauptspeisen);
     }
 
-    /**
-     * Fügt dynamisch Buttons für die übergebenen Hauptspeisen hinzu.
-     */
     private void zeigeHauptspeisen(List<? extends BasisEssen> hauptspeisen) {
         if (hauptspeisen == null || hauptspeisen.isEmpty()) {
             TextView leerText = new TextView(this);
@@ -59,15 +48,52 @@ public class HauptspeisenActivity extends AppCompatActivity {
             return;
         }
 
-        for (BasisEssen essen : hauptspeisen) {
-            Button btn = new Button(this);
-            btn.setText(essen.getName() + " (" + essen.getPreis() + " €)");
-            btn.setContentDescription("Wähle Hauptspeise: " + essen.getName());
+        for (int i = 0; i < hauptspeisen.size(); i++) {
+            BasisEssen essen = hauptspeisen.get(i);
 
-            btn.setOnClickListener(v ->
-                    Toast.makeText(this, essen.getName() + " gewählt", Toast.LENGTH_SHORT).show());
+            // Layout für Gerichtseintrag
+            LinearLayout itemLayout = new LinearLayout(this);
+            itemLayout.setOrientation(LinearLayout.HORIZONTAL);
+            itemLayout.setPadding(24, 24, 24, 24);
 
-            containerHauptspeisen.addView(btn);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(0, 0, 0, 0); // kein zusätzlicher Abstand unten – die Linie übernimmt das
+            itemLayout.setLayoutParams(params);
+
+            // Bild dynamisch aus dem Namen ermitteln
+            int bildId = MainActivity.controller.getBildResIdAusName(this, essen.getName());
+            ImageView imageView = new ImageView(this);
+            imageView.setImageResource(bildId != 0 ? bildId : R.drawable.ic_placeholder_essen);
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(120, 120);
+            imageParams.setMargins(0, 0, 24, 0);
+            imageView.setLayoutParams(imageParams);
+
+            // Text: Name + Preis
+            TextView textView = new TextView(this);
+            textView.setText(essen.getName() + " (" + essen.getPreis() + " €)");
+            textView.setTextSize(16);
+            textView.setTextColor(0xFF004700);
+
+            // Zusammenfügen
+            itemLayout.addView(imageView);
+            itemLayout.addView(textView);
+            containerHauptspeisen.addView(itemLayout);
+
+            // Optional: Linie NACH jedem Gericht (außer dem letzten)
+            if (i < hauptspeisen.size() - 1) {
+                View trennlinie = new View(this);
+                LinearLayout.LayoutParams trennParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        2
+                );
+                trennParams.setMargins(0, 16, 0, 16); // Abstand oberhalb und unterhalb der Linie
+                trennlinie.setLayoutParams(trennParams);
+                trennlinie.setBackgroundColor(0xFFBDBDBD); // hellgrau
+                containerHauptspeisen.addView(trennlinie);
+            }
         }
     }
 }

@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
             adresse.setText(r.getAdressfeld());
             website.setText(r.getWebsite());
             kategorie.setText(r.getKategorie().name());
-            bild.setImageResource(R.drawable.ic_placeholder_restaurant);
-            bild.setImageResource(r.getBildResourceId());
+            int bildResId = r.getBildResourceId();
+            bild.setImageResource(bildResId != 0 ? bildResId : R.drawable.ic_placeholder_restaurant);
 
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(MainActivity.this, RestaurantActivity.class);

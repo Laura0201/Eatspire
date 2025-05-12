@@ -23,7 +23,7 @@ public class Restaurant {
 
     private ArrayList<Bewertung> bewertungen = new ArrayList<>();
 
-    private ArrayList<Hauptspeiße> listeHauptspeisen = new ArrayList<>();
+    private ArrayList<Hauptspeise> listeHauptspeisen = new ArrayList<>();
     private ArrayList<Vorspeise> listeVorspeisen = new ArrayList<>();
     private ArrayList<Nachspeiße> listeNachspeisen = new ArrayList<>();
     private ArrayList<Heißgetränk> listeHeißgetränke = new ArrayList<>();
@@ -127,11 +127,11 @@ public class Restaurant {
         this.hatVegetarisch = hatVegetarisch;
     }
 
-    public List<Hauptspeiße> getHauptspeisen() {
+    public List<Hauptspeise> getHauptspeisen() {
         return listeHauptspeisen;
     }
 
-    public void setHauptspeisenListe(ArrayList<Hauptspeiße> listeGerichte) {
+    public void setHauptspeisenListe(ArrayList<Hauptspeise> listeGerichte) {
         this.listeHauptspeisen = listeGerichte;
     }
 

@@ -30,6 +30,16 @@ public abstract class BasisEssen {
         return idDesGerichts;
     }
 
+    private int bildResourceId;
+
+    public void setBildResourceId(int bildResourceId) {
+        this.bildResourceId = bildResourceId;
+    }
+
+    public int getBildResourceId() {
+        return bildResourceId;
+    }
+
     public void setPreis(double neuerPreis){
         this.preis = neuerPreis;
     }

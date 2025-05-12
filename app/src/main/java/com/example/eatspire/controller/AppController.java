@@ -1,6 +1,7 @@
 package com.example.eatspire.controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -17,6 +18,7 @@ import com.example.eatspire.model.Data.UserVerwaltung;
 import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
+import com.example.eatspire.model.Nahrung.Hauptspeise;
 import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
 import com.google.android.gms.location.*;
@@ -32,7 +34,11 @@ public class AppController {
     private static final AppController controller = new AppController();
     public static AppController getInstance() { return controller; }
 
-    private final DataManager dataManager = new DataManager();
+    private DataManager dataManager;
+
+    public void init(Context context) {
+        this.dataManager = new DataManager(context);
+    }
 
     public boolean login(String username, String password) {
         return UserVerwaltung.isValidLogin(username, password);
@@ -46,6 +52,7 @@ public class AppController {
         UserVerwaltung.logout();
     }
 
+    // Standort Logik
     public void holeAutomatischenStandort(Activity activity, StandortCallback callback) {
         FusedLocationProviderClient fusedClient = LocationServices.getFusedLocationProviderClient(activity);
         if (!hatBerechtigung(activity)) {
@@ -115,7 +122,7 @@ public class AppController {
         void onStandortGefunden(double latitude, double longitude, String adresse);
     }
 
-    // === Restaurants ===
+    // Restaurant Logik
     public Restaurant[] getAlleRestaurants() {
         return dataManager.getAlleRestaurants();
     }
@@ -129,6 +136,23 @@ public class AppController {
         return null;
     }
 
+    public List<Hauptspeise> getHauptspeisenVon(String restaurantName) {
+        Restaurant r = getRestaurantByName(restaurantName);
+        if (r != null) return r.getHauptspeisen();
+        return List.of();
+    }
+
+    public int getBildResIdAusName(Context context, String gerichtName) {
+        String resName = gerichtName.toLowerCase()
+                .replace("ä", "ae")
+                .replace("ö", "oe")
+                .replace("ü", "ue")
+                .replace("ß", "ss")
+                .replaceAll("[^a-z0-9]", "_"); // nur a-z, 0-9 und _
+
+        return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+    }
+
     public List<BasisEssen> getAlleHauptspeisen() {
         List<BasisEssen> alle = new ArrayList<>();
         for (Restaurant r : dataManager.getAlleRestaurants()) {
@@ -137,6 +161,7 @@ public class AppController {
         return alle;
     }
 
+    //Sortieren und Filtern Logik
     public List<Restaurant> filterNachUmkreis(float maxDistanzMeter) {
         User user = getAktuellerUser();
         if (user == null) return List.of();
