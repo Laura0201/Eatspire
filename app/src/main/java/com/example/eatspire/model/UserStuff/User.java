@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class User {
 
-    public static int anzahlNutzer;
+    public static int anzahlNutzer=0;
     private int userId;
     private String username;
     private String password;
@@ -14,7 +14,8 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.userId = anzahlNutzer++;
+        this.userId = anzahlNutzer;
+        anzahlNutzer++;
         this.standort = new Standort();
     }
 
