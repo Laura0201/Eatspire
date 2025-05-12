@@ -157,7 +157,6 @@ public class RestaurantRepository {
 
         // Restaurant anlegen und zuweisen
         Restaurant bellaNapoli = new Restaurant(Kategorien.ITALIENISCH, true);
-        bellaNapoli.setBildResourceId(R.drawable.pizza);
         bellaNapoli.setName("Bella Napoli");
         bellaNapoli.setHauptspeisenListe(hauptspeisen);
         bellaNapoli.setVorspeisenListe(vorspeisen);
@@ -360,36 +359,36 @@ public class RestaurantRepository {
                 new Zutat("Hummus", 0.80),
                 new Zutat("Rucola", 0.30)
         };
-        Restaurant BarLounge1 = new Restaurant(Kategorien.SPIRITUOSEN, false);
-        ArrayList<Hauptspeise> drinksBarLounge1 = new ArrayList<>();
-        ArrayList<Vorspeise> drinksBarLounge1Vorspeisen = new ArrayList<>();
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Mini Burger Slider", MiniBurgerSlider));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Nacho Platte", NachoPlatte));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Garnelen Cocktail", GarnelenCocktail));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Chicken Wings", ChickenWings));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Falafel Bällchen", FalafelBällchen));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Mozzarella Sticks", MozzarellaSticks));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Trüffel Pommes", TrüffelPommes));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Veggie Wraps", VeggieWraps));
-        BarLounge1.setVorspeisenListe(drinksBarLounge1Vorspeisen);
-        drinksBarLounge1.add(new Hauptspeise("Mojito", Mojito));
-        drinksBarLounge1.add(new Hauptspeise("Tequila Sunrise", TequilaSunrise));
-        drinksBarLounge1.add(new Hauptspeise("Whiskey Sour", WhiskeySour));
-        drinksBarLounge1.add(new Hauptspeise("Pina Colada", PinaColada));
-        drinksBarLounge1.add(new Hauptspeise("Blue Lagoon", BlueLagoon));
-        drinksBarLounge1.add(new Hauptspeise("Gin Tonic", GinTonic));
-        drinksBarLounge1.add(new Hauptspeise("Espresso Martini", EspressoMartini));
-        BarLounge1.setHauptspeisenListe(drinksBarLounge1);
-        BarLounge1.setName("BarLounge 1");
+        Restaurant BarLounge = new Restaurant(Kategorien.SPIRITUOSEN, false);
+        ArrayList<Hauptspeise> drinksBarLounge = new ArrayList<>();
+        ArrayList<Vorspeise> drinksBarLoungeVorspeisen = new ArrayList<>();
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Mini Burger Slider", MiniBurgerSlider));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Nacho Platte", NachoPlatte));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Garnelen Cocktail", GarnelenCocktail));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Chicken Wings", ChickenWings));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Falafel Bällchen", FalafelBällchen));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Mozzarella Sticks", MozzarellaSticks));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Trüffel Pommes", TrüffelPommes));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Veggie Wraps", VeggieWraps));
+        BarLounge.setVorspeisenListe(drinksBarLoungeVorspeisen);
+        drinksBarLounge.add(new Hauptspeise("Mojito", Mojito));
+        drinksBarLounge.add(new Hauptspeise("Tequila Sunrise", TequilaSunrise));
+        drinksBarLounge.add(new Hauptspeise("Whiskey Sour", WhiskeySour));
+        drinksBarLounge.add(new Hauptspeise("Pina Colada", PinaColada));
+        drinksBarLounge.add(new Hauptspeise("Blue Lagoon", BlueLagoon));
+        drinksBarLounge.add(new Hauptspeise("Gin Tonic", GinTonic));
+        drinksBarLounge.add(new Hauptspeise("Espresso Martini", EspressoMartini));
+        BarLounge.setHauptspeisenListe(drinksBarLounge);
+        BarLounge.setName("BarLounge");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            BarLounge1.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
+            BarLounge.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
         }
-        BarLounge1.setWebsite ("www.barlounge1.de");
-        BarLounge1.setBeschreibung ("Die stilvolle Cocktailbar im Herzen der Stadt mit Signature Drinks und entspannter Atmosphäre.");
-        BarLounge1.setTelefonnummer ("040 9876543");
-        BarLounge1.setMail ("info@barlounge1.de");
+        BarLounge.setWebsite ("www.barlounge1.de");
+        BarLounge.setBeschreibung ("Die stilvolle Cocktailbar im Herzen der Stadt mit Signature Drinks und entspannter Atmosphäre.");
+        BarLounge.setTelefonnummer ("040 9876543");
+        BarLounge.setMail ("info@barlounge1.de");
 
-        restaurants.add(BarLounge1);
+        restaurants.add(BarLounge);
 
         // Zutaten und Gerichte für das Restaurant "SnackHaus 1"
         Zutat[] SchinkenBaguette = new Zutat[] {
@@ -548,56 +547,56 @@ public class RestaurantRepository {
         };
 
         // Getränke-Listen anlegen
-        ArrayList<Kaltgetränk> drinksSnackHaus1 = new ArrayList<>();
-        ArrayList<Heißgetränk> hotDrinksSnackHaus1 = new ArrayList<>();
+        ArrayList<Kaltgetränk> drinksSnackHaus = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksSnackHaus = new ArrayList<>();
 
 // Kaltgetränke hinzufügen
-        drinksSnackHaus1.add(new Kaltgetränk("Cola", Cola, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Apfelschorle", Apfelschorle, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich1, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Zitronenlimonade", Zitronenlimonade, false));
+        drinksSnackHaus.add(new Kaltgetränk("Cola", Cola, false));
+        drinksSnackHaus.add(new Kaltgetränk("Apfelschorle", Apfelschorle, false));
+        drinksSnackHaus.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich1, false));
+        drinksSnackHaus.add(new Kaltgetränk("Zitronenlimonade", Zitronenlimonade, false));
 
 // Heißgetränke hinzufügen
-        hotDrinksSnackHaus1.add(new Heißgetränk("Kaffee", Kaffee));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Kakao", Kakao));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Tee Kamille", TeeKamille));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Cappuccino", Cappuccino1));
+        hotDrinksSnackHaus.add(new Heißgetränk("Kaffee", Kaffee));
+        hotDrinksSnackHaus.add(new Heißgetränk("Kakao", Kakao));
+        hotDrinksSnackHaus.add(new Heißgetränk("Tee Kamille", TeeKamille));
+        hotDrinksSnackHaus.add(new Heißgetränk("Cappuccino", Cappuccino1));
 
-        Restaurant SnackHaus1 = new Restaurant(Kategorien.SNACKS, true);
-        SnackHaus1.setBildResourceId(R.drawable.pizza);
-        ArrayList<Hauptspeise> speisenSnackHaus1 = new ArrayList<>();
-        ArrayList<Nachspeiße> snackHaus1Nachspeisen = new ArrayList<>();
-        speisenSnackHaus1.add(new Hauptspeise("Schinken Baguette", SchinkenBaguette));
-        speisenSnackHaus1.add(new Hauptspeise("Chicken Wrap", ChickenWrap));
-        speisenSnackHaus1.add(new Hauptspeise("Veggie Toast", VeggieToast));
-        speisenSnackHaus1.add(new Hauptspeise("Spiegelei Sandwich", SpiegeleiSandwich));
-        speisenSnackHaus1.add(new Hauptspeise("Tuna Snack", TunaSnack));
-        speisenSnackHaus1.add(new Hauptspeise("Mozzarella Ciabatta", MozzarellaCiabatta));
-        speisenSnackHaus1.add(new Hauptspeise("Snackplatte", Snackplatte));
-        SnackHaus1.setHauptspeisenListe(speisenSnackHaus1);
-        snackHaus1Nachspeisen.add(new Nachspeiße("Brownie",Brownie));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Donut", Donut));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Waffel mit Kirschen", WaffelMitKirschen));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Cookie Sandwich", CookieSandwich));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Muffin", Muffin));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Eisbecher", Eisbecher));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Milchreis mit Zimt und Zucker", MilchreisZimtZucker));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Apfeltasche", Apfeltasche));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Mini Pancakes", MiniPancakes));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Churros mit Schokosauce", ChurrosMitSchokosauce));
-        SnackHaus1.setNachspeisenListe(snackHaus1Nachspeisen);
-        SnackHaus1.setKaltgetränkeListe(drinksSnackHaus1);
-        SnackHaus1.setHeißgetränkeListe(hotDrinksSnackHaus1);
-        SnackHaus1.setName("SnackHaus 1");
+        Restaurant SnackHaus = new Restaurant(Kategorien.SNACKS, true);
+        SnackHaus.setBildResourceId(R.drawable.bella_napoli);
+        ArrayList<Hauptspeise> speisenSnackHaus = new ArrayList<>();
+        ArrayList<Nachspeiße> snackHausNachspeisen = new ArrayList<>();
+        speisenSnackHaus.add(new Hauptspeise("Schinken Baguette", SchinkenBaguette));
+        speisenSnackHaus.add(new Hauptspeise("Chicken Wrap", ChickenWrap));
+        speisenSnackHaus.add(new Hauptspeise("Veggie Toast", VeggieToast));
+        speisenSnackHaus.add(new Hauptspeise("Spiegelei Sandwich", SpiegeleiSandwich));
+        speisenSnackHaus.add(new Hauptspeise("Tuna Snack", TunaSnack));
+        speisenSnackHaus.add(new Hauptspeise("Mozzarella Ciabatta", MozzarellaCiabatta));
+        speisenSnackHaus.add(new Hauptspeise("Snackplatte", Snackplatte));
+        SnackHaus.setHauptspeisenListe(speisenSnackHaus);
+        snackHausNachspeisen.add(new Nachspeiße("Brownie",Brownie));
+        snackHausNachspeisen.add(new Nachspeiße("Donut", Donut));
+        snackHausNachspeisen.add(new Nachspeiße("Waffel mit Kirschen", WaffelMitKirschen));
+        snackHausNachspeisen.add(new Nachspeiße("Cookie Sandwich", CookieSandwich));
+        snackHausNachspeisen.add(new Nachspeiße("Muffin", Muffin));
+        snackHausNachspeisen.add(new Nachspeiße("Eisbecher", Eisbecher));
+        snackHausNachspeisen.add(new Nachspeiße("Milchreis mit Zimt und Zucker", MilchreisZimtZucker));
+        snackHausNachspeisen.add(new Nachspeiße("Apfeltasche", Apfeltasche));
+        snackHausNachspeisen.add(new Nachspeiße("Mini Pancakes", MiniPancakes));
+        snackHausNachspeisen.add(new Nachspeiße("Churros mit Schokosauce", ChurrosMitSchokosauce));
+        SnackHaus.setNachspeisenListe(snackHausNachspeisen);
+        SnackHaus.setKaltgetränkeListe(drinksSnackHaus);
+        SnackHaus.setHeißgetränkeListe(hotDrinksSnackHaus);
+        SnackHaus.setName("SnackHaus 1");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            SnackHaus1.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
+            SnackHaus.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
         }
-        SnackHaus1.setWebsite ("www.snackhaus1.de");
-        SnackHaus1.setBeschreibung ("Knackige Snacks, frisch belegt und ideal für unterwegs. Bei uns trifft Genuss auf Geschwindigkeit!");
-        SnackHaus1.setTelefonnummer ("030 11122233");
-        SnackHaus1.setMail ("kontakt@snackhaus1.de");
+        SnackHaus.setWebsite ("www.snackhaus.de");
+        SnackHaus.setBeschreibung ("Knackige Snacks, frisch belegt und ideal für unterwegs. Bei uns trifft Genuss auf Geschwindigkeit!");
+        SnackHaus.setTelefonnummer ("030 11122233");
+        SnackHaus.setMail ("kontakt@snackhaus.de");
 
-        restaurants.add(SnackHaus1);
+        restaurants.add(SnackHaus);
 
         // Zutaten und Gerichte für das Asiatische Restaurant "Tokyo Zen"
         // 1. Sushi Platter
@@ -2554,8 +2553,11 @@ public class RestaurantRepository {
     private void bildeZuordnungFürAlleRestaurants(Context context, List<Restaurant> restaurants) {
         for (Restaurant restaurant : restaurants) {
 
+            int restaurantBildId = AppController.getInstance().getRestaurantBildResIdAusName(context, restaurant.getName());
+            restaurant.setBildResourceId(restaurantBildId);
+
             for (Hauptspeise gericht : restaurant.getHauptspeisen()) {
-                int resId = AppController.getInstance().getBildResIdAusName(context, gericht.getName());
+                int resId = AppController.getInstance().getBildResIdAusName(context, gericht.getName(), restaurant.getName());
                 gericht.setBildResourceId(resId);
             }
 

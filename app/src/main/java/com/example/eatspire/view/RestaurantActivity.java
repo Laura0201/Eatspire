@@ -22,7 +22,7 @@ public class RestaurantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant_activity); // dein XML-Layout
+        setContentView(R.layout.restaurant_activity);
 
         // Views initialisieren
         textViewRestaurantName = findViewById(R.id.textViewRestaurantName);
@@ -50,8 +50,6 @@ public class RestaurantActivity extends AppCompatActivity {
             intent.putExtra("restaurant_name", restaurant.getName());
             startActivity(intent);
         });
-
-
 
         // Beispiel für spätere Implementierung
         /*
