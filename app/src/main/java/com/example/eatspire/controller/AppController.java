@@ -173,6 +173,7 @@ public class AppController {
         return userLoc.distanceTo(rLoc);
     }
     // Filtern nach eigenschaften
+    // erwartet 3 Wahrheitswerte, jeweils für einzelne Eigenschaften.
     public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();
@@ -187,6 +188,7 @@ public class AppController {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 if (r.getOeffnungszeit().isBefore(user.getAktuelleUhrzeit()) && r.getSchliesszeit().isAfter(user.getAktuelleUhrzeit())) {
                                     gefiltert.add(r);
+                                    break;
                                 }
                             }
                         } else {
