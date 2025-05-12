@@ -10,9 +10,17 @@ import BusinessLogik.UserStuff.User;
  * Controller steuert die Verbindung zwischen View und Model (Datenlogik).
  */
 public class MVCController {
+    private static final MVCController controller = new MVCController(); // Direkte Instanziierung
+    public static MVCController getInstance() {
+        return controller; // Gibt immer dieselbe Instanz zurück
+    }
+    public MVCModel getModel(){
+        return model;
+    }
+
 
     private MVCView view;
-    public MVCModel model;
+    private MVCModel model;
     private UserVerwaltung userVerwaltung;
     private User aktuellerUser;
 

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
 
+import BusinessLogik.MVC.MVCController;
 import BusinessLogik.UserStuff.Standort;
 
 
@@ -35,31 +36,50 @@ public class StandortActivity extends AppCompatActivity {
         buttonSetManuell = findViewById(R.id.buttonSetManuelleAdresse);
 
         // Wenn bereits ein Standort vorhanden ist, zeige ihn an
-        Standort standort = MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().getStandort();
-        if (standort != null && standort.getAdresse() != null) {
-            textViewAdresse.setText("Aktueller Standort: " + standort.getAdresse());
+        if (MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getStandort()
+                == null) {
+            Standort standort = new Standort();
+            standort.holeAutomatischStandort(this, (lat, lon, adresse) -> {
+                if (adresse != null && !adresse.isEmpty()) {
+                    textViewAdresse.setText("Aktueller Standort: " + adresse);
+                } else {
+                    // Fallback auf Stuttgart
+                    double fallbackLat = 48.7758;
+                    double fallbackLon = 9.1829;
+                    String fallbackAdresse = "Stuttgart, Deutschland";
+
+                    textViewAdresse.setText("Aktueller Standort: " + fallbackAdresse);
+                    Toast.makeText(this, "Automatische Standortbestimmung fehlgeschlagen. Fallback auf Stuttgart.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else {
+            Standort standort = MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getStandort();
+            if (standort != null && standort.getAdresse() != null) {
+                textViewAdresse.setText("Aktueller Standort: " + standort.getAdresse());
+            }
         }
 
-        // Button für manuelle Adresseingabe
-        buttonSetManuell.setOnClickListener(v -> {
-            String adresse = editTextAdresse.getText().toString().trim();
-            if (!adresse.isEmpty()) {
-                // Verarbeite Eingabe über Controller
-                MainActivity1.getController().setzeManuellenStandort(this, adresse, (lat, lon, resolvedAdresse) -> {
-                    Toast.makeText(this, "Adresse gespeichert: " + resolvedAdresse, Toast.LENGTH_SHORT).show();
+            // Button für manuelle Adresseingabe
+            buttonSetManuell.setOnClickListener(v -> {
+                String adresse = editTextAdresse.getText().toString().trim();
+                if (!adresse.isEmpty()) {
+                    // Verarbeite Eingabe über Controller
+                    MVCController.getInstance().setzeManuellenStandort(this, adresse, (lat, lon, resolvedAdresse) -> {
+                        Toast.makeText(this, "Adresse gespeichert: " + resolvedAdresse, Toast.LENGTH_SHORT).show();
+                        finish(); // Zurück zur MainActivity
+                    });
+                } else {
+                    Toast.makeText(this, "Bitte Adresse eingeben", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // Button für automatische Standortermittlung per GPS
+            buttonGPS.setOnClickListener(v -> {
+                MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().holeAutomatischenStandort(this, (lat, lon, adresse) -> {
+                    Toast.makeText(this, "Standort gefunden: " + adresse, Toast.LENGTH_SHORT).show();
                     finish(); // Zurück zur MainActivity
                 });
-            } else {
-                Toast.makeText(this, "Bitte Adresse eingeben", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Button für automatische Standortermittlung per GPS
-        buttonGPS.setOnClickListener(v -> {
-            MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().holeAutomatischenStandort(this, (lat, lon, adresse) -> {
-                Toast.makeText(this, "Standort gefunden: " + adresse, Toast.LENGTH_SHORT).show();
-                finish(); // Zurück zur MainActivity
             });
-        });
+        }
     }
-}

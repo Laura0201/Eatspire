@@ -11,7 +11,7 @@ import BusinessLogik.UserStuff.User;
  */
 public class UserVerwaltung {
 
-    private final List<User> userListe;
+    private List<User> userListe;
     private User aktuellerUser;
 
     public UserVerwaltung() {

@@ -1,4 +1,5 @@
 package com.example.eatspire;
+import BusinessLogik.Data.DataManager;
 import BusinessLogik.Data.UserVerwaltung;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import BusinessLogik.EssensOrte.Restaurant;
 import BusinessLogik.EssensOrte.RestaurantsListeRecyclerViewAdapter;
@@ -33,25 +36,27 @@ public class MainActivity1 extends AppCompatActivity {
     private RelativeLayout empfehlungContainer;
     private ImageView bildDesGerichts;
     private TextView nameDesGerichts, beschreibungDesGerichts;
+    private DataManager dataManager;
     private RecyclerView restaurantsRecyclerView;
     private RestaurantsListeRecyclerViewAdapter restaurantsListeAdapter;
+    private List<Restaurant> restaurantList;
 
 
-    private static MVCController controller = new MVCController();;
-    public static MVCController getController(){
-        return controller;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 //        if(controller.model.getUserVerwaltung().getAktuellenUser()==null){
 //            startActivity(new Intent(this, UserLoginActivity.class));
 //            finish();
 //            return;
 //        }
         setContentView(R.layout.activity_main);
+
+        // RecyclerView für die Liste der Restaurants
+        dataManager= MVCController.getInstance().getModel().getDatamanager();
+        setUpRecyclerView();
+
         empfehlungContainer = findViewById(R.id.dataContainer);
         bildDesGerichts = findViewById(R.id.imageData);
         nameDesGerichts = findViewById(R.id.textTitle);
@@ -62,16 +67,20 @@ public class MainActivity1 extends AppCompatActivity {
         buttonEinstellungen = findViewById(R.id.buttonEinstellungen);
         buttonFilterSortieren = findViewById(R.id.buttonFilterSortieren);
         linearLayoutElements = findViewById(R.id.bottomButtonContainer);
-        //Zeile geändert von linearLayoutElements zu bottomButtonContainer, weil
-        // das denke ich der Container für die unteren beiden Buttons ist, korrigiert mich tho
 
-        zeigeRestaurants();
+
         aktualisiereStandortAnzeige();
+
+        empfehlungContainer.setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity1.this, HeutigeEmpfehlungActivity.class);
+            intent.putExtra("restaurant_name", nameDesGerichts.getText().toString());
+            startActivity(intent);
+        });
 
         // Button: Refresh
         buttonRefresh.setOnClickListener(v ->{
                 Toast.makeText(this, "Daten werden aktualisiert...", Toast.LENGTH_SHORT).show();
-        aktualisiereScrollViewRestaurants();
+
             // Standort muss aktualisiert werden?? Methoden implementieren
                 });
 
@@ -96,8 +105,7 @@ public class MainActivity1 extends AppCompatActivity {
             Intent intent = new Intent(MainActivity1.this, HeutigeEmpfehlungActivity.class);
             startActivity(intent);
         });
-        //ScrollView mit Inhalt füllen
-        aktualisiereScrollViewRestaurants();
+
         //Empfehlung einfügen
         aktuaisiereEmpfehlungContainer();
 
@@ -105,49 +113,26 @@ public class MainActivity1 extends AppCompatActivity {
         addExampleContent();
     }
 
-    protected void onResume(){
+    /**
+     * Falls es sinnvoll ist, die Liste der Restaurants bei Rückkehr in diese Activity zu aktualisieren,
+     */
+    @Override
+    protected void onResume() {
         super.onResume();
-        aktualisiereScrollViewRestaurants();
+        // Beispiel: Neue Daten aus dem DataManager abrufen
+        Restaurant[] aktualisierteRestaurants = dataManager.getListeAllerRestaurants();
 
-    }
-    public void zeigeRestaurants() {
-        Restaurant[] restaurants = controller.model.getDatamanager().getListeAllerRestaurants();
-        LayoutInflater inflater = LayoutInflater.from(this);
-
-        for (Restaurant r : restaurants) {
-            View itemView = inflater.inflate(R.layout.restaurant_item_view, linearLayoutElements, false);
-
-            ImageView bild = itemView.findViewById(R.id.bildDesRestaurants);
-            TextView name = itemView.findViewById(R.id.nameDesRestaurantsTextView);
-            TextView beschreibung = itemView.findViewById(R.id.beschreibungDesRestaurantsTextView);
-            TextView adresse = itemView.findViewById(R.id.adresseDesRestaurantsTextview);
-            TextView website = itemView.findViewById(R.id.websiteDesRestaurantsTextView);
-            TextView kategorie = itemView.findViewById(R.id.kategorieDesRestaurantsTextView);
-
-            name.setText(r.getName());
-            beschreibung.setText(r.getBeschreibung());
-            adresse.setText(r.getAdressfeld());
-            website.setText(r.getWebsite());
-            kategorie.setText(r.getKategorie().name());
-            String pfadFürBildDesRestaurants = getPfadfürBildDesRestaurants(r.getIdDesRestaurants());
-            Bitmap bitmap = BitmapFactory.decodeFile(pfadFürBildDesRestaurants);
-            bild.setImageBitmap(bitmap);
-
-            itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity1.this, EinzelnesRestaurantMitGerichtenActivity.class);
-                intent.putExtra("restaurant_name", r.getName());
-                startActivity(intent);
-            });
-
-            linearLayoutElements.addView(itemView);
+        // Falls sich die Daten geändert haben, informiere den Adapter darüber
+        if (restaurantsListeAdapter != null) {
+            restaurantsListeAdapter.updateRestaurants(aktualisierteRestaurants);
         }
-
     }
+
     private String getPfadfürBildDesRestaurants(int indexAlsId){
-        return MainActivity1.getController().model.getDatamanager().getPfadFürImageDesRestaurants(indexAlsId);
+        return dataManager.getPfadFürImageDesRestaurants(indexAlsId);
     }
     private void aktualisiereStandortAnzeige() {
-        User aktuellerUser = controller.model.getUserVerwaltung().getAktuellenUser();
+        User aktuellerUser = dataManager.getUserVerwaltung().getAktuellenUser();
         if (aktuellerUser != null && aktuellerUser.getStandort() != null) {
             String adresse = aktuellerUser.getStandort().getAdresse();
             buttonCurrentLocation.setText(adresse != null ? adresse : "Standort wählen");
@@ -155,13 +140,11 @@ public class MainActivity1 extends AppCompatActivity {
             buttonCurrentLocation.setText("Standort wählen");
         }
     }
-    private void aktualisiereScrollViewRestaurants(){
-        zeigeRestaurants();
-    }
+
     private void aktuaisiereEmpfehlungContainer(){
         //bildDesGerichts=findViewById(R.drawable.ic_placeholder_restaurant);
-        int i = (int) (Math.random() * controller.model.getDatamanager().getListeAllerRestaurants().length);
-        Restaurant restaurant = controller.model.getDatamanager().getRestaurant(i);
+        int i = (int) (Math.random() * MVCController.getInstance().getModel().getDatamanager().getListeAllerRestaurants().length);
+        Restaurant restaurant = dataManager.getRestaurant(i);
         Hauptspeiße intern = restaurant .zufälligesGericht(restaurant);
             nameDesGerichts.setText(intern.getName());
             StringBuilder beschreibung = new StringBuilder();
@@ -175,6 +158,27 @@ public class MainActivity1 extends AppCompatActivity {
             beschreibungDesGerichts.setText(beschreibung);
             buttonRestaurantDerEmpfehlung.setText(restaurant.name);
     }
+    /**
+     * Konfiguriert den RecyclerView:
+     * - Holt die Daten (Restaurant-Objekte) aus dem DataManager.
+     * - Wandelt das Array in eine List um.
+     * - Setzt einen LayoutManager (hier LinearLayoutManager für eine vertikale Liste).
+     * - Initialisiert den Adapter und bindet ihn an den RecyclerView.
+     */
+    private void setUpRecyclerView() {
+        // Hole alle Restaurants als Array und wandle sie in eine Liste um
+        Restaurant[] restaurantsArray = dataManager.getListeAllerRestaurants();
+        restaurantList = Arrays.asList(restaurantsArray);
+
+        // Hole den RecyclerView aus dem Layout und setze einen LayoutManager
+        restaurantsRecyclerView = findViewById(R.id.restaurants_recycler_view);
+        restaurantsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Erstelle den Adapter und übergebe ihm die Datenliste
+        restaurantsListeAdapter = new RestaurantsListeRecyclerViewAdapter(this, restaurantList);
+        restaurantsRecyclerView.setAdapter(restaurantsListeAdapter);
+    }
+
 
     private void addExampleContent() {
         for (int i = 1; i <= 5; i++) {

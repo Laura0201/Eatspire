@@ -33,13 +33,15 @@
 
     <!-- Container für diverse Daten: Bild und mehrere Texte -->
 <RelativeLayout
-android:id="@+id/dataContainer"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_below="@id/buttonRefresh"
-android:layout_margin="16dp"
-android:background="#E0F2F1"
-android:padding="8dp">
+    android:id="@+id/dataContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/buttonRefresh"
+    android:layout_margin="16dp"
+    android:background="#E0F2F1"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/imageData"
@@ -79,7 +81,6 @@ android:padding="8dp">
     android:layout_alignRight="@id/textDescription"
     android:text="Restaurantname des Gerichts"
     />
-
 
 
 </RelativeLayout>

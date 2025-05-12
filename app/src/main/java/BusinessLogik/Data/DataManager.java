@@ -24,11 +24,16 @@ import BusinessLogik.UserStuff.User;
 public class DataManager {
     public DataManager() {
         initGerichteAlsZutatenArrays();
-        userVerwaltung.nehmeUserAuf(new User("User", "123"));
+        initialisereUserVerwaltungMitTestUser();
     }
     private ArrayList<Restaurant> listeAllerRestaurants = new ArrayList<Restaurant>();
 
-    private UserVerwaltung userVerwaltung = new UserVerwaltung();
+    private UserVerwaltung userVerwaltung;
+    private void initialisereUserVerwaltungMitTestUser() {
+        userVerwaltung = new UserVerwaltung();
+        User testUser = new User("User", "123");
+        userVerwaltung.nehmeUserAuf(testUser);
+    }
     public UserVerwaltung getUserVerwaltung() {
         return userVerwaltung;
     }

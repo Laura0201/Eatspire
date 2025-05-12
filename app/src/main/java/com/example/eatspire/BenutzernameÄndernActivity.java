@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import BusinessLogik.MVC.MVCController;
+
 public class BenutzernameÄndernActivity  extends AppCompatActivity {
     private TextView textViewEinstellungen, textViewBenutzernameAktuell;
     private EditText benutzerNameÄndernFeld;
@@ -60,9 +62,9 @@ public class BenutzernameÄndernActivity  extends AppCompatActivity {
         super.onResume();
     }
     private String getAktuellenBenutzername() {
-        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getUsername();
+        return MVCController.getInstance().getModel().getDatamanager().getUserVerwaltung().getAktuellenUser().getUsername();
     }
     private void speichernDesNeuenBenutzernamens(String neuerUsername){
-        MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().setUsername(neuerUsername);
+        MVCController.getInstance().getModel().getDatamanager().getUserVerwaltung().getAktuellenUser().setUsername(neuerUsername);
     }
 }

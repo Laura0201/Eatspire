@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import BusinessLogik.MVC.MVCController;
+
 public class KontoeinstellungenActivity extends AppCompatActivity {
 
     private Button buttonBackTop, buttonUsername, buttonEmail, buttonChangePassword,
@@ -66,12 +68,12 @@ public class KontoeinstellungenActivity extends AppCompatActivity {
 
         }
         private String getBenutzername(){
-        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getUsername();
+        return MVCController.getInstance().getModel().getDatamanager().getUserVerwaltung().getAktuellenUser().getUsername();
     }
     private String getEmail(){
-        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getEmail();
+        return MVCController.getInstance().getModel().getDatamanager().getUserVerwaltung().getAktuellenUser().getEmail();
     }
     private String getTelefonnummer(){
-        return MainActivity1.getController().model.getDatamanager().getUserVerwaltung().getAktuellenUser().getTelefonnummer();
+        return MVCController.getInstance().getModel().getDatamanager().getUserVerwaltung().getAktuellenUser().getTelefonnummer();
     }
 }

@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import BusinessLogik.MVC.MVCController;
+
 public class UserLoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
@@ -28,21 +30,27 @@ public class UserLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String benutzername = usernameEditText.getText().toString().trim();
                 String passwort = passwordEditText.getText().toString().trim();
+                Intent intent = new Intent(UserLoginActivity.this, MainActivity1.class);
+                startActivity(intent);
+                finish();
 
-                if (benutzername.isEmpty() || passwort.isEmpty()) {
-                    Toast.makeText(UserLoginActivity.this, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().getUsername().equals(benutzername) && MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser().getPassword().equals(passwort)) {
-                        Toast.makeText(UserLoginActivity.this, "Login erfolgreich", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(UserLoginActivity.this, MainActivity1.class);
-                        startActivity(intent);
-                        finish(); // verhindert Zurückgehen per Back-Button
-                    }
-                        else {
-                        Toast.makeText(UserLoginActivity.this, "Ungültige Anmeldedaten", Toast.LENGTH_SHORT).show();
-                    }
-                }
             }
         });
     }
 }
+//FÜR CLICKLISTENER
+//if (benutzername.isEmpty() || passwort.isEmpty()) {
+//        Toast.makeText(UserLoginActivity.this, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show();
+//                }
+//                        else if(MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getUsername()==null || MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getPassword()==null) {
+//        Toast.makeText(UserLoginActivity.this, "Keine Benutzerdaten vorhanden", Toast.LENGTH_SHORT).show();
+//                }
+//                        else if (MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getUsername().equals(benutzername) && MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser().getPassword().equals(passwort)) {
+//        Toast.makeText(UserLoginActivity.this, "Login erfolgreich", Toast.LENGTH_SHORT).show();
+//Intent intent = new Intent(UserLoginActivity.this, MainActivity1.class);
+//startActivity(intent);
+//finish(); // verhindert Zurückgehen per Back-Button
+//                    }
+//                            else {
+//                            Toast.makeText(UserLoginActivity.this, "Ungültige Anmeldedaten", Toast.LENGTH_SHORT).show();
+//                    }

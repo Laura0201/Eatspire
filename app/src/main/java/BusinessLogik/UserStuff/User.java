@@ -7,6 +7,8 @@ import com.example.eatspire.MainActivity1;
 
 import java.time.LocalTime;
 
+import BusinessLogik.MVC.MVCController;
+
 public class User {
 
     public static int anzahlNutzer;
@@ -78,7 +80,7 @@ public class User {
     public void holeAutomatischenStandort(Activity activity, Standort.StandortCallback callback) {
         Standort standort = new Standort();
         standort.holeAutomatischStandort(activity, (lat, lon, adresse) -> {
-            User user = MainActivity1.getController().model.getUserVerwaltung().getAktuellenUser();
+            User user = MVCController.getInstance().getModel().getUserVerwaltung().getAktuellenUser();
             if (user != null) {
                 user.setStandort(standort);
                 callback.onStandortGefunden(lat, lon, adresse);

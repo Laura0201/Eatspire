@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
 
+import BusinessLogik.MVC.MVCController;
+
 public class EinzelnesRestaurantMitGerichtenActivity extends ComponentActivity {
     // Hier können Sie die Logik für die Anzeige der Gerichte eines einzelnen Restaurants implementieren
     // Zum Beispiel:
@@ -48,46 +50,46 @@ private Button buttonVorspeisen, buttonNachspeisen, buttonHauptspeisen, buttonHe
 //            Intent intent = new Intent(EinzelnesRestaurantMitGerichtenActivity.this, GerichteAnzeigenTypEgal.class);
 //            startActivity(intent); Parameter übergeben, id und Art der Gerichte
 //        });
-        if(MainActivity1.getController().model.getDatamanager().getRestaurant(idDesRestaurants).getVorspeisenListe().isEmpty()){
+        if(MVCController.getInstance().getModel().getDatamanager().getRestaurant(idDesRestaurants).getVorspeisenListe().isEmpty()){
             buttonVorspeisen.setVisibility(View.GONE);//Unterschied zu View.Invisible
         }
 //        buttonHauptspeisen.setOnClickListener(v -> {;
 //            Intent intent = new Intent(EinzelnesRestaurantMitGerichtenActivity.this, GerichteAnzeigenTypEgal.class);
 //            startActivity(intent); // Parameter übergeben, id und Art der Gerichte
 //        });
-        if(MainActivity1.getController().model.getDatamanager().getRestaurant(idDesRestaurants).getHauptspeisenListe().isEmpty()){
+        if(MVCController.getInstance().getModel().getDatamanager().getRestaurant(idDesRestaurants).getHauptspeisenListe().isEmpty()){
             buttonHauptspeisen.setVisibility(View.GONE);//Unterschied zu View.Invisible
         }
 //        buttonNachspeisen.setOnClickListener(v -> {;
 //            Intent intent = new Intent(EinzelnesRestaurantMitGerichtenActivity.this, GerichteAnzeigenTypEgal.class);
 //            startActivity(intent); // Parameter übergeben, id und Art der Gerichte
 //        });
-        if(MainActivity1.getController().model.getDatamanager().getRestaurant(idDesRestaurants).getNachspeisenListe().isEmpty()){
+        if(MVCController.getInstance().getModel().getDatamanager().getRestaurant(idDesRestaurants).getNachspeisenListe().isEmpty()){
             buttonNachspeisen.setVisibility(View.GONE);//Unterschied zu View.Invisible
         }
 //        buttonHeißgetränke.setOnClickListener(v -> {;
 //            Intent intent = new Intent(EinzelnesRestaurantMitGerichtenActivity.this, GerichteAnzeigenTypEgal.class);
 //            startActivity(intent); // Parameter übergeben, id und Art der Gerichte
 //        });
-        if(MainActivity1.getController().model.getDatamanager().getRestaurant(idDesRestaurants).getHeißgetränkeListe().isEmpty()){
+        if(MVCController.getInstance().getModel().getDatamanager().getRestaurant(idDesRestaurants).getHeißgetränkeListe().isEmpty()){
             buttonHeißgetränke.setVisibility(View.GONE);//Unterschied zu View.Invisible
         }
 //        buttonKaltgetränke.setOnClickListener(v -> {;
 //            Intent intent = new Intent(EinzelnesRestaurantMitGerichtenActivity.this, GerichteAnzeigenTypEgal.class);
 //            startActivity(intent); // Parameter übergeben, id und Art der Gerichte
 //        });
-        if(MainActivity1.getController().model.getDatamanager().getRestaurant(idDesRestaurants).getKaltgetränkeListe().isEmpty()){
+        if(MVCController.getInstance().getModel().getDatamanager().getRestaurant(idDesRestaurants).getKaltgetränkeListe().isEmpty()){
             buttonKaltgetränke.setVisibility(View.GONE);//Unterschied zu View.Invisible
         }
 
     }
     private String getPfadfürBildDesRestaurants(int indexAlsId){
-        return MainActivity1.getController().model.getDatamanager().getPfadFürImageDesRestaurants(indexAlsId);
+        return MVCController.getInstance().getModel().getDatamanager().getPfadFürImageDesRestaurants(indexAlsId);
     }
     private String getNameDesRestaurants(int indexAlsId){
-        return MainActivity1.getController().model.getDatamanager().getRestaurant(indexAlsId).getName();
+        return MVCController.getInstance().getModel().getDatamanager().getRestaurant(indexAlsId).getName();
     }
     private String getBeschrebibungDesRestaurants(int indexAlsId){
-        return MainActivity1.getController().model.getDatamanager().getRestaurant(indexAlsId).getBeschreibung();
+        return MVCController.getInstance().getModel().getDatamanager().getRestaurant(indexAlsId).getBeschreibung();
     }
 }
