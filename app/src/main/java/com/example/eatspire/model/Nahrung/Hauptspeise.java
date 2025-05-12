@@ -7,8 +7,8 @@
  */
 package com.example.eatspire.model.Nahrung;
 
-public class Hauptspeiße extends BasisEssen {
-    public Hauptspeiße(String name, Zutat[] zutaten) {
+public class Hauptspeise extends BasisEssen {
+    public Hauptspeise(String name, Zutat[] zutaten) {
         super(name, zutaten);
     }
 }

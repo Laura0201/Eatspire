@@ -1,10 +1,12 @@
 package com.example.eatspire.controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
@@ -14,8 +16,10 @@ import androidx.core.content.ContextCompat;
 
 import com.example.eatspire.model.Data.DataManager;
 import com.example.eatspire.model.Data.UserVerwaltung;
+import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
+import com.example.eatspire.model.Nahrung.Hauptspeise;
 import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
 import com.google.android.gms.location.*;
@@ -31,7 +35,11 @@ public class AppController {
     private static final AppController controller = new AppController();
     public static AppController getInstance() { return controller; }
 
-    private final DataManager dataManager = new DataManager();
+    private DataManager dataManager;
+
+    public void init(Context context) {
+        this.dataManager = new DataManager(context);
+    }
 
     public boolean login(String username, String password) {
         return UserVerwaltung.isValidLogin(username, password);
@@ -45,6 +53,7 @@ public class AppController {
         UserVerwaltung.logout();
     }
 
+    // Standort Logik
     public void holeAutomatischenStandort(Activity activity, StandortCallback callback) {
         FusedLocationProviderClient fusedClient = LocationServices.getFusedLocationProviderClient(activity);
         if (!hatBerechtigung(activity)) {
@@ -114,7 +123,7 @@ public class AppController {
         void onStandortGefunden(double latitude, double longitude, String adresse);
     }
 
-    // === Restaurants ===
+    // Restaurant Logik
     public Restaurant[] getAlleRestaurants() {
         return dataManager.getAlleRestaurants();
     }
@@ -128,6 +137,34 @@ public class AppController {
         return null;
     }
 
+    public List<Hauptspeise> getHauptspeisenVon(String restaurantName) {
+        Restaurant r = getRestaurantByName(restaurantName);
+        if (r != null) return r.getHauptspeisen();
+        return List.of();
+    }
+    public int getRestaurantBildResIdAusName(Context context, String restaurantName) {
+        String resName = restaurantName.toLowerCase()
+                .replace("ä", "ae")
+                .replace("ö", "oe")
+                .replace("ü", "ue")
+                .replace("ß", "ss")
+                .replaceAll("[^a-z0-9]", "_"); // nur a-z, 0-9 und _
+
+        return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+    }
+
+    public int getBildResIdAusName(Context context, String gerichtName, String restaurantName) {
+        String combinedName = restaurantName + "_" + gerichtName;
+        String resName = combinedName.toLowerCase()
+                .replace("ä", "ae")
+                .replace("ö", "oe")
+                .replace("ü", "ue")
+                .replace("ß", "ss")
+                .replaceAll("[^a-z0-9]", "_"); // nur a-z, 0-9 und _
+
+        return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+    }
+
     public List<BasisEssen> getAlleHauptspeisen() {
         List<BasisEssen> alle = new ArrayList<>();
         for (Restaurant r : dataManager.getAlleRestaurants()) {
@@ -136,6 +173,7 @@ public class AppController {
         return alle;
     }
 
+    //Sortieren und Filtern Logik
     public List<Restaurant> filterNachUmkreis(float maxDistanzMeter) {
         User user = getAktuellerUser();
         if (user == null) return List.of();
@@ -169,5 +207,108 @@ public class AppController {
         rLoc.setLongitude(restaurant.getLongitude());
 
         return userLoc.distanceTo(rLoc);
+    }
+
+    // Filtern nach eigenschaften
+    // erwartet 3 Wahrheitswerte, jeweils für einzelne Eigenschaften.
+    public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.isToGomöglich()==toGomöglich || r.isHatVegetarisch() == hatVegetarisch || geoeffnet) {
+                        if(geoeffnet) {
+                            // Time.isBefore braucht JDK 26, current ist 24, deshalb if Klammer! wird nur rt wenn geoffnet wahr ist!
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (r.getOeffnungszeit().isBefore(user.getAktuelleUhrzeit()) && r.getSchliesszeit().isAfter(user.getAktuelleUhrzeit())) {
+                                    gefiltert.add(r);
+                                    continue;
+                                }
+                            }
+                        } else {
+                            gefiltert.add(r);
+                        }
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+
+    // Filterung nach Kategorie
+
+    // Methode um nach 1ner Kategorie zu filtern
+
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+    // Methode um nach 2 Kategorien zu filtern
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2) {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+    // Methode um nach 3 Kategorien zu filtern
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2, Kategorien kategorie3) {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2) || r.getKategorie().equals(kategorie3)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
     }
 }

@@ -1,14 +1,17 @@
 package com.example.eatspire.model.Data;
 
+import android.content.Context;
 import android.os.Build;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.eatspire.R;
+import com.example.eatspire.controller.AppController;
 import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
-import com.example.eatspire.model.Nahrung.Hauptspeiße;
+import com.example.eatspire.model.Nahrung.Hauptspeise;
 import com.example.eatspire.model.Nahrung.Heißgetränk;
 import com.example.eatspire.model.Nahrung.Kaltgetränk;
 import com.example.eatspire.model.Nahrung.Nachspeiße;
@@ -18,7 +21,8 @@ import com.example.eatspire.model.Nahrung.Zutat;
 public class RestaurantRepository {
     private final ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-    public void initRestaurants() {
+
+    public void initRestaurants(Context context) {
         // Restaurant „Bella Napoli“ Initialisierung
         // Zutaten
         Zutat[] VegetarischeLasagne = new Zutat[]{
@@ -140,9 +144,8 @@ public class RestaurantRepository {
         hotDrinksBellaNapoli.add(new Heißgetränk("Heiße Schokolade", HeißeSchokolade));
 
         // Gerichte – Haupt- & Vorspeisen
-        ArrayList<Hauptspeiße> hauptspeisen = new ArrayList<>();
-        hauptspeisen.add(new Hauptspeiße("Vegetarische Lasagne", VegetarischeLasagne));
-
+        ArrayList<Hauptspeise> hauptspeisen = new ArrayList<>();
+        hauptspeisen.add(new Hauptspeise("Vegetarische Lasagne", VegetarischeLasagne));
         ArrayList<Vorspeise> vorspeisen = new ArrayList<>();
         vorspeisen.add(new Vorspeise("Käseplatte", Käseplatte));
         vorspeisen.add(new Vorspeise("Bruschetta", Bruschetta));
@@ -154,7 +157,6 @@ public class RestaurantRepository {
 
         // Restaurant anlegen und zuweisen
         Restaurant bellaNapoli = new Restaurant(Kategorien.ITALIENISCH, true);
-        bellaNapoli.setBildResourceId(R.drawable.pizza);
         bellaNapoli.setName("Bella Napoli");
         bellaNapoli.setHauptspeisenListe(hauptspeisen);
         bellaNapoli.setVorspeisenListe(vorspeisen);
@@ -216,11 +218,11 @@ public class RestaurantRepository {
         vorspeisen.add(new Vorspeise("Käseauswahl", kaeseAuswahl));
 
 
-        hauptspeisen.add(new Hauptspeiße("Ratatouille", ratatouilleAlt));
-        hauptspeisen.add(new Hauptspeiße("Quiche Lorraine", quicheLorraineAlt));
-        hauptspeisen.add(new Hauptspeiße("Bouillabaisse", bouillabaisse));
-        hauptspeisen.add(new Hauptspeiße("Coq au Vin", coqAuVin));
-        hauptspeisen.add(new Hauptspeiße("Tarte Tatin", tarteTatin));
+        hauptspeisen.add(new Hauptspeise("Ratatouille", ratatouilleAlt));
+        hauptspeisen.add(new Hauptspeise("Quiche Lorraine", quicheLorraineAlt));
+        hauptspeisen.add(new Hauptspeise("Bouillabaisse", bouillabaisse));
+        hauptspeisen.add(new Hauptspeise("Coq au Vin", coqAuVin));
+        hauptspeisen.add(new Hauptspeise("Tarte Tatin", tarteTatin));
 
         ArrayList<Kaltgetränk> kaltgetraenke = new ArrayList<>();
         kaltgetraenke.add(new Kaltgetränk("Perrier", perrier, false));
@@ -357,36 +359,36 @@ public class RestaurantRepository {
                 new Zutat("Hummus", 0.80),
                 new Zutat("Rucola", 0.30)
         };
-        Restaurant BarLounge1 = new Restaurant(Kategorien.SPIRITUOSEN, false);
-        ArrayList<Hauptspeiße> drinksBarLounge1 = new ArrayList<>();
-        ArrayList<Vorspeise> drinksBarLounge1Vorspeisen = new ArrayList<>();
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Mini Burger Slider", MiniBurgerSlider));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Nacho Platte", NachoPlatte));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Garnelen Cocktail", GarnelenCocktail));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Chicken Wings", ChickenWings));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Falafel Bällchen", FalafelBällchen));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Mozzarella Sticks", MozzarellaSticks));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Trüffel Pommes", TrüffelPommes));
-        drinksBarLounge1Vorspeisen.add(new Vorspeise("Veggie Wraps", VeggieWraps));
-        BarLounge1.setVorspeisenListe(drinksBarLounge1Vorspeisen);
-        drinksBarLounge1.add(new Hauptspeiße("Mojito", Mojito));
-        drinksBarLounge1.add(new Hauptspeiße("Tequila Sunrise", TequilaSunrise));
-        drinksBarLounge1.add(new Hauptspeiße("Whiskey Sour", WhiskeySour));
-        drinksBarLounge1.add(new Hauptspeiße("Pina Colada", PinaColada));
-        drinksBarLounge1.add(new Hauptspeiße("Blue Lagoon", BlueLagoon));
-        drinksBarLounge1.add(new Hauptspeiße("Gin Tonic", GinTonic));
-        drinksBarLounge1.add(new Hauptspeiße("Espresso Martini", EspressoMartini));
-        BarLounge1.setHauptspeisenListe(drinksBarLounge1);
-        BarLounge1.setName("BarLounge 1");
+        Restaurant BarLounge = new Restaurant(Kategorien.SPIRITUOSEN, false);
+        ArrayList<Hauptspeise> drinksBarLounge = new ArrayList<>();
+        ArrayList<Vorspeise> drinksBarLoungeVorspeisen = new ArrayList<>();
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Mini Burger Slider", MiniBurgerSlider));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Nacho Platte", NachoPlatte));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Garnelen Cocktail", GarnelenCocktail));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Chicken Wings", ChickenWings));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Falafel Bällchen", FalafelBällchen));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Mozzarella Sticks", MozzarellaSticks));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Trüffel Pommes", TrüffelPommes));
+        drinksBarLoungeVorspeisen.add(new Vorspeise("Veggie Wraps", VeggieWraps));
+        BarLounge.setVorspeisenListe(drinksBarLoungeVorspeisen);
+        drinksBarLounge.add(new Hauptspeise("Mojito", Mojito));
+        drinksBarLounge.add(new Hauptspeise("Tequila Sunrise", TequilaSunrise));
+        drinksBarLounge.add(new Hauptspeise("Whiskey Sour", WhiskeySour));
+        drinksBarLounge.add(new Hauptspeise("Pina Colada", PinaColada));
+        drinksBarLounge.add(new Hauptspeise("Blue Lagoon", BlueLagoon));
+        drinksBarLounge.add(new Hauptspeise("Gin Tonic", GinTonic));
+        drinksBarLounge.add(new Hauptspeise("Espresso Martini", EspressoMartini));
+        BarLounge.setHauptspeisenListe(drinksBarLounge);
+        BarLounge.setName("BarLounge");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            BarLounge1.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
+            BarLounge.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
         }
-        BarLounge1.setWebsite ("www.barlounge1.de");
-        BarLounge1.setBeschreibung ("Die stilvolle Cocktailbar im Herzen der Stadt mit Signature Drinks und entspannter Atmosphäre.");
-        BarLounge1.setTelefonnummer ("040 9876543");
-        BarLounge1.setMail ("info@barlounge1.de");
+        BarLounge.setWebsite ("www.barlounge1.de");
+        BarLounge.setBeschreibung ("Die stilvolle Cocktailbar im Herzen der Stadt mit Signature Drinks und entspannter Atmosphäre.");
+        BarLounge.setTelefonnummer ("040 9876543");
+        BarLounge.setMail ("info@barlounge1.de");
 
-        restaurants.add(BarLounge1);
+        restaurants.add(BarLounge);
 
         // Zutaten und Gerichte für das Restaurant "SnackHaus 1"
         Zutat[] SchinkenBaguette = new Zutat[] {
@@ -545,56 +547,56 @@ public class RestaurantRepository {
         };
 
         // Getränke-Listen anlegen
-        ArrayList<Kaltgetränk> drinksSnackHaus1 = new ArrayList<>();
-        ArrayList<Heißgetränk> hotDrinksSnackHaus1 = new ArrayList<>();
+        ArrayList<Kaltgetränk> drinksSnackHaus = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksSnackHaus = new ArrayList<>();
 
 // Kaltgetränke hinzufügen
-        drinksSnackHaus1.add(new Kaltgetränk("Cola", Cola, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Apfelschorle", Apfelschorle, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich1, false));
-        drinksSnackHaus1.add(new Kaltgetränk("Zitronenlimonade", Zitronenlimonade, false));
+        drinksSnackHaus.add(new Kaltgetränk("Cola", Cola, false));
+        drinksSnackHaus.add(new Kaltgetränk("Apfelschorle", Apfelschorle, false));
+        drinksSnackHaus.add(new Kaltgetränk("Eistee Pfirsich", EisteePfirsich1, false));
+        drinksSnackHaus.add(new Kaltgetränk("Zitronenlimonade", Zitronenlimonade, false));
 
 // Heißgetränke hinzufügen
-        hotDrinksSnackHaus1.add(new Heißgetränk("Kaffee", Kaffee));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Kakao", Kakao));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Tee Kamille", TeeKamille));
-        hotDrinksSnackHaus1.add(new Heißgetränk("Cappuccino", Cappuccino1));
+        hotDrinksSnackHaus.add(new Heißgetränk("Kaffee", Kaffee));
+        hotDrinksSnackHaus.add(new Heißgetränk("Kakao", Kakao));
+        hotDrinksSnackHaus.add(new Heißgetränk("Tee Kamille", TeeKamille));
+        hotDrinksSnackHaus.add(new Heißgetränk("Cappuccino", Cappuccino1));
 
-        Restaurant SnackHaus1 = new Restaurant(Kategorien.SNACKS, true);
-        SnackHaus1.setBildResourceId(R.drawable.pizza);
-        ArrayList<Hauptspeiße> speisenSnackHaus1 = new ArrayList<>();
-        ArrayList<Nachspeiße> snackHaus1Nachspeisen = new ArrayList<>();
-        speisenSnackHaus1.add(new Hauptspeiße("Schinken Baguette", SchinkenBaguette));
-        speisenSnackHaus1.add(new Hauptspeiße("Chicken Wrap", ChickenWrap));
-        speisenSnackHaus1.add(new Hauptspeiße("Veggie Toast", VeggieToast));
-        speisenSnackHaus1.add(new Hauptspeiße("Spiegelei Sandwich", SpiegeleiSandwich));
-        speisenSnackHaus1.add(new Hauptspeiße("Tuna Snack", TunaSnack));
-        speisenSnackHaus1.add(new Hauptspeiße("Mozzarella Ciabatta", MozzarellaCiabatta));
-        speisenSnackHaus1.add(new Hauptspeiße("Snackplatte", Snackplatte));
-        SnackHaus1.setHauptspeisenListe(speisenSnackHaus1);
-        snackHaus1Nachspeisen.add(new Nachspeiße("Brownie",Brownie));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Donut", Donut));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Waffel mit Kirschen", WaffelMitKirschen));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Cookie Sandwich", CookieSandwich));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Muffin", Muffin));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Eisbecher", Eisbecher));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Milchreis mit Zimt und Zucker", MilchreisZimtZucker));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Apfeltasche", Apfeltasche));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Mini Pancakes", MiniPancakes));
-        snackHaus1Nachspeisen.add(new Nachspeiße("Churros mit Schokosauce", ChurrosMitSchokosauce));
-        SnackHaus1.setNachspeisenListe(snackHaus1Nachspeisen);
-        SnackHaus1.setKaltgetränkeListe(drinksSnackHaus1);
-        SnackHaus1.setHeißgetränkeListe(hotDrinksSnackHaus1);
-        SnackHaus1.setName("SnackHaus 1");
+        Restaurant SnackHaus = new Restaurant(Kategorien.SNACKS, true);
+        SnackHaus.setBildResourceId(R.drawable.bella_napoli);
+        ArrayList<Hauptspeise> speisenSnackHaus = new ArrayList<>();
+        ArrayList<Nachspeiße> snackHausNachspeisen = new ArrayList<>();
+        speisenSnackHaus.add(new Hauptspeise("Schinken Baguette", SchinkenBaguette));
+        speisenSnackHaus.add(new Hauptspeise("Chicken Wrap", ChickenWrap));
+        speisenSnackHaus.add(new Hauptspeise("Veggie Toast", VeggieToast));
+        speisenSnackHaus.add(new Hauptspeise("Spiegelei Sandwich", SpiegeleiSandwich));
+        speisenSnackHaus.add(new Hauptspeise("Tuna Snack", TunaSnack));
+        speisenSnackHaus.add(new Hauptspeise("Mozzarella Ciabatta", MozzarellaCiabatta));
+        speisenSnackHaus.add(new Hauptspeise("Snackplatte", Snackplatte));
+        SnackHaus.setHauptspeisenListe(speisenSnackHaus);
+        snackHausNachspeisen.add(new Nachspeiße("Brownie",Brownie));
+        snackHausNachspeisen.add(new Nachspeiße("Donut", Donut));
+        snackHausNachspeisen.add(new Nachspeiße("Waffel mit Kirschen", WaffelMitKirschen));
+        snackHausNachspeisen.add(new Nachspeiße("Cookie Sandwich", CookieSandwich));
+        snackHausNachspeisen.add(new Nachspeiße("Muffin", Muffin));
+        snackHausNachspeisen.add(new Nachspeiße("Eisbecher", Eisbecher));
+        snackHausNachspeisen.add(new Nachspeiße("Milchreis mit Zimt und Zucker", MilchreisZimtZucker));
+        snackHausNachspeisen.add(new Nachspeiße("Apfeltasche", Apfeltasche));
+        snackHausNachspeisen.add(new Nachspeiße("Mini Pancakes", MiniPancakes));
+        snackHausNachspeisen.add(new Nachspeiße("Churros mit Schokosauce", ChurrosMitSchokosauce));
+        SnackHaus.setNachspeisenListe(snackHausNachspeisen);
+        SnackHaus.setKaltgetränkeListe(drinksSnackHaus);
+        SnackHaus.setHeißgetränkeListe(hotDrinksSnackHaus);
+        SnackHaus.setName("SnackHaus 1");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            SnackHaus1.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
+            SnackHaus.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
         }
-        SnackHaus1.setWebsite ("www.snackhaus1.de");
-        SnackHaus1.setBeschreibung ("Knackige Snacks, frisch belegt und ideal für unterwegs. Bei uns trifft Genuss auf Geschwindigkeit!");
-        SnackHaus1.setTelefonnummer ("030 11122233");
-        SnackHaus1.setMail ("kontakt@snackhaus1.de");
+        SnackHaus.setWebsite ("www.snackhaus.de");
+        SnackHaus.setBeschreibung ("Knackige Snacks, frisch belegt und ideal für unterwegs. Bei uns trifft Genuss auf Geschwindigkeit!");
+        SnackHaus.setTelefonnummer ("030 11122233");
+        SnackHaus.setMail ("kontakt@snackhaus.de");
 
-        restaurants.add(SnackHaus1);
+        restaurants.add(SnackHaus);
 
         // Zutaten und Gerichte für das Asiatische Restaurant "Tokyo Zen"
         // 1. Sushi Platter
@@ -605,7 +607,7 @@ public class RestaurantRepository {
                 new Zutat("Gurke", 0.80),
                 new Zutat("Avocado", 1.20)
         };
-        Hauptspeiße SushiPlatter = new Hauptspeiße("Sushi Platter", SushiZutaten);
+        Hauptspeise SushiPlatter = new Hauptspeise("Sushi Platter", SushiZutaten);
 
         // 2. Gemüse Tempura
         Zutat[] TempuraZutaten = new Zutat[]{
@@ -615,7 +617,7 @@ public class RestaurantRepository {
                 new Zutat("Tempura-Teig", 0.90),
                 new Zutat("Dip-Sauce", 0.50)
         };
-        Hauptspeiße GemüseTempura = new Hauptspeiße("Gemüse Tempura", TempuraZutaten);
+        Hauptspeise GemüseTempura = new Hauptspeise("Gemüse Tempura", TempuraZutaten);
 
         // 3. Miso Suppe
         Zutat[] MisoZutaten = new Zutat[]{
@@ -624,7 +626,7 @@ public class RestaurantRepository {
                 new Zutat("Frühlingszwiebeln", 0.65),
                 new Zutat("Seetang", 1.10)
         };
-        Hauptspeiße MisoSuppe = new Hauptspeiße("Miso Suppe", MisoZutaten);
+        Hauptspeise MisoSuppe = new Hauptspeise("Miso Suppe", MisoZutaten);
         Zutat[] Edamame = new Zutat[] {
                 new Zutat("Edamame", 1.20),
                 new Zutat("Meersalz", 0.20)
@@ -800,7 +802,7 @@ public class RestaurantRepository {
         };
         // Erstellen des Restaurants und Befüllen der Gerichte-Liste
         Restaurant TokyoZen = new Restaurant(Kategorien.ASIATISCH, true);
-        ArrayList<Hauptspeiße> listeTokyoZenHauptspeisen = new ArrayList<Hauptspeiße>();
+        ArrayList<Hauptspeise> listeTokyoZenHauptspeisen = new ArrayList<Hauptspeise>();
         ArrayList<Nachspeiße> listeTokyoZenNachspeisen = new ArrayList<Nachspeiße>();
         ArrayList<Vorspeise> listeTokyoZenVorspeisen = new ArrayList<Vorspeise>();
         // Getränke-Listen anlegen
@@ -1011,21 +1013,21 @@ public class RestaurantRepository {
                 new Zutat("Krokant", 0.50)
         };
         Restaurant RistoranteAmore = new Restaurant(Kategorien.ITALIENISCH, true);
-        ArrayList<Hauptspeiße> listeHauptspeisenAmore = new ArrayList<>();
+        ArrayList<Hauptspeise> listeHauptspeisenAmore = new ArrayList<>();
         ArrayList<Vorspeise> listeVorspeisenAmore = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenAmore = new ArrayList<>();
-        listeHauptspeisenAmore.add(new Hauptspeiße("Penne Arrabbiata", PenneArrabbiata));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Caprese", Caprese));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Spaghetti Bolognese", SpaghettiBolognese));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Pizza Margherita", PizzaMargherita));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Lasagne", Lasagne));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Tagliatelle Alfredo", TagliatelleAlfredo));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Risotto ai Funghi", RisottoAiFunghi));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Gnocchi Sorrentina", GnocchiSorrentina));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Frittierte Auberginen", FrittierteAuberginen));
-        listeHauptspeisenAmore.add(new Hauptspeiße("PolloAllaCacciatora", PolloAllaCacciatora));
-        listeHauptspeisenAmore.add(new Hauptspeiße("SaltimboccaAllaRomana", SaltimboccaAllaRomana));
-        listeHauptspeisenAmore.add(new Hauptspeiße("Branzino al Forno", BranzinoAlForno));
+        listeHauptspeisenAmore.add(new Hauptspeise("Penne Arrabbiata", PenneArrabbiata));
+        listeHauptspeisenAmore.add(new Hauptspeise("Caprese", Caprese));
+        listeHauptspeisenAmore.add(new Hauptspeise("Spaghetti Bolognese", SpaghettiBolognese));
+        listeHauptspeisenAmore.add(new Hauptspeise("Pizza Margherita", PizzaMargherita));
+        listeHauptspeisenAmore.add(new Hauptspeise("Lasagne", Lasagne));
+        listeHauptspeisenAmore.add(new Hauptspeise("Tagliatelle Alfredo", TagliatelleAlfredo));
+        listeHauptspeisenAmore.add(new Hauptspeise("Risotto ai Funghi", RisottoAiFunghi));
+        listeHauptspeisenAmore.add(new Hauptspeise("Gnocchi Sorrentina", GnocchiSorrentina));
+        listeHauptspeisenAmore.add(new Hauptspeise("Frittierte Auberginen", FrittierteAuberginen));
+        listeHauptspeisenAmore.add(new Hauptspeise("PolloAllaCacciatora", PolloAllaCacciatora));
+        listeHauptspeisenAmore.add(new Hauptspeise("SaltimboccaAllaRomana", SaltimboccaAllaRomana));
+        listeHauptspeisenAmore.add(new Hauptspeise("Branzino al Forno", BranzinoAlForno));
         RistoranteAmore.setHauptspeisenListe(listeHauptspeisenAmore);
         listeVorspeisenAmore.add(new Vorspeise("Bruschetta", Bruschetta1));
         listeVorspeisenAmore.add(new Vorspeise("Caprese", Caprese1));
@@ -1245,7 +1247,7 @@ public class RestaurantRepository {
                 new Zutat("Grappa", 1.20)
         };
         Restaurant TrattoriaRoma = new Restaurant(Kategorien.ITALIENISCH, true);
-        ArrayList<Hauptspeiße> listeHauptspeisenRoma = new ArrayList<>();
+        ArrayList<Hauptspeise> listeHauptspeisenRoma = new ArrayList<>();
         ArrayList<Vorspeise> listeVorspeisenRoma = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenRoma = new ArrayList<>();
         // Getränke-Listen anlegen
@@ -1263,16 +1265,16 @@ public class RestaurantRepository {
         hotDrinksRistoranteAmore.add(new Heißgetränk("Cappuccino", Cappuccino));
         hotDrinksRistoranteAmore.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
         hotDrinksRistoranteAmore.add(new Heißgetränk("Caffè Corretto", CaffèCorretto));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Penne Arrabbiata", PenneArrabbiata));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Pizza Quattro Stagioni", PizzaQuattroStagioni));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Fettuccine Alfredo", FettuccineAlfredo));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Risotto alla Pescatora", RisottoAllaPescatora));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Pizza Diavola", PizzaDiavola));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Gnocchi Burro Salvia", GnocchiBurroSalvia));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Pollo alla Parmigiana", PolloAllaParmigiana));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Lasagne alla Bolognese", LasagneAllaBolognese));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Saltimbocca alla Romana", SaltimboccaAllaRomana));
-        listeHauptspeisenRoma.add(new Hauptspeiße("Frittura di Pesce", FritturaDiPesce));
+        listeHauptspeisenRoma.add(new Hauptspeise("Penne Arrabbiata", PenneArrabbiata));
+        listeHauptspeisenRoma.add(new Hauptspeise("Pizza Quattro Stagioni", PizzaQuattroStagioni));
+        listeHauptspeisenRoma.add(new Hauptspeise("Fettuccine Alfredo", FettuccineAlfredo));
+        listeHauptspeisenRoma.add(new Hauptspeise("Risotto alla Pescatora", RisottoAllaPescatora));
+        listeHauptspeisenRoma.add(new Hauptspeise("Pizza Diavola", PizzaDiavola));
+        listeHauptspeisenRoma.add(new Hauptspeise("Gnocchi Burro Salvia", GnocchiBurroSalvia));
+        listeHauptspeisenRoma.add(new Hauptspeise("Pollo alla Parmigiana", PolloAllaParmigiana));
+        listeHauptspeisenRoma.add(new Hauptspeise("Lasagne alla Bolognese", LasagneAllaBolognese));
+        listeHauptspeisenRoma.add(new Hauptspeise("Saltimbocca alla Romana", SaltimboccaAllaRomana));
+        listeHauptspeisenRoma.add(new Hauptspeise("Frittura di Pesce", FritturaDiPesce));
         TrattoriaRoma.setHauptspeisenListe(listeHauptspeisenRoma);
         listeVorspeisenRoma.add(new Vorspeise("Bruschetta al Pomodoro", BruschettaAlPomodoro));
         listeVorspeisenRoma.add(new Vorspeise("Caprese", Caprese2));
@@ -1438,23 +1440,23 @@ public class RestaurantRepository {
                 new Zutat("Früchte", 0.80)
         };
         Restaurant SakuraSushi = new Restaurant(Kategorien.ASIATISCH, true);
-        ArrayList<Hauptspeiße> listeHauptspeisenSakura = new ArrayList<>();
+        ArrayList<Hauptspeise> listeHauptspeisenSakura = new ArrayList<>();
         ArrayList<Vorspeise> listeVorspeisenSakura = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenSakura = new ArrayList<>();
-        listeHauptspeisenSakura.add(new Hauptspeiße("Maki mit Lachs", MakiLachs));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Edamame", Edamame1));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Thunfischtatar mit Avocado", ThunfischtatarmitAvocado));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Sushi Variation", SushiVariation));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Sushi Maki", SushiMaki));
-        listeHauptspeisenSakura.add(new Hauptspeiße("California Roll", CaliforniaRoll));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Nigiri Lachs", NigiriLachs));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Teriyaki Hähnchen", TeriyakiHähnchen));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Ramen Shoyu", RamenShoyu));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Tempura Shrimps", TempuraShrimps));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Yakimeshi", Yakimeshi));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Ebi Sushi", EbiSushi));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Sashimi Lachs", SashimiLachs));
-        listeHauptspeisenSakura.add(new Hauptspeiße("Unagi Don", UnagiDon));
+        listeHauptspeisenSakura.add(new Hauptspeise("Maki mit Lachs", MakiLachs));
+        listeHauptspeisenSakura.add(new Hauptspeise("Edamame", Edamame1));
+        listeHauptspeisenSakura.add(new Hauptspeise("Thunfischtatar mit Avocado", ThunfischtatarmitAvocado));
+        listeHauptspeisenSakura.add(new Hauptspeise("Sushi Variation", SushiVariation));
+        listeHauptspeisenSakura.add(new Hauptspeise("Sushi Maki", SushiMaki));
+        listeHauptspeisenSakura.add(new Hauptspeise("California Roll", CaliforniaRoll));
+        listeHauptspeisenSakura.add(new Hauptspeise("Nigiri Lachs", NigiriLachs));
+        listeHauptspeisenSakura.add(new Hauptspeise("Teriyaki Hähnchen", TeriyakiHähnchen));
+        listeHauptspeisenSakura.add(new Hauptspeise("Ramen Shoyu", RamenShoyu));
+        listeHauptspeisenSakura.add(new Hauptspeise("Tempura Shrimps", TempuraShrimps));
+        listeHauptspeisenSakura.add(new Hauptspeise("Yakimeshi", Yakimeshi));
+        listeHauptspeisenSakura.add(new Hauptspeise("Ebi Sushi", EbiSushi));
+        listeHauptspeisenSakura.add(new Hauptspeise("Sashimi Lachs", SashimiLachs));
+        listeHauptspeisenSakura.add(new Hauptspeise("Unagi Don", UnagiDon));
         listeVorspeisenSakura.add(new Vorspeise("Miso Suppe", MisoSuppe2));
         listeVorspeisenSakura.add(new Vorspeise("Gyoza", Gyoza2));
         listeVorspeisenSakura.add(new Vorspeise("Wakamesalat", Wakamesalat));
@@ -1622,7 +1624,7 @@ public class RestaurantRepository {
                 new Zutat("Wasser", 0.10)
         };
         Restaurant WokDynasty = new Restaurant(Kategorien.ASIATISCH, true);
-        ArrayList<Hauptspeiße> listeWok = new ArrayList<>();
+        ArrayList<Hauptspeise> listeWok = new ArrayList<>();
         // Getränke-Listen anlegen
         ArrayList<Kaltgetränk> drinksSakuraSushi = new ArrayList<>();
         ArrayList<Heißgetränk> hotDrinksSakuraSushi = new ArrayList<>();
@@ -1638,10 +1640,10 @@ public class RestaurantRepository {
         hotDrinksSakuraSushi.add(new Heißgetränk("Matcha Latte", MatchaLatteHeiß));
         hotDrinksSakuraSushi.add(new Heißgetränk("Hōjicha", Hojicha));
         hotDrinksSakuraSushi.add(new Heißgetränk("Ingwer-Zitrone-Tee", IngwerZitroneTee));
-        listeWok.add(new Hauptspeiße("Gebratener Reis mit Gemüse", WokGemüseReis));
-        listeWok.add(new Hauptspeiße("Thai-Curry mit Hähnchen", ThaiCurry));
-        listeWok.add(new Hauptspeiße("Jakobsmuscheln mit Safransauce", JakobsmuschelnmitSafransauce));
-        listeWok.add(new Hauptspeiße("Oktopus-Carpaccio", OktopusCarpaccio));
+        listeWok.add(new Hauptspeise("Gebratener Reis mit Gemüse", WokGemüseReis));
+        listeWok.add(new Hauptspeise("Thai-Curry mit Hähnchen", ThaiCurry));
+        listeWok.add(new Hauptspeise("Jakobsmuscheln mit Safransauce", JakobsmuschelnmitSafransauce));
+        listeWok.add(new Hauptspeise("Oktopus-Carpaccio", OktopusCarpaccio));
         ArrayList<Vorspeise> listeVorspeisenWok = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenWok = new ArrayList<>();
         listeVorspeisenWok.add(new Vorspeise("Frühlingsrollen", Frühlingsrollen));
@@ -1808,15 +1810,15 @@ public class RestaurantRepository {
                 new Zutat("Milchschaum", 0.30)
         };
         Restaurant BurgerFactory = new Restaurant(Kategorien.FASTFOOD, true);
-        ArrayList<Hauptspeiße> listeHauptspeisenBurger = new ArrayList<>();
-        listeHauptspeisenBurger.add(new Hauptspeiße("Cheeseburger", Cheeseburger));
-        listeHauptspeisenBurger.add(new Hauptspeiße("Veggie Burger", VeggieBurger));
+        ArrayList<Hauptspeise> listeHauptspeisenBurger = new ArrayList<>();
+        listeHauptspeisenBurger.add(new Hauptspeise("Cheeseburger", Cheeseburger));
+        listeHauptspeisenBurger.add(new Hauptspeise("Veggie Burger", VeggieBurger));
         ArrayList<Nachspeiße> listeNachspeisenBurger = new ArrayList<>();
-        listeHauptspeisenBurger.add(new Hauptspeiße("Classic Cheeseburger", ClassicCheeseburger));
-        listeHauptspeisenBurger.add(new Hauptspeiße("Bacon Cheeseburger", BaconCheeseburger));
-        listeHauptspeisenBurger.add(new Hauptspeiße("Veggie Burger", VeggieBurger));
-        listeHauptspeisenBurger.add(new Hauptspeiße("Chicken Burger", ChickenBurger));
-        listeHauptspeisenBurger.add(new Hauptspeiße("BBQ Burger", BBQBurger));
+        listeHauptspeisenBurger.add(new Hauptspeise("Classic Cheeseburger", ClassicCheeseburger));
+        listeHauptspeisenBurger.add(new Hauptspeise("Bacon Cheeseburger", BaconCheeseburger));
+        listeHauptspeisenBurger.add(new Hauptspeise("Veggie Burger", VeggieBurger));
+        listeHauptspeisenBurger.add(new Hauptspeise("Chicken Burger", ChickenBurger));
+        listeHauptspeisenBurger.add(new Hauptspeise("BBQ Burger", BBQBurger));
         listeNachspeisenBurger.add(new Nachspeiße("Schokoladenkuchen", Schokoladenkuchen));
         listeNachspeisenBurger.add(new Nachspeiße("Cheesecake", Cheesecake));
         listeNachspeisenBurger.add(new Nachspeiße("Apfelstrudel", Apfelstrudel));
@@ -1840,7 +1842,6 @@ public class RestaurantRepository {
 
         BurgerFactory.setHauptspeisenListe(listeHauptspeisenBurger);
         BurgerFactory.setNachspeisenListe(listeNachspeisenBurger);
-        BurgerFactory.setHauptspeisenListe(listeHauptspeisenBurger);
         // Listen zum Restaurant hinzufügen
         BurgerFactory.setKaltgetränkeListe(drinksBurgerFactory);
         BurgerFactory.setHeißgetränkeListe(hotDrinksBurgerFactory);
@@ -1992,15 +1993,15 @@ public class RestaurantRepository {
         hotDrinksFrittenkoenig.add(new Heißgetränk("Tee mit Zitrone", TeeZitroneFritten));
         hotDrinksFrittenkoenig.add(new Heißgetränk("Cappuccino", CappuccinoFritten));
         Restaurant Frittenkoenig = new Restaurant(Kategorien.FASTFOOD, true);
-        ArrayList<Hauptspeiße> listeHauptspeisenFrittenkönig = new ArrayList<>();
+        ArrayList<Hauptspeise> listeHauptspeisenFrittenkönig = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenFrittenkönig = new ArrayList<>();
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Currywurst mit Pommes", CurrywurstPommes));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Chili Cheese Fries", ChiliCheeseFries));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Pommes Frites Classic", PommesFritesClassic));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Pommes Frites mit Currywurst", PommesFritesCurrywurst));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Pommes Frites mit Cheddar", PommesFritesCheese));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Fritten mit Pulled Pork", FrittenMitPulledPork));
-        listeHauptspeisenFrittenkönig.add(new Hauptspeiße("Fritten mit Hähnchen", FrittenMitHähnchen));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Currywurst mit Pommes", CurrywurstPommes));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Chili Cheese Fries", ChiliCheeseFries));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Pommes Frites Classic", PommesFritesClassic));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Pommes Frites mit Currywurst", PommesFritesCurrywurst));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Pommes Frites mit Cheddar", PommesFritesCheese));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Fritten mit Pulled Pork", FrittenMitPulledPork));
+        listeHauptspeisenFrittenkönig.add(new Hauptspeise("Fritten mit Hähnchen", FrittenMitHähnchen));
         listeNachspeisenFrittenkönig.add(new Nachspeiße("Schokofrüchte", Schokofrüchte));
         listeNachspeisenFrittenkönig.add(new Nachspeiße("Waffeln", Waffeln));
         listeNachspeisenFrittenkönig.add(new Nachspeiße("Donuts", Donuts1));
@@ -2168,18 +2169,18 @@ public class RestaurantRepository {
                 new Zutat("Zucker", 0.30)
         };
         Restaurant Hausmannskost = new Restaurant(Kategorien.DEUTSCH, false);
-        ArrayList<Hauptspeiße> listeHM = new ArrayList<>();
-        listeHM.add(new Hauptspeiße("Entenbrust auf Orangenspiegel", EntenbrustaufOrangenspiegel));
-        listeHM.add(new Hauptspeiße("Ziegenkäse im Speckmantel", ZiegenkäseimSpeckmantel));
-        listeHM.add(new Hauptspeiße("Kalbsrücken in Senfkruste", KalbsrückeninSenfkruste));
-        listeHM.add(new Hauptspeiße("Zitronenhähnchen mit Rosmarinkartoffeln", ZitronenhähnchenmitRosmarinkartoffeln));
-        listeHM.add(new Hauptspeiße("Rindergulasch", Rindergulasch));
-        listeHM.add(new Hauptspeiße("Schweinshaxe mit Krautsalat", SchweinshaxemitKrautsalat));
-        listeHM.add(new Hauptspeiße("Forelle Müllerin Art", ForelleMüllerinArt));
-        listeHM.add(new Hauptspeiße("Kalbsleber Berliner Art", KalbsleberBerlinerArt));
-        listeHM.add(new Hauptspeiße("Wiener Schnitzel", WienerSchnitzel));
-        listeHM.add(new Hauptspeiße("Schweinebraten mit Kloß", SchweinebratenmitKloß));
-        listeHM.add(new Hauptspeiße("Hackbraten mit Erbsen", HackbratenmitErbsen));
+        ArrayList<Hauptspeise> listeHM = new ArrayList<>();
+        listeHM.add(new Hauptspeise("Entenbrust auf Orangenspiegel", EntenbrustaufOrangenspiegel));
+        listeHM.add(new Hauptspeise("Ziegenkäse im Speckmantel", ZiegenkäseimSpeckmantel));
+        listeHM.add(new Hauptspeise("Kalbsrücken in Senfkruste", KalbsrückeninSenfkruste));
+        listeHM.add(new Hauptspeise("Zitronenhähnchen mit Rosmarinkartoffeln", ZitronenhähnchenmitRosmarinkartoffeln));
+        listeHM.add(new Hauptspeise("Rindergulasch", Rindergulasch));
+        listeHM.add(new Hauptspeise("Schweinshaxe mit Krautsalat", SchweinshaxemitKrautsalat));
+        listeHM.add(new Hauptspeise("Forelle Müllerin Art", ForelleMüllerinArt));
+        listeHM.add(new Hauptspeise("Kalbsleber Berliner Art", KalbsleberBerlinerArt));
+        listeHM.add(new Hauptspeise("Wiener Schnitzel", WienerSchnitzel));
+        listeHM.add(new Hauptspeise("Schweinebraten mit Kloß", SchweinebratenmitKloß));
+        listeHM.add(new Hauptspeise("Hackbraten mit Erbsen", HackbratenmitErbsen));
         Hausmannskost.setHauptspeisenListe(listeHM);
         ArrayList<Nachspeiße> listeNachspeisenHausmannskost = new ArrayList<>();
         listeNachspeisenHausmannskost.add(new Nachspeiße("Apfelstrudel", ApfelstrudelHausmannskost));
@@ -2344,12 +2345,12 @@ public class RestaurantRepository {
                 new Zutat("Wasser", 0.10)
         };
         Restaurant Veganuss = new Restaurant(Kategorien.DEUTSCH, true);
-        ArrayList<Hauptspeiße> listeVeganuss = new ArrayList<>();
-        listeVeganuss.add(new Hauptspeiße("Tortellini mit Ricotta und Spinat", TortellinimitRicottaundSpinat));
-        listeVeganuss.add(new Hauptspeiße("Kürbissuppe mit Ingwer", KürbissuppemitIngwer));
-        listeVeganuss.add(new Hauptspeiße("Bulgur-Salat mit Kräutern", BulgurSalatmitKräutern));
-        listeVeganuss.add(new Hauptspeiße("Couscous mit Gemüse", CouscousmitGemüse));
-        listeVeganuss.add(new Hauptspeiße("Quinoa-Bowl vegan", QuinoaBowlvegan));
+        ArrayList<Hauptspeise> listeVeganuss = new ArrayList<>();
+        listeVeganuss.add(new Hauptspeise("Tortellini mit Ricotta und Spinat", TortellinimitRicottaundSpinat));
+        listeVeganuss.add(new Hauptspeise("Kürbissuppe mit Ingwer", KürbissuppemitIngwer));
+        listeVeganuss.add(new Hauptspeise("Bulgur-Salat mit Kräutern", BulgurSalatmitKräutern));
+        listeVeganuss.add(new Hauptspeise("Couscous mit Gemüse", CouscousmitGemüse));
+        listeVeganuss.add(new Hauptspeise("Quinoa-Bowl vegan", QuinoaBowlvegan));
         Veganuss.setHauptspeisenListe(listeVeganuss);
         ArrayList<Nachspeiße> listeNachspeisenVeganuss = new ArrayList<>();
         listeNachspeisenVeganuss.add(new Nachspeiße("Veganer Schokoladenkuchen", VeganerSchokoladenkuchen));
@@ -2503,11 +2504,11 @@ public class RestaurantRepository {
         };
 
         Restaurant SnackChill = new Restaurant(Kategorien.FASTFOOD, true);
-        ArrayList<Hauptspeiße> listeSnack = new ArrayList<>();
-        listeSnack.add(new Hauptspeiße("Brioche mit Ziegenkäse", BriochemitZiegenkäse));
-        listeSnack.add(new Hauptspeiße("Focaccia mit Oliven", FocacciamitOliven));
-        listeSnack.add(new Hauptspeiße("Sauerteigbrot mit Avocado", SauerteigbrotmitAvocado));
-        listeSnack.add(new Hauptspeiße("Kaviarschnittchen", Kaviarschnittchen));
+        ArrayList<Hauptspeise> listeSnack = new ArrayList<>();
+        listeSnack.add(new Hauptspeise("Brioche mit Ziegenkäse", BriochemitZiegenkäse));
+        listeSnack.add(new Hauptspeise("Focaccia mit Oliven", FocacciamitOliven));
+        listeSnack.add(new Hauptspeise("Sauerteigbrot mit Avocado", SauerteigbrotmitAvocado));
+        listeSnack.add(new Hauptspeise("Kaviarschnittchen", Kaviarschnittchen));
         SnackChill.setHauptspeisenListe(listeSnack);
         ArrayList<Nachspeiße> listeNachspeisenSnackChill = new ArrayList<>();
         listeNachspeisenSnackChill.add(new Nachspeiße("Schokokekse", Schokokekse));
@@ -2544,11 +2545,43 @@ public class RestaurantRepository {
             SnackChill.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(22, 0));
         }
         restaurants.add(SnackChill);
+
+        bildeZuordnungFürAlleRestaurants(context, restaurants);
     }
 
+    //Zuordnung von Bildern zu den Gerichten
+    private void bildeZuordnungFürAlleRestaurants(Context context, List<Restaurant> restaurants) {
+        for (Restaurant restaurant : restaurants) {
+
+            int restaurantBildId = AppController.getInstance().getRestaurantBildResIdAusName(context, restaurant.getName());
+            restaurant.setBildResourceId(restaurantBildId);
+
+            for (Hauptspeise gericht : restaurant.getHauptspeisen()) {
+                int resId = AppController.getInstance().getBildResIdAusName(context, gericht.getName(), restaurant.getName());
+                gericht.setBildResourceId(resId);
+            }
+
+            /*
+            for (Vorspeise vorspeise : restaurant.getVorspeisen()) {
+               int resId = AppController.getInstance().getBildResIdAusName(context, vorspeise.getName());
+               vorspeise.setBildResourceId(resId);
+            }
+            for (Nachspeiße nachspeise : restaurant.getNachspeisen()) {
+                int resId = AppController.getInstance().getBildResIdAusName(context, nachspeise.getName());
+                nachspeise.setBildResourceId(resId);
+            }
+            for (Kaltgetränk kaltgetränk : restaurant.getKaltgetränke()) {
+                int resId = AppController.getInstance().getBildResIdAusName(context, kaltgetränk.getName());
+                kaltgetränk.setBildResourceId(resId);
+            }
+            for (Heißgetränk heißgetränk : restaurant.getHeißgetränke()) {
+                int resId = AppController.getInstance().getBildResIdAusName(context, heißgetränk.getName());
+                heißgetränk.setBildResourceId(resId);
+            }
+            */
+        }
+    }
     public Restaurant[] getRestaurants() {
         return restaurants.toArray(new Restaurant[0]);
     }
-
-
 }
