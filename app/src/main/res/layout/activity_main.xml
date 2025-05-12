@@ -30,7 +30,6 @@
         android:text="Standort wird geladen..."
         android:textColor="#FFFFFF"
         android:background="#004700" />
->
 
     <!-- Container für diverse Daten: Bild und mehrere Texte -->
 <RelativeLayout

@@ -21,6 +21,7 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppController.getInstance().init(getApplicationContext());
         setContentView(R.layout.user_login);
 
         // UI verknüpfen

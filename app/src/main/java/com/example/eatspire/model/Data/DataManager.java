@@ -1,5 +1,7 @@
 package com.example.eatspire.model.Data;
 
+import android.content.Context;
+
 import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
 
@@ -9,9 +11,9 @@ import java.util.List;
 public class DataManager {
     private final RestaurantRepository repository;
 
-    public DataManager() {
+    public DataManager(Context context) {
         repository = new RestaurantRepository();
-        repository.initRestaurants(); // Initialisiert alle Restaurantdaten
+        repository.initRestaurants(context); // Initialisiert alle Restaurantdaten
     }
 
     public Restaurant[] getAlleRestaurants() {
