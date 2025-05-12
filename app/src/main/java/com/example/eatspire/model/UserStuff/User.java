@@ -9,6 +9,7 @@ public class User {
     private int userId;
     private String username;
     private String password;
+    private String email;
     private Standort standort; // Nur Standortobjekt, keine separaten Koordinaten
 
     public User(String username, String password) {
@@ -31,5 +32,11 @@ public class User {
             return LocalTime.now();
         }
         return null;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

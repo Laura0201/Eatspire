@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.sign_up_activity" />
         <!-- Hauptansicht -->
         <activity android:name=".view.MainActivity" />
 

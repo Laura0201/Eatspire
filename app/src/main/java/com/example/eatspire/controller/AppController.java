@@ -42,15 +42,18 @@ public class AppController {
     }
 
     public boolean login(String username, String password) {
-        return UserVerwaltung.isValidLogin(username, password);
+        return AppController.getInstance().getDataManager().getUserVerwaltung().isValidLogin(username, password);
     }
 
     public User getAktuellerUser() {
-        return UserVerwaltung.getAktuellerUser();
+        return dataManager.getUserVerwaltung().getAktuellerUser();
+    }
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
     public void logout() {
-        UserVerwaltung.logout();
+        AppController.getInstance().getDataManager().getUserVerwaltung().logout();
     }
 
     // Standort Logik

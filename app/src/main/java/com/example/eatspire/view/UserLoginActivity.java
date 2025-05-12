@@ -16,7 +16,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class UserLoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login_button);
+        registerButton = findViewById(R.id.register_button);
 
         loginButton.setOnClickListener(view -> {
             String username = usernameEditText.getText().toString().trim();
@@ -44,5 +45,9 @@ public class UserLoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Falscher Benutzername oder Passwort", Toast.LENGTH_SHORT).show();
             }
         });
+        registerButton.setOnClickListener(view ->{
+            startActivity(new Intent(UserLoginActivity.this, sign_up_activity.class));
+        });
+
     }
 }

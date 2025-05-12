@@ -18,13 +18,7 @@
         android:textStyle="bold" />
 
     <!-- Scrollbarer Bereich für Filter- und Sortieroptionen -->
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/buttonBackTop"
-        android:layout_above="@id/buttonApply"
-        android:padding="8dp">
+
 
         <LinearLayout
             android:id="@+id/mainContainer"
@@ -33,13 +27,6 @@
             android:orientation="horizontal">
 
             <!-- Sortieroptionen (links) -->
-            <LinearLayout
-                android:id="@+id/sortContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingEnd="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -124,9 +111,9 @@
 
 
 
-                <CheckBox android:id="@+id/checkboxItalian" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp"android:text="Italienisch" android:textColor="#FFFFFF" android:background="#004d00" />
-                <CheckBox android:id="@+id/checkboxAsian" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp"android:text="Asiatisch" android:textColor="#FFFFFF" android:background="#004d00" />
-                <CheckBox android:id="@+id/checkboxFastFood" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp"android:text="Fastfood" android:textColor="#FFFFFF" android:background="#004d00" />
+                <CheckBox android:id="@+id/checkboxItalian" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Italienisch" android:textColor="#FFFFFF" android:background="#004d00" />
+                <CheckBox android:id="@+id/checkboxAsian" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Asiatisch" android:textColor="#FFFFFF" android:background="#004d00" />
+                <CheckBox android:id="@+id/checkboxFastFood" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Fastfood" android:textColor="#FFFFFF" android:background="#004d00" />
                 <CheckBox android:id="@+id/checkboxSnacks" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Snacks" android:textColor="#FFFFFF" android:background="#004d00" />
                 <CheckBox android:id="@+id/checkboxSpirits" android:layout_width="match_parent" android:layout_height="wrap_content"  android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Spirituosen" android:textColor="#FFFFFF" android:background="#004d00" />
                 <CheckBox android:id="@+id/checkboxFrench" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:text="Französisch" android:textColor="#FFFFFF" android:background="#004d00" />
@@ -153,18 +140,7 @@
                     android:progressTint="#81c784"
                     android:layout_marginBottom="8dp" />
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </RelativeLayout>
 
-    <!-- Anwenden-Button -->
-    <Button
-        android:id="@+id/buttonApply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:background="#004700"
-        android:text="Anwenden"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
-</RelativeLayout>
+
+

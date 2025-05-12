@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Prüfen ob Nutzer eingeloggt ist
-        if (UserVerwaltung.getAktuellerUser() == null) {
+        if (AppController.getInstance().getDataManager().getUserVerwaltung().getAktuellerUser() == null) {
             startActivity(new Intent(this, UserLoginActivity.class));
             finish();
             return;
