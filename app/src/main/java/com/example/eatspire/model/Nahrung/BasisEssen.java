@@ -39,9 +39,9 @@ public abstract class BasisEssen {
     public double errechnePreis(Zutat[] zutaten){
         double preis = 0;
         for (Zutat zutat : zutaten) {
-            preis += zutat.getPreis();
+            preis = Math.round(preis+zutat.getPreis()*100);
         }
-        return preis;
+        return preis/100;
     }
     public Zutat[] getZutaten() {
         return zutaten;

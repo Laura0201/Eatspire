@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.eatspire.model.Data.DataManager;
 import com.example.eatspire.model.Data.UserVerwaltung;
+import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
 import com.example.eatspire.model.UserStuff.Standort;
@@ -169,5 +170,72 @@ public class AppController {
         rLoc.setLongitude(restaurant.getLongitude());
 
         return userLoc.distanceTo(rLoc);
+    }
+    // Filterung nach Kategorie
+
+    // Methode um nach 1ner Kategorie zu filtern
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+    // Methode um nach 2 Kategorien zu filtern
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2) {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+    // Methode um nach 3 Kategorien zu filtern
+    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2, Kategorien kategorie3) {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2) || r.getKategorie().equals(kategorie3)) {
+                        gefiltert.add(r);
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
     }
 }
