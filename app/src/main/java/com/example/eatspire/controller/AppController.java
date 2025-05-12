@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AppController {
 
@@ -212,31 +213,33 @@ public class AppController {
         return userLoc.distanceTo(rLoc);
     }
 
-    // Filtern nach eigenschaften
-    // erwartet 3 Wahrheitswerte, jeweils für einzelne Eigenschaften.
     public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();
-
         try {
             List<Restaurant> gefiltert = new ArrayList<>();
-            if(getAlleRestaurants() != null) {
+
                 for (Restaurant r : List.of(getAlleRestaurants())) {
-                    if (r.isToGomöglich()==toGomöglich || r.isHatVegetarisch() == hatVegetarisch || geoeffnet) {
+                    if(toGomöglich) {
+                        if (r.isToGomöglich()) {
+                            gefiltert.add(r);
+                            continue;
+                        }
+                    }
+                    if(hatVegetarisch) {
+                        if(r.isHatVegetarisch()) {
+                            gefiltert.add(r);
+                            continue;
+                        }
+                    }
                         if(geoeffnet) {
-                            // Time.isBefore braucht JDK 26, current ist 24, deshalb if Klammer! wird nur rt wenn geoffnet wahr ist!
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 if (r.getOeffnungszeit().isBefore(user.getAktuelleUhrzeit()) && r.getSchliesszeit().isAfter(user.getAktuelleUhrzeit())) {
                                     gefiltert.add(r);
-                                    continue;
                                 }
                             }
-                        } else {
-                            gefiltert.add(r);
                         }
                     }
-                }
-            }
             return gefiltert;
         } catch (NullPointerException e)
         {
@@ -244,11 +247,6 @@ public class AppController {
         }
         return null;
     }
-
-
-    // Filterung nach Kategorie
-
-    // Methode um nach 1ner Kategorie zu filtern
 
     public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
         User user = getAktuellerUser();
@@ -266,52 +264,30 @@ public class AppController {
             return gefiltert;
         } catch (NullPointerException e)
         {
-            //maybe System out print oder so?
         }
         return null;
     }
 
-    // Methode um nach 2 Kategorien zu filtern
-    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2) {
-        User user = getAktuellerUser();
-        if (user == null) return List.of();
-
-        try {
-            List<Restaurant> gefiltert = new ArrayList<>();
-            if(getAlleRestaurants() != null) {
-                for (Restaurant r : List.of(getAlleRestaurants())) {
-                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2)) {
-                        gefiltert.add(r);
-                    }
-                }
+    public List<Restaurant> anwendenVonFilternUndSortierung(
+            int umkreisKm,
+            boolean toGo, boolean open, boolean vegetarian,
+            List<Kategorien> kategorien,
+            boolean nachEntfernungSortieren
+    ) {
+        List<Restaurant> liste= filtereNachEigenschaften(toGo, open, vegetarian);;
+                //= filterNachUmkreis(umkreisKm * 1000f);
+        if (kategorien != null && !kategorien.isEmpty()) {
+            List<Restaurant> kategorienGefiltert = new ArrayList<>();
+            for (Kategorien k : kategorien) {
+                kategorienGefiltert.addAll(filtereNachKategorie(k));
             }
-            return gefiltert;
-        } catch (NullPointerException e)
-        {
-            //maybe System out print oder so?
+            liste = liste.stream().filter(kategorienGefiltert::contains).collect(Collectors.toList());
         }
-        return null;
-    }
 
-    // Methode um nach 3 Kategorien zu filtern
-    public List<Restaurant> filtereNachKategorie(Kategorien kategorie1, Kategorien kategorie2, Kategorien kategorie3) {
-        User user = getAktuellerUser();
-        if (user == null) return List.of();
-
-        try {
-            List<Restaurant> gefiltert = new ArrayList<>();
-            if(getAlleRestaurants() != null) {
-                for (Restaurant r : List.of(getAlleRestaurants())) {
-                    if (r.getKategorie().equals(kategorie1) || r.getKategorie().equals(kategorie2) || r.getKategorie().equals(kategorie3)) {
-                        gefiltert.add(r);
-                    }
-                }
-            }
-            return gefiltert;
-        } catch (NullPointerException e)
-        {
-            //maybe System out print oder so?
+        if (nachEntfernungSortieren) {
+            liste = liste.stream().sorted(Comparator.comparingDouble(r -> sortiereNachEntfernung().indexOf(r))).collect(Collectors.toList());
         }
-        return null;
+
+        return liste;
     }
 }
