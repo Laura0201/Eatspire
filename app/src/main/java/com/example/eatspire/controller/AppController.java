@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Looper;
 import android.widget.Toast;
 
@@ -171,9 +172,42 @@ public class AppController {
 
         return userLoc.distanceTo(rLoc);
     }
+    // Filtern nach eigenschaften
+    public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
+        User user = getAktuellerUser();
+        if (user == null) return List.of();
+
+        try {
+            List<Restaurant> gefiltert = new ArrayList<>();
+            if(getAlleRestaurants() != null) {
+                for (Restaurant r : List.of(getAlleRestaurants())) {
+                    if (r.isToGomöglich()==toGomöglich || r.isHatVegetarisch() == hatVegetarisch || geoeffnet) {
+                        if(geoeffnet) {
+                            // Time.isBefore braucht JDK 26, current ist 24, deshalb if Klammer! wird nur rt wenn geoffnet wahr ist!
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (r.getOeffnungszeit().isBefore(user.getAktuelleUhrzeit()) && r.getSchliesszeit().isAfter(user.getAktuelleUhrzeit())) {
+                                    gefiltert.add(r);
+                                }
+                            }
+                        } else {
+                            gefiltert.add(r);
+                        }
+                    }
+                }
+            }
+            return gefiltert;
+        } catch (NullPointerException e)
+        {
+            //maybe System out print oder so?
+        }
+        return null;
+    }
+
+
     // Filterung nach Kategorie
 
     // Methode um nach 1ner Kategorie zu filtern
+
     public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();
