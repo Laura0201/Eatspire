@@ -16,22 +16,24 @@
         android:layout_marginBottom="24dp"
         android:gravity="center" />
 
-    <TextView
-        android:id="@+id/aktueller_benutzername"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aktueller Benutzername: [aktueller Name]"
-        android:textSize="18sp"
+        android:hint="Neues Passwort"
+        android:inputType="textPassword"
+        android:padding="12dp"
         android:layout_marginBottom="16dp" />
 
     <EditText
-        android:id="@+id/benutzernameAendern"
+        android:id="@+id/change_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Neuer Benutzername"
-        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:hint="Neue E-Mail"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
         android:layout_marginBottom="16dp" />
-
 
     <Button
         android:id="@+id/save_button"

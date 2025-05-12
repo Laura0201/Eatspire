@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,8 +23,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-         />
+        android:scaleType="centerCrop" />
 
     <!-- Name Field -->
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:paddingBottom="16dp"
-        android:text="" />
+        android:hint="Email-Adresse eingeben" />
 
     <!-- Email Field -->
     <TextView
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
-        android:text="E mail address"
+        android:text="Email address"
         android:textSize="16sp" />
 
     <EditText
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:paddingBottom="16dp"
-        android:text="" />
+        android:hint="Email-Adresse eingeben" />
 
     <!-- Username Field -->
     <TextView
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
-        android:text="User name"
+        android:text="Username"
         android:textSize="16sp" />
 
     <EditText
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:paddingBottom="16dp"
-        android:text="" />
+        android:hint="Username" />
 
     <!-- Password Field -->
     <TextView
@@ -97,13 +97,13 @@
             android:layout_weight="1"
             android:inputType="textPassword"
             android:paddingBottom="16dp"
-            android:text="" />
+            android:hint="Password" />
 
         <ImageView
             android:id="@+id/password_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
     <!-- Phone Number Field -->
@@ -121,142 +121,18 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:paddingBottom="16dp"
-        android:text="" />
+        android:hint="Email-Adresse eingeben" />
 
-
+    <!-- Back Button -->
     <Button
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_gravity="start"
         android:background="?attr/selectableItemBackground"
         android:padding="8dp"
-        android:textSize="16dp"
         android:text="Zurück"
+        android:textSize="16sp"
         android:textColor="?android:attr/textColorPrimary" />
-    </LinearLayout>
 
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:background="#004d00"> &lt;!&ndash; Dunkles Grün als Hintergrund &ndash;&gt;-->
-
-    <!--    &lt;!&ndash; Zurück-Button oben links &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonBackTop"-->
-    <!--        android:layout_width="52dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:layout_marginRight="16dp"-->
-    <!--        android:layout_marginBottom="16dp"-->
-    <!--        android:background="#004700"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:text="Zurück"-->
-    <!--        android:textSize="10dp" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textViewHeader"-->
-    <!--        android:layout_width="329dp"-->
-    <!--        android:layout_height="72dp"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_marginStart="-1dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:layout_toEndOf="@id/buttonBackTop"-->
-    <!--        android:background="#004700"-->
-    <!--        android:gravity="center_vertical"-->
-    <!--        android:padding="8dp"-->
-    <!--        android:text="Kontoeinstellungen ändern"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textSize="20.5dp"-->
-    <!--        android:textStyle="bold" />-->
-
-    <!--    &lt;!&ndash; Button: Benutzername &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonUsername"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/buttonBackTop"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#1b5e20"-->
-    <!--        android:text="Benutzername"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold" />-->
-
-    <!--    &lt;!&ndash; Button: Email &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonEmail"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/buttonUsername"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#1b5e20"-->
-    <!--        android:text="Email"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold" />-->
-
-    <!--    &lt;!&ndash; Button: Passwort ändern &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonChangePassword"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/buttonEmail"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#1b5e20"-->
-    <!--        android:text="Passwort ändern"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold" />-->
-
-    <!--    &lt;!&ndash; Button: Telefonnummer &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonPhoneNumber"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/buttonChangePassword"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#1b5e20"-->
-    <!--        android:text="Telefonnummer"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/präferenzenÄndernButton"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_below="@+id/buttonPhoneNumber"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#1b5e20"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold"-->
-    <!--        android:text="Präferenzen ändern"-->
-    <!--        android:layout_height="wrap_content"/>-->
-
-    <!--    &lt;!&ndash; Platz zwischen den Buttons und dem unteren Zurück-Button &ndash;&gt;-->
-    <!--    <View-->
-    <!--        android:id="@+id/spaceView"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_below="@id/präferenzenÄndernButton"-->
-    <!--        />-->
-    <!--    &lt;!&ndash; Zurück-Button unten &ndash;&gt;-->
-    <!--    <Button-->
-    <!--        android:id="@+id/speichernButton"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:background="#004700"-->
-    <!--        android:text="Zurück"-->
-    <!--        android:textColor="#FFFFFF"-->
-    <!--        android:textStyle="bold" />-->
-
-
-    <!--</RelativeLayout>-->
+</LinearLayout>

@@ -1,9 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
-        tools:ignore="CoarseFineLocation" />
-
+    <!-- Berechtigungen -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -17,18 +16,33 @@
         android:theme="@style/Theme.Eatspire"
         tools:targetApi="31">
 
-        <!-- Main-App-Ansicht nach Login -->
-        <activity android:name=".MainActivity1" />
-
         <!-- Start-Activity: Login -->
-        <activity   android:name=".UserLoginActivity"
-                    android:exported="true">
+        <activity
+            android:name=".view.UserLoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-    </application>
+        <!-- Hauptansicht -->
+        <activity android:name=".view.MainActivity" />
 
+        <!-- Restaurant-Detailansicht -->
+        <activity android:name=".view.RestaurantActivity" />
+
+        <!-- Hauptspeisen-Ansicht -->
+        <activity android:name=".view.HauptspeisenActivity" />
+
+        <!-- Einstellungen -->
+        <activity android:name=".view.EinstellungenTabActivity" />
+
+        <!-- Filter und Sortieren -->
+        <activity android:name=".view.FilterUndSortierOptionenActivity" />
+        <!-- Standort -->
+        <activity android:name=".view.StandortActivity" />
+
+
+    </application>
 </manifest>
