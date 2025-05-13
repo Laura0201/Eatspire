@@ -38,10 +38,7 @@ public class AppController {
     public static AppController getInstance() { return controller; }
     //Controller enthält einen privaten DataManager(Verbindung ins Model)
     private DataManager dataManager;
-    public DataManager getDataManager() {
-        return dataManager;
-    }
-    //Methode initiiert den DataManager, passiert in der ersten Activity
+
     public void init(Context context) {
         this.dataManager = new DataManager(context);
     }
@@ -115,6 +112,33 @@ public class AppController {
         }
         return "Unbekannte Adresse";
     }
+
+    public void setzeStandortVonAdresse(Activity activity, String adresseEingabe, StandortCallback callback) {
+        Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(adresseEingabe, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                double lat = address.getLatitude();
+                double lon = address.getLongitude();
+                String addr = address.getAddressLine(0);
+
+                User user = getAktuellerUser();
+                if (user != null) {
+                    user.getStandort().setDaten(lat, lon, addr);
+                    callback.onStandortGefunden(lat, lon, addr);
+                }
+            } else {
+                callback.onStandortGefunden(0, 0, "Adresse nicht gefunden");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            callback.onStandortGefunden(0, 0, "Adressfehler");
+        }
+    }
+
+
     private boolean hatBerechtigung(Activity activity) {
         return ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
@@ -227,7 +251,7 @@ public class AppController {
         } catch (NullPointerException e)
         {
             //maybe System out print oder so?
-            }
+        }
         return null;
     }
     public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
