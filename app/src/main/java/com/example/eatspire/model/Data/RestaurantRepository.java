@@ -2564,25 +2564,23 @@ public class RestaurantRepository {
                 int resId = AppController.getInstance().getBildResIdAusName(context, gericht.getName(), restaurant.getName());
                 gericht.setBildResourceId(resId);
             }
-
-            /*
             for (Vorspeise vorspeise : restaurant.getVorspeisen()) {
-               int resId = AppController.getInstance().getBildResIdAusName(context, vorspeise.getName());
+               int resId = AppController.getInstance().getBildResIdAusName(context, vorspeise.getName(), restaurant.getName());
                vorspeise.setBildResourceId(resId);
             }
             for (Nachspeiße nachspeise : restaurant.getNachspeisen()) {
-                int resId = AppController.getInstance().getBildResIdAusName(context, nachspeise.getName());
+                int resId = AppController.getInstance().getBildResIdAusName(context, nachspeise.getName(), restaurant.getName());
                 nachspeise.setBildResourceId(resId);
             }
             for (Kaltgetränk kaltgetränk : restaurant.getKaltgetränke()) {
-                int resId = AppController.getInstance().getBildResIdAusName(context, kaltgetränk.getName());
+                int resId = AppController.getInstance().getBildResIdAusName(context, kaltgetränk.getName(), restaurant.getName());
                 kaltgetränk.setBildResourceId(resId);
             }
             for (Heißgetränk heißgetränk : restaurant.getHeißgetränke()) {
-                int resId = AppController.getInstance().getBildResIdAusName(context, heißgetränk.getName());
+                int resId = AppController.getInstance().getBildResIdAusName(context, heißgetränk.getName(), restaurant.getName());
                 heißgetränk.setBildResourceId(resId);
             }
-            */
+
         }
     }
     public Restaurant[] getRestaurants() {

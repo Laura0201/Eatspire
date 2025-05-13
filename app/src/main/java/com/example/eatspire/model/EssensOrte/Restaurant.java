@@ -206,4 +206,10 @@ public class Restaurant {
     }
 
 
+    public List<BasisGetränk> getGetränke() {
+        List<BasisGetränk> alleGetränke = new ArrayList<>();
+        alleGetränke.addAll(listeHeißgetränke);
+        alleGetränke.addAll(listeKaltgetränke);
+        return alleGetränke;
+    }
 }

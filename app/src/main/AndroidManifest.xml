@@ -33,8 +33,14 @@
         <!-- Restaurant-Detailansicht -->
         <activity android:name=".view.RestaurantActivity" />
 
+        <!-- Vorspeisen Ansicht -->
+        <activity android:name=".view.VorspeisenActivity" />
         <!-- Hauptspeisen-Ansicht -->
         <activity android:name=".view.HauptspeisenActivity" />
+        <!-- Nachspeisen-Ansicht -->
+        <activity android:name=".view.NachspeisenActivity" />
+        <!-- Getränke-Ansicht -->
+        <activity android:name=".view.GetraenkeActivity" />
 
         <!-- Einstellungen -->
         <activity android:name=".view.EinstellungenTabActivity" />

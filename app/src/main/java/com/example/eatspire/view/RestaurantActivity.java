@@ -50,9 +50,6 @@ public class RestaurantActivity extends AppCompatActivity {
             intent.putExtra("restaurant_name", restaurant.getName());
             startActivity(intent);
         });
-
-        // Beispiel für spätere Implementierung
-        /*
         buttonVorspeisen.setOnClickListener(v -> {
             Intent intent = new Intent(RestaurantActivity.this, VorspeisenActivity.class);
             intent.putExtra("restaurant_name", restaurant.getName());
@@ -70,6 +67,5 @@ public class RestaurantActivity extends AppCompatActivity {
             intent.putExtra("restaurant_name", restaurant.getName());
             startActivity(intent);
         });
-        */
     }
 }

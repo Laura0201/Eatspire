@@ -20,7 +20,10 @@ import com.example.eatspire.model.Data.UserVerwaltung;
 import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
+import com.example.eatspire.model.Nahrung.BasisGetränk;
 import com.example.eatspire.model.Nahrung.Hauptspeise;
+import com.example.eatspire.model.Nahrung.Nachspeiße;
+import com.example.eatspire.model.Nahrung.Vorspeise;
 import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
 import com.example.eatspire.view.FilterUndSortierOptionenActivity;
@@ -166,6 +169,21 @@ public class AppController {
     public List<Hauptspeise> getHauptspeisenVon(String restaurantName) {
         Restaurant r = getRestaurantByName(restaurantName);
         if (r != null) return r.getHauptspeisen();
+        return List.of();
+    }
+    public List<Vorspeise> getVorspeisenVon(String restaurantName) {
+        Restaurant r = getRestaurantByName(restaurantName);
+        if (r != null) return r.getVorspeisen();
+        return List.of();
+    }
+    public List<Nachspeiße> getNachspeisenVon(String restaurantName) {
+        Restaurant r = getRestaurantByName(restaurantName);
+        if (r != null) return r.getNachspeisen();
+        return List.of();
+    }
+    public List<BasisGetränk> getGetränkeVon(String restaurantName) {
+        Restaurant r = getRestaurantByName(restaurantName);
+        if (r != null) return r.getGetränke();
         return List.of();
     }
     public int getRestaurantBildResIdAusName(Context context, String restaurantName) {

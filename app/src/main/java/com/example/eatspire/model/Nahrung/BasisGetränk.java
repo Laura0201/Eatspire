@@ -15,6 +15,7 @@ public abstract class BasisGetränk{
 
     private Zutat[] zutaten;
     public double preis;
+    private int bildResourceId;
 
     BasisGetränk(String name, Zutat[] zutaten) {
         this.name = name;
@@ -39,6 +40,9 @@ public abstract class BasisGetränk{
     }
     public double getPreis() {
         return preis;
+    }
+    public void setBildResourceId(int bildResourceId) {
+        this.bildResourceId = bildResourceId;
     }
     public double errechnePreis(Zutat[] zutaten){
         double preis = 0;
