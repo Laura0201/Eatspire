@@ -17,7 +17,6 @@ public class DataManager {
         repository.initRestaurants(context); // Initialisiert alle Restaurantdaten
         userVerwaltung = new UserVerwaltung();
     }
-
     public Restaurant[] getAlleRestaurants() {
         return repository.getRestaurants(); // ← Hier ist die Methode
     }

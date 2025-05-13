@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Looper;
+import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,9 @@ public class AppController {
     public static AppController getInstance() { return controller; }
     //Controller enthält einen privaten DataManager(Verbindung ins Model)
     private DataManager dataManager;
+    public DataManager getDataManager(){
+        return dataManager;
+    }
 
     public void init(Context context) {
         this.dataManager = new DataManager(context);
