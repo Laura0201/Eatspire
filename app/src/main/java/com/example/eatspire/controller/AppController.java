@@ -22,6 +22,7 @@ import com.example.eatspire.model.Nahrung.BasisEssen;
 import com.example.eatspire.model.Nahrung.Hauptspeise;
 import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
+import com.example.eatspire.view.FilterUndSortierOptionenActivity;
 import com.google.android.gms.location.*;
 
 import java.io.IOException;
@@ -32,32 +33,32 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class AppController {
-
+    //statische Instanz des Controllers als Singleton mit Getter
     private static final AppController controller = new AppController();
     public static AppController getInstance() { return controller; }
-
+    //Controller enthält einen privaten DataManager(Verbindung ins Model)
     private DataManager dataManager;
-
-    public void init(Context context) {
-        this.dataManager = new DataManager(context);
-    }
-
-    public boolean login(String username, String password) {
-        return AppController.getInstance().getDataManager().getUserVerwaltung().isValidLogin(username, password);
-    }
-
-    public User getAktuellerUser() {
-        return dataManager.getUserVerwaltung().getAktuellerUser();
-    }
     public DataManager getDataManager() {
         return dataManager;
     }
-
+    //Methode initiiert den DataManager, passiert in der ersten Activity
+    public void init(Context context) {
+        this.dataManager = new DataManager(context);
+    }
+    //Überprüfung, ob der LogIn erfolgreich und zulässig ist
+    public boolean login(String username, String password) {
+        return AppController.getInstance().getDataManager().getUserVerwaltung().isValidLogin(username, password);
+    }
+    //LogOut Methode, setzt den aktuellen User = null, sodass neuer LogIn erforderlich ist
+    //speichern einer Anmeldung erst bei dauerhafter Datenspeicherung möglich
     public void logout() {
         AppController.getInstance().getDataManager().getUserVerwaltung().logout();
     }
-
-    // Standort Logik
+    //übergibt die Instanz des aktuellen Users
+    public User getAktuellerUser() {
+        return dataManager.getUserVerwaltung().getAktuellerUser();
+    }
+    // Standort Logik bis Z. 123
     public void holeAutomatischenStandort(Activity activity, StandortCallback callback) {
         FusedLocationProviderClient fusedClient = LocationServices.getFusedLocationProviderClient(activity);
         if (!hatBerechtigung(activity)) {
@@ -69,7 +70,6 @@ public class AppController {
         starteNeueStandortabfrage(activity, fusedClient, callback);
 
     }
-
     private void starteNeueStandortabfrage(Activity activity, FusedLocationProviderClient client, StandortCallback callback) {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
@@ -92,7 +92,6 @@ public class AppController {
             Toast.makeText(activity, "Keine Berechtigung", Toast.LENGTH_SHORT).show();
         }
     }
-
     private void updateStandortMitLocation(Activity activity, Location location, StandortCallback callback) {
         double lat = location.getLatitude();
         double lon = location.getLongitude();
@@ -104,7 +103,6 @@ public class AppController {
             callback.onStandortGefunden(lat, lon, adresse);
         }
     }
-
     private String aufloesenAdresse(Activity activity, double lat, double lon) {
         Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
         try {
@@ -117,21 +115,18 @@ public class AppController {
         }
         return "Unbekannte Adresse";
     }
-
     private boolean hatBerechtigung(Activity activity) {
         return ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
-
-    // Callback-Interface
+    // Callback-Interface direkt in der Klasse, weil es nur hier genutzt wird
     public interface StandortCallback {
         void onStandortGefunden(double latitude, double longitude, String adresse);
     }
 
-    // Restaurant Logik
+    // Restaurant Logik bis Z. 162
     public Restaurant[] getAlleRestaurants() {
         return dataManager.getAlleRestaurants();
     }
-
     public Restaurant getRestaurantByName(String name) {
         for (Restaurant r : dataManager.getAlleRestaurants()) {
             if (r.getName().equalsIgnoreCase(name)) {
@@ -140,7 +135,6 @@ public class AppController {
         }
         return null;
     }
-
     public List<Hauptspeise> getHauptspeisenVon(String restaurantName) {
         Restaurant r = getRestaurantByName(restaurantName);
         if (r != null) return r.getHauptspeisen();
@@ -156,7 +150,6 @@ public class AppController {
 
         return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
     }
-
     public int getBildResIdAusName(Context context, String gerichtName, String restaurantName) {
         String combinedName = restaurantName + "_" + gerichtName;
         String resName = combinedName.toLowerCase()
@@ -167,14 +160,6 @@ public class AppController {
                 .replaceAll("[^a-z0-9]", "_"); // nur a-z, 0-9 und _
 
         return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
-    }
-
-    public List<BasisEssen> getAlleHauptspeisen() {
-        List<BasisEssen> alle = new ArrayList<>();
-        for (Restaurant r : dataManager.getAlleRestaurants()) {
-            alle.addAll(r.getHauptspeisen());
-        }
-        return alle;
     }
 
     //Sortieren und Filtern Logik
@@ -191,7 +176,6 @@ public class AppController {
         }
         return gefiltert;
     }
-
     public List<Restaurant> sortiereNachEntfernung() {
         User user = getAktuellerUser();
         if (user == null) return List.of();
@@ -212,7 +196,6 @@ public class AppController {
 
         return userLoc.distanceTo(rLoc);
     }
-
     public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();
@@ -244,10 +227,9 @@ public class AppController {
         } catch (NullPointerException e)
         {
             //maybe System out print oder so?
-        }
+            }
         return null;
     }
-
     public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();
@@ -267,7 +249,6 @@ public class AppController {
         }
         return null;
     }
-
     public List<Restaurant> anwendenVonFilternUndSortierung(
             int umkreisKm,
             boolean toGo, boolean open, boolean vegetarian,
@@ -283,11 +264,9 @@ public class AppController {
             }
             liste = liste.stream().filter(kategorienGefiltert::contains).collect(Collectors.toList());
         }
-
         if (nachEntfernungSortieren) {
             liste = liste.stream().sorted(Comparator.comparingDouble(r -> sortiereNachEntfernung().indexOf(r))).collect(Collectors.toList());
         }
-
         return liste;
     }
 }

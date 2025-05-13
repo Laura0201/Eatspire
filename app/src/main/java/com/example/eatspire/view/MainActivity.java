@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonRefresh, buttonCurrentLocation, buttonEinstellungen, buttonFilterSortieren;
     private LinearLayout linearLayoutElements;
+    private RelativeLayout dataContainer;
+    private ImageView imageData;
+    private TextView textTitle, textDescription;
 
     public static AppController controller;
     private List<Restaurant> letzteAngezeigteRestaurants;
@@ -114,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
         buttonEinstellungen = findViewById(R.id.buttonEinstellungen);
         buttonFilterSortieren = findViewById(R.id.buttonFilterSortieren);
         linearLayoutElements = findViewById(R.id.linearLayoutElements);
+        dataContainer = findViewById(R.id.dataContainer);
+        imageData = findViewById(R.id.imageData);
+        textTitle = findViewById(R.id.textTitle);
+        textDescription = findViewById(R.id.textDescription);
 
         buttonRefresh.setOnClickListener(v -> recreate());
 
@@ -132,11 +140,25 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtras(letzteFilterDaten); // Zustand übergeben
             filterLauncher.launch(intent);
         });
+        Restaurant randomRestaurant = AppController.getInstance().getDataManager().getRandomRestaurant();
+        textTitle.setText("Heutige Empfehlung: "+randomRestaurant.getName());
+        textDescription.setText(randomRestaurant.getBeschreibung());
+        imageData.setImageResource(R.drawable.empfehlung_bild); // Ersetze mit einem tatsächlichen Bild in drawable
 
+        dataContainer.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RestaurantActivity.class);
+            intent.putExtra("restaurant_name", randomRestaurant.getName());
+            startActivity(intent);
+        });
         // Beim ersten Öffnen alle Restaurants anzeigen
         letzteAngezeigteRestaurants = List.of(controller.getAlleRestaurants());
         zeigeRestaurants(letzteAngezeigteRestaurants);
         aktualisiereStandortanzeige();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppController.getInstance().logout();
     }
 
     private void aktualisiereStandortanzeige() {

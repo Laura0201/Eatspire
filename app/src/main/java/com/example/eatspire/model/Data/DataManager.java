@@ -35,6 +35,14 @@ public class DataManager {
 
         return hauptgerichte;
     }
+    public Restaurant getRandomRestaurant(){
+        Restaurant[] restaurants = getAlleRestaurants();
+        if (restaurants.length > 0) {
+            int randomIndex = (int) (Math.random() * restaurants.length);
+            return restaurants[randomIndex];
+        }
+        return null;
+    }
 
 
 }
