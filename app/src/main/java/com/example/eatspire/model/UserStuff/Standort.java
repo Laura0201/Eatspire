@@ -26,24 +26,6 @@ public class Standort {
         this.adresse = adresse;
     }
 
-    public void setDatenVonAdresse(Activity activity, String userInput) {
-        Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(userInput, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                this.latitude = address.getLatitude();
-                this.longitude = address.getLongitude();
-                this.adresse = address.getAddressLine(0);
-            } else {
-                this.adresse = "Adresse nicht gefunden";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            this.adresse = "Adressfehler";
-        }
-    }
-
     // Getter
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
