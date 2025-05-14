@@ -231,16 +231,25 @@ public class AppController {
         return sortiert;
     }
 
-    private float berechneEntfernung(Standort standort, Restaurant restaurant) {
-        Location userLoc = new Location("User");
-        userLoc.setLatitude(standort.getLatitude());
-        userLoc.setLongitude(standort.getLongitude());
+    public float berechneEntfernung(Standort standort, Restaurant restaurant) {
+        double lat1 = Math.toRadians(standort.getLatitude());
+        double lon1 = Math.toRadians(standort.getLongitude());
+        double lat2 = Math.toRadians(restaurant.getLatitude());
+        double lon2 = Math.toRadians(restaurant.getLongitude());
 
-        Location rLoc = new Location("Restaurant");
-        rLoc.setLatitude(restaurant.getLatitude());
-        rLoc.setLongitude(restaurant.getLongitude());
+        double dlat = lat2 - lat1;
+        double dlon = lon2 - lon1;
 
-        return userLoc.distanceTo(rLoc);
+        double a = Math.sin(dlat / 2) * Math.sin(dlat / 2)
+                + Math.cos(lat1) * Math.cos(lat2)
+                * Math.sin(dlon / 2) * Math.sin(dlon / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double earthRadius = 6371000; // in Meter
+        double distance = earthRadius * c;
+
+        return (float) distance;
     }
     public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
         User user = getAktuellerUser();

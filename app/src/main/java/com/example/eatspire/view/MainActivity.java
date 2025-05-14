@@ -21,10 +21,12 @@ import com.example.eatspire.R;
 import com.example.eatspire.controller.AppController;
 import com.example.eatspire.model.EssensOrte.Kategorien;
 import com.example.eatspire.model.EssensOrte.Restaurant;
+import com.example.eatspire.model.UserStuff.Standort;
 import com.example.eatspire.model.UserStuff.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -182,6 +184,14 @@ public class MainActivity extends AppCompatActivity {
             TextView name = itemView.findViewById(R.id.nameDesRestaurantsTextView);
             TextView beschreibung = itemView.findViewById(R.id.beschreibungDesRestaurantsTextView);
             TextView adresse = itemView.findViewById(R.id.adresseDesRestaurantsTextview);
+            TextView entfernungTextView = itemView.findViewById(R.id.entfernungDesRestaurantsTextView); // muss im Layout vorhanden sein
+            Standort userStandort = AppController.getInstance().getAktuellerUser().getStandort();
+            if (userStandort != null) {
+                float entfernung = AppController.getInstance().berechneEntfernung(userStandort, r);
+                entfernungTextView.setText(String.format(Locale.getDefault(), "%.0f m entfernt", entfernung));
+            } else {
+                entfernungTextView.setText("Keine Standortdaten");
+            }
             TextView website = itemView.findViewById(R.id.websiteDesRestaurantsTextView);
             TextView kategorie = itemView.findViewById(R.id.kategorieDesRestaurantsTextView);
 

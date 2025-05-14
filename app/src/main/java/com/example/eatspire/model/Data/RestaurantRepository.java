@@ -162,6 +162,9 @@ public class RestaurantRepository {
         bellaNapoli.setVorspeisenListe(vorspeisen);
         bellaNapoli.setKaltgetränkeListe(drinksBellaNapoli);
         bellaNapoli.setHeißgetränkeListe(hotDrinksBellaNapoli);
+        bellaNapoli.setAdresse("Lange-Strasse 19, 50667");
+        bellaNapoli.setLatitude(50.937531);
+        bellaNapoli.setLongitude(6.960279);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             bellaNapoli.setOeffnungszeiten(LocalTime.of(9, 30), LocalTime.of(22, 0));
@@ -243,6 +246,7 @@ public class RestaurantRepository {
         laProvence.setHauptspeisenListe(hauptspeisen);
         laProvence.setKaltgetränkeListe(kaltgetraenke);
         laProvence.setHeißgetränkeListe(heissgetraenke);
+        laProvence.setAdresse("Bahnhof Strasse 15, 20095 Hamburg");
         laProvence.setLatitude(53.548828);
         laProvence.setLongitude(9.987170);
         laProvence.setWebsite ( "www.laprovence.fr");
@@ -381,6 +385,9 @@ public class RestaurantRepository {
         drinksBarLounge.add(new Hauptspeise("Gin Tonic", GinTonic));
         drinksBarLounge.add(new Hauptspeise("Espresso Martini", EspressoMartini));
         BarLounge.setHauptspeisenListe(drinksBarLounge);
+        BarLounge.setAdresse("Bahnhof Strasse 15, 20095 Hamburg");
+        BarLounge.setLatitude(53.548828);
+        BarLounge.setLongitude(9.987170);
         BarLounge.setName("BarLounge");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             BarLounge.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
@@ -2580,7 +2587,6 @@ public class RestaurantRepository {
                 int resId = AppController.getInstance().getBildResIdAusName(context, heißgetränk.getName(), restaurant.getName());
                 heißgetränk.setBildResourceId(resId);
             }
-
         }
     }
     public Restaurant[] getRestaurants() {

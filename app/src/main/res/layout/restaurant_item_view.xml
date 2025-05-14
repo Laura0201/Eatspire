@@ -51,6 +51,12 @@
             android:layout_height="wrap_content"
             android:text="Text 5"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/entfernungDesRestaurantsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text 6"
+            android:textSize="14sp" />
 
     </LinearLayout>
 </LinearLayout>
