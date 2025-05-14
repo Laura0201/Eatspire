@@ -162,7 +162,7 @@ public class RestaurantRepository {
         bellaNapoli.setVorspeisenListe(vorspeisen);
         bellaNapoli.setKaltgetränkeListe(drinksBellaNapoli);
         bellaNapoli.setHeißgetränkeListe(hotDrinksBellaNapoli);
-        bellaNapoli.setAdresse("Lange-Strasse 19, 50667");
+        bellaNapoli.setAdresse("Lange-Strasse 19, 50667 Köln");
         bellaNapoli.setLatitude(50.937531);
         bellaNapoli.setLongitude(6.960279);
 
@@ -385,9 +385,9 @@ public class RestaurantRepository {
         drinksBarLounge.add(new Hauptspeise("Gin Tonic", GinTonic));
         drinksBarLounge.add(new Hauptspeise("Espresso Martini", EspressoMartini));
         BarLounge.setHauptspeisenListe(drinksBarLounge);
-        BarLounge.setAdresse("Bahnhof Strasse 15, 20095 Hamburg");
-        BarLounge.setLatitude(53.548828);
-        BarLounge.setLongitude(9.987170);
+        BarLounge.setAdresse("Reeperbahn 34, 20359 Hamburg");
+        BarLounge.setLatitude(53.554246);
+        BarLounge.setLongitude(9.964778);
         BarLounge.setName("BarLounge");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             BarLounge.setOeffnungszeiten(LocalTime.of(18, 0), LocalTime.of(2, 0));
@@ -596,8 +596,9 @@ public class RestaurantRepository {
         SnackHaus.setNachspeisenListe(snackHausNachspeisen);
         SnackHaus.setKaltgetränkeListe(drinksSnackHaus);
         SnackHaus.setHeißgetränkeListe(hotDrinksSnackHaus);
-        bellaNapoli.setLatitude(50.937531);
-        bellaNapoli.setLongitude(6.960279);
+        SnackHaus.setAdresse("Mönckebergstraße 11, 20095 Hamburg");
+        SnackHaus.setLatitude(53.550290);
+        SnackHaus.setLongitude(10.001400);
         SnackHaus.setName("SnackHaus");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             SnackHaus.setOeffnungszeiten(LocalTime.of(10, 0), LocalTime.of(20, 0));
@@ -860,6 +861,9 @@ public class RestaurantRepository {
         // Listen zum Restaurant hinzufügen
         TokyoZen.setKaltgetränkeListe(drinksTokyoZen);
         TokyoZen.setHeißgetränkeListe(hotDrinksTokyoZen);
+        TokyoZen.setAdresse("Steinstraße 1, 20095 Hamburg");
+        TokyoZen.setLatitude(53.548469);
+        TokyoZen.setLongitude(10.002377);
         TokyoZen.setName("Tokyo Zen");
         // Öffnungszeiten setzen (mit API Level Überprüfung)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -1052,6 +1056,9 @@ public class RestaurantRepository {
         listeNachspeisenAmore.add(new Nachspeiße("Zabaione", Zabaione));
         listeNachspeisenAmore.add(new Nachspeiße("Gelato", Gelato));
         RistoranteAmore.setNachspeisenListe(listeNachspeisenAmore);
+        RistoranteAmore.setAdresse("Hohenstaufenring 29, 50674 Köln");
+        RistoranteAmore.setLatitude(50.931390);
+        RistoranteAmore.setLongitude(6.944976);
         RistoranteAmore.setName("Ristorante Amore");
         RistoranteAmore.setWebsite ("www.ristorante-amore.it");
         RistoranteAmore.setBeschreibung ("Klassische italienische Küche mit Leidenschaft gekocht. Besonders bekannt für unsere hausgemachten Nudelgerichte.");
@@ -1262,20 +1269,20 @@ public class RestaurantRepository {
         ArrayList<Vorspeise> listeVorspeisenRoma = new ArrayList<>();
         ArrayList<Nachspeiße> listeNachspeisenRoma = new ArrayList<>();
         // Getränke-Listen anlegen
-        ArrayList<Kaltgetränk> drinksRistoranteAmore = new ArrayList<>();
-        ArrayList<Heißgetränk> hotDrinksRistoranteAmore = new ArrayList<>();
+        ArrayList<Kaltgetränk> drinksTrattoriaRoma = new ArrayList<>();
+        ArrayList<Heißgetränk> hotDrinksTrattoriaRoma = new ArrayList<>();
 
 // Kaltgetränke hinzufügen
-        drinksRistoranteAmore.add(new Kaltgetränk("San Pellegrino", SanPellegrino, false));
-        drinksRistoranteAmore.add(new Kaltgetränk("Aranciata Rossa", AranciataRossa, false));
-        drinksRistoranteAmore.add(new Kaltgetränk("Chinotto", Chinotto, false));
-        drinksRistoranteAmore.add(new Kaltgetränk("Limonata", Limonata, false));
+        drinksTrattoriaRoma.add(new Kaltgetränk("San Pellegrino", SanPellegrino, false));
+        drinksTrattoriaRoma.add(new Kaltgetränk("Aranciata Rossa", AranciataRossa, false));
+        drinksTrattoriaRoma.add(new Kaltgetränk("Chinotto", Chinotto, false));
+        drinksTrattoriaRoma.add(new Kaltgetränk("Limonata", Limonata, false));
 
 // Heißgetränke hinzufügen
-        hotDrinksRistoranteAmore.add(new Heißgetränk("Espresso", Espresso));
-        hotDrinksRistoranteAmore.add(new Heißgetränk("Cappuccino", Cappuccino));
-        hotDrinksRistoranteAmore.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
-        hotDrinksRistoranteAmore.add(new Heißgetränk("Caffè Corretto", CaffèCorretto));
+        hotDrinksTrattoriaRoma.add(new Heißgetränk("Espresso", Espresso));
+        hotDrinksTrattoriaRoma.add(new Heißgetränk("Cappuccino", Cappuccino));
+        hotDrinksTrattoriaRoma.add(new Heißgetränk("Latte Macchiato", LatteMacchiato));
+        hotDrinksTrattoriaRoma.add(new Heißgetränk("Caffè Corretto", CaffèCorretto));
         listeHauptspeisenRoma.add(new Hauptspeise("Penne Arrabbiata", PenneArrabbiata));
         listeHauptspeisenRoma.add(new Hauptspeise("Pizza Quattro Stagioni", PizzaQuattroStagioni));
         listeHauptspeisenRoma.add(new Hauptspeise("Fettuccine Alfredo", FettuccineAlfredo));
@@ -1300,8 +1307,11 @@ public class RestaurantRepository {
         listeNachspeisenRoma.add(new Nachspeiße("Zabaione", Zabaione2));
         TrattoriaRoma.setNachspeisenListe(listeNachspeisenRoma);
         // Listen zum Restaurant hinzufügen
-        RistoranteAmore.setKaltgetränkeListe(drinksRistoranteAmore);
-        RistoranteAmore.setHeißgetränkeListe(hotDrinksRistoranteAmore);
+        TrattoriaRoma.setKaltgetränkeListe(drinksTrattoriaRoma);
+        TrattoriaRoma.setHeißgetränkeListe(hotDrinksTrattoriaRoma);
+        TrattoriaRoma.setAdresse("Venloer Str. 20, 50672 Köln");
+        TrattoriaRoma.setLatitude(50.942173);
+        TrattoriaRoma.setLongitude(6.942328);
         TrattoriaRoma.setName("Trattoria Roma");
         TrattoriaRoma.setWebsite ("www.trattoria-roma.it");
         TrattoriaRoma.setBeschreibung ("Traditionelle Trattoria mit Holzofenpizza und mediterranem Flair.");
@@ -1480,6 +1490,9 @@ public class RestaurantRepository {
         SakuraSushi.setHauptspeisenListe(listeHauptspeisenSakura);
         SakuraSushi.setVorspeisenListe(listeVorspeisenSakura);
         SakuraSushi.setNachspeisenListe(listeNachspeisenSakura);
+        SakuraSushi.setAdresse("Neuer Wall 50, 20354 Hamburg");
+        SakuraSushi.setLatitude(53.552574);
+        SakuraSushi.setLongitude(9.988593);
         SakuraSushi.setName("Sakura Sushi Bar");
         SakuraSushi.setWebsite ("www.sakura-sushi.de");
         SakuraSushi.setBeschreibung ("Frisches Sushi in modernem Ambiente. Unsere Spezialität: kreative Maki-Rollen.");
@@ -1673,6 +1686,9 @@ public class RestaurantRepository {
         // Listen zum Restaurant hinzufügen
         SakuraSushi.setKaltgetränkeListe(drinksSakuraSushi);
         SakuraSushi.setHeißgetränkeListe(hotDrinksSakuraSushi);
+        WokDynasty.setAdresse("Dammtorstraße 12, 20354 Hamburg");
+        WokDynasty.setLatitude(53.556285);
+        WokDynasty.setLongitude(9.989712);
         WokDynasty.setName("Wok Dynasty");
         WokDynasty.setWebsite ("www.wokdynasty.de");
         WokDynasty.setBeschreibung ("Authentische asiatische Wok-Gerichte – frisch und schnell zubereitet.");
@@ -1856,6 +1872,9 @@ public class RestaurantRepository {
         // Listen zum Restaurant hinzufügen
         BurgerFactory.setKaltgetränkeListe(drinksBurgerFactory);
         BurgerFactory.setHeißgetränkeListe(hotDrinksBurgerFactory);
+        BurgerFactory.setAdresse("Große Bergstraße 251, 22767 Hamburg");
+        BurgerFactory.setLatitude(53.553436);
+        BurgerFactory.setLongitude(9.939162);
         BurgerFactory.setName("Burger Factory");
         BurgerFactory.setWebsite ("www.burgerfactory.de");
         BurgerFactory.setBeschreibung ("Handgemachte Burger mit hochwertigen Zutaten – klassisch oder vegan!");
@@ -2023,6 +2042,9 @@ public class RestaurantRepository {
         // Listen zum Restaurant hinzufügen
         Frittenkoenig.setKaltgetränkeListe(drinksFrittenkoenig);
         Frittenkoenig.setHeißgetränkeListe(hotDrinksFrittenkoenig);
+        Frittenkoenig.setAdresse("Lange Reihe 67, 20099 Hamburg");
+        Frittenkoenig.setLatitude(53.556701);
+        Frittenkoenig.setLongitude(10.012248);
         Frittenkoenig.setName("Frittenkönig");
         Frittenkoenig.setWebsite ("www.frittenkoenig.de");
         Frittenkoenig.setBeschreibung ("Deftiges Fastfood mit Kultcharakter – schnell, günstig, lecker.");
@@ -2219,7 +2241,9 @@ public class RestaurantRepository {
 // Listen zum Restaurant hinzufügen
         Hausmannskost.setKaltgetränkeListe(drinksHausmannskost);
         Hausmannskost.setHeißgetränkeListe(hotDrinksHausmannskost);
-
+        Hausmannskost.setAdresse("Severinstraße 123, 50678 Köln");
+        Hausmannskost.setLatitude(50.926015);
+        Hausmannskost.setLongitude(6.957669);
         Hausmannskost.setName("Hausmannskost");
         Hausmannskost.setWebsite ("www.Hausmannskost.de");
         Hausmannskost.setBeschreibung ("Echt deutsche Kost zu echten deutschen Preisen – hier gibt es alles, was das Herz begehrt.");
@@ -2389,7 +2413,9 @@ public class RestaurantRepository {
 // Listen zum Restaurant hinzufügen
         Veganuss.setKaltgetränkeListe(drinksVeganuss);
         Veganuss.setHeißgetränkeListe(hotDrinksVeganuss);
-
+        Veganuss.setAdresse("Kettwiger Straße 20, 51103 Köln");
+        Veganuss.setLatitude(50.943651);
+        Veganuss.setLongitude(7.002304);
         Veganuss.setName("Veganuss");
         Veganuss.setWebsite ("www.Veganuss.de");
         Veganuss.setBeschreibung ("Die leckersten Veganen gerichte - frei von Tierleid, gut für Mensch und Umwelt." +
@@ -2547,7 +2573,9 @@ public class RestaurantRepository {
 // Listen zum Restaurant hinzufügen
         SnackChill.setKaltgetränkeListe(drinksSnackChill);
         SnackChill.setHeißgetränkeListe(hotDrinksSnackChill);
-
+        SnackChill.setAdresse("Ehrenstraße 45, 50672 Köln");
+        SnackChill.setLatitude(50.938403);
+        SnackChill.setLongitude(6.946625);
         SnackChill.setName("Snack & Chill");
         SnackChill.setWebsite( "www.snackandchill.de");
         SnackChill.setBeschreibung ("Kreative Snacks und Fingerfood für jeden Anlass – frisch zubereitet und zum Mitnehmen.");

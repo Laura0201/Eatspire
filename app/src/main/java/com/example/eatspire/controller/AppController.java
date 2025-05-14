@@ -209,18 +209,11 @@ public class AppController {
     }
 
     //Sortieren und Filtern Logik
-    public List<Restaurant> filterNachUmkreis(float maxDistanzMeter) {
-        User user = getAktuellerUser();
-        if (user == null) return List.of();
-
-        List<Restaurant> gefiltert = new ArrayList<>();
-        for (Restaurant r : List.of(getAlleRestaurants())) {
-            float dist = berechneEntfernung(user.getStandort(), r);
-            if (dist <= maxDistanzMeter) {
-                gefiltert.add(r);
-            }
-        }
-        return gefiltert;
+    public List<Restaurant> filterNachUmkreis(List<Restaurant> eingabeListe, float umkreisInMetern) {
+        Standort userStandort = AppController.getInstance().getAktuellerUser().getStandort();
+        return eingabeListe.stream()
+                .filter(r -> AppController.getInstance().berechneEntfernung(userStandort, r) <= umkreisInMetern)
+                .collect(Collectors.toList());
     }
     public List<Restaurant> sortiereNachEntfernung() {
         User user = getAktuellerUser();
@@ -318,8 +311,12 @@ public class AppController {
             List<Kategorien> kategorien,
             boolean nachEntfernungSortieren
     ) {
-        List<Restaurant> liste= filtereNachEigenschaften(toGo, open, vegetarian);;
-                //= filterNachUmkreis(umkreisKm * 1000f);
+        List<Restaurant> liste = filtereNachEigenschaften(toGo, open, vegetarian);
+
+        if (umkreisKm > 0) {
+            liste = filterNachUmkreis(liste, umkreisKm * 1000f);
+        }
+
         if (kategorien != null && !kategorien.isEmpty()) {
             List<Restaurant> kategorienGefiltert = new ArrayList<>();
             for (Kategorien k : kategorien) {
@@ -327,9 +324,13 @@ public class AppController {
             }
             liste = liste.stream().filter(kategorienGefiltert::contains).collect(Collectors.toList());
         }
+
         if (nachEntfernungSortieren) {
-            liste = liste.stream().sorted(Comparator.comparingDouble(r -> sortiereNachEntfernung().indexOf(r))).collect(Collectors.toList());
+            liste = liste.stream()
+                    .sorted(Comparator.comparingDouble(r -> sortiereNachEntfernung().indexOf(r)))
+                    .collect(Collectors.toList());
         }
+
         return liste;
     }
 }
