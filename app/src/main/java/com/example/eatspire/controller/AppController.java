@@ -251,6 +251,14 @@ public class AppController {
 
         return (float) distance;
     }
+    public String formatiereEntfernung(float entfernungInMetern) {
+        if (entfernungInMetern >= 1000) {
+            float entfernungInKm = entfernungInMetern / 1000f;
+            return String.format(Locale.getDefault(), "%.1f km entfernt", entfernungInKm);
+        } else {
+            return String.format(Locale.getDefault(), "%.0f m entfernt", entfernungInMetern);
+        }
+    }
     public List<Restaurant> filtereNachEigenschaften(boolean toGomöglich, boolean geoeffnet, boolean hatVegetarisch) throws NullPointerException {
         User user = getAktuellerUser();
         if (user == null) return List.of();

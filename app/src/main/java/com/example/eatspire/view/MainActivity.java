@@ -188,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
             Standort userStandort = AppController.getInstance().getAktuellerUser().getStandort();
             if (userStandort != null) {
                 float entfernung = AppController.getInstance().berechneEntfernung(userStandort, r);
-                entfernungTextView.setText(String.format(Locale.getDefault(), "%.0f m entfernt", entfernung));
+                String entfernungText = AppController.getInstance().formatiereEntfernung(entfernung);
+                entfernungTextView.setText(entfernungText);
             } else {
                 entfernungTextView.setText("Keine Standortdaten");
             }
