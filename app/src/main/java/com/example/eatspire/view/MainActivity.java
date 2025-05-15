@@ -3,7 +3,6 @@ package com.example.eatspire.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,11 +25,10 @@ import com.example.eatspire.model.UserStuff.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonRefresh, buttonCurrentLocation, buttonEinstellungen, buttonFilterSortieren;
+    private Button buttonLogout, buttonCurrentLocation, buttonEinstellungen, buttonFilterSortieren;
     private LinearLayout linearLayoutElements;
     private RelativeLayout dataContainer;
     private ImageView imageData;
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         controller = AppController.getInstance();
 
-        buttonRefresh = findViewById(R.id.buttonRefresh);
+        buttonLogout = findViewById(R.id.buttonLogout);
         buttonCurrentLocation = findViewById(R.id.buttonStandortAnzeige);
         buttonEinstellungen = findViewById(R.id.buttonEinstellungen);
         buttonFilterSortieren = findViewById(R.id.buttonFilterSortieren);
@@ -125,7 +123,12 @@ public class MainActivity extends AppCompatActivity {
         textTitle = findViewById(R.id.textTitle);
         textDescription = findViewById(R.id.textDescription);
 
-        buttonRefresh.setOnClickListener(v -> recreate());
+        buttonLogout.setOnClickListener(v -> {
+            AppController.getInstance().logout();
+            Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         buttonCurrentLocation.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StandortActivity.class);
