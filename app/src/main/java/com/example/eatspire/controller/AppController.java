@@ -22,6 +22,8 @@ import com.example.eatspire.model.EssensOrte.Restaurant;
 import com.example.eatspire.model.Nahrung.BasisEssen;
 import com.example.eatspire.model.Nahrung.BasisGetränk;
 import com.example.eatspire.model.Nahrung.Hauptspeise;
+import com.example.eatspire.model.Nahrung.Heißgetränk;
+import com.example.eatspire.model.Nahrung.Kaltgetränk;
 import com.example.eatspire.model.Nahrung.Nachspeiße;
 import com.example.eatspire.model.Nahrung.Vorspeise;
 import com.example.eatspire.model.UserStuff.Standort;
@@ -207,6 +209,35 @@ public class AppController {
 
         return context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
     }
+    public void bildeZuordnungFürAlleRestaurants(Context context, List<Restaurant> restaurants) {
+        for (Restaurant restaurant : restaurants) {
+
+            int restaurantBildId = getRestaurantBildResIdAusName(context, restaurant.getName());
+            restaurant.setBildResourceId(restaurantBildId);
+
+            for (Hauptspeise gericht : restaurant.getHauptspeisen()) {
+                int resId = getBildResIdAusName(context, gericht.getName(), restaurant.getName());
+                gericht.setBildResourceId(resId);
+            }
+            for (Vorspeise vorspeise : restaurant.getVorspeisen()) {
+                int resId = getBildResIdAusName(context, vorspeise.getName(), restaurant.getName());
+                vorspeise.setBildResourceId(resId);
+            }
+            for (Nachspeiße nachspeise : restaurant.getNachspeisen()) {
+                int resId = getBildResIdAusName(context, nachspeise.getName(), restaurant.getName());
+                nachspeise.setBildResourceId(resId);
+            }
+            for (Kaltgetränk kaltgetränk : restaurant.getKaltgetränke()) {
+                int resId = getBildResIdAusName(context, kaltgetränk.getName(), restaurant.getName());
+                kaltgetränk.setBildResourceId(resId);
+            }
+            for (Heißgetränk heißgetränk : restaurant.getHeißgetränke()) {
+                int resId = getBildResIdAusName(context, heißgetränk.getName(), restaurant.getName());
+                heißgetränk.setBildResourceId(resId);
+            }
+        }
+    }
+
 
     //Sortieren und Filtern Logik
     public List<Restaurant> filterNachUmkreis(List<Restaurant> eingabeListe, float umkreisInMetern) {
@@ -281,9 +312,7 @@ public class AppController {
                     }
             return gefiltert;
         } catch (NullPointerException e)
-        {
-            //maybe System out print oder so?
-        }
+        {}
         return null;
     }
     public List<Restaurant> filtereNachKategorie(Kategorien kategorie) throws NullPointerException {
