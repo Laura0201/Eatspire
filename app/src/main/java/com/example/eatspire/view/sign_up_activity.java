@@ -47,8 +47,13 @@ public class sign_up_activity extends AppCompatActivity {
             }
             else if (AppController.getInstance().getDataManager().getUserVerwaltung().isValidLogin(username, password)) {
                 Toast.makeText(this, "Benutzer erfolgreich registriert", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(sign_up_activity.this, MainActivity.class));
-                finish();
+                AppController.getInstance().holeAutomatischenStandort(this, (lat, lon, adresse) -> {
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Standort erkannt: " + adresse, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(sign_up_activity.this, MainActivity.class));
+                        finish();
+                    });
+                });
             }
             else{
                 Toast.makeText(this, "Ungültiger Nutzername oder Password", Toast.LENGTH_SHORT).show();

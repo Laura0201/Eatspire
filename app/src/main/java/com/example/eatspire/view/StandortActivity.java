@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
 import com.example.eatspire.businesslogik.UserStuff.Standort;
+import com.example.eatspire.controller.AppController;
 
 /**
  * View-Klasse für die Standortauswahl (manuell oder automatisch).
@@ -46,7 +47,11 @@ public class StandortActivity extends AppCompatActivity {
 
             if (!adresse.isEmpty()) {
                 MainActivity.controller.setzeStandortVonAdresse(this, adresse, (lat, lon, resolvedAdresse) -> {
-                    finish(); // zurück zur MainActivity
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Standort gesetzt: " + resolvedAdresse, Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish(); // zurück zur MainActivity
+                    });
                 });
             } else {
                 Toast.makeText(this, "Bitte Adresse eingeben", Toast.LENGTH_SHORT).show();
@@ -56,7 +61,8 @@ public class StandortActivity extends AppCompatActivity {
 
         // GPS-Standort setzen über Controller
         buttonGPS.setOnClickListener(v -> {
-            MainActivity.controller.holeAutomatischenStandort(this, (lat, lon, adresse) -> {
+            AppController.getInstance().holeAutomatischenStandort(this, (lat, lon, adresse) -> {
+                Toast.makeText(this, "Standort erkannt: " + adresse, Toast.LENGTH_SHORT).show();
                 finish(); // zurück zur MainActivity
             });
         });

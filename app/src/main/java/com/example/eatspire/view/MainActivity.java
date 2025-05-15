@@ -99,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+    private final ActivityResultLauncher<Intent> standortLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    aktualisiereStandortanzeige();
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+
         setContentView(R.layout.activity_main);
 
         controller = AppController.getInstance();
@@ -132,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonCurrentLocation.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StandortActivity.class);
-            startActivity(intent);
+            standortLauncher.launch(intent);
         });
 
         buttonEinstellungen.setOnClickListener(v -> {
@@ -159,6 +168,17 @@ public class MainActivity extends AppCompatActivity {
         letzteAngezeigteRestaurants = List.of(controller.getAlleRestaurants());
         zeigeRestaurants(letzteAngezeigteRestaurants);
         aktualisiereStandortanzeige();
+
+        // Nur wenn noch keine Adresse gesetzt wurde → automatischer Standortversuch
+        User aktuellerUser = AppController.getInstance().getAktuellerUser();
+        if (aktuellerUser != null && (aktuellerUser.getStandort().getAdresse() == null || aktuellerUser.getStandort().getAdresse().equals("Unbekannte Adresse"))) {
+            AppController.getInstance().holeAutomatischenStandort(this, (lat, lon, adresse) -> {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Standort automatisch erkannt: " + adresse, Toast.LENGTH_SHORT).show();
+                    aktualisiereStandortanzeige();
+                });
+            });
+        }
     }
     @Override
     protected void onDestroy() {
