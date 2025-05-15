@@ -1,14 +1,20 @@
-package com.example.eatspire.model.EssensOrte;
+package com.example.eatspire.businesslogik.EssensOrte;
 
 import android.os.Build;
-import com.example.eatspire.model.Nahrung.*;
+
+import com.example.eatspire.businesslogik.Nahrung.BasisGetränk;
+import com.example.eatspire.businesslogik.Nahrung.Hauptspeise;
+import com.example.eatspire.businesslogik.Nahrung.Heißgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Kaltgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Nachspeiße;
+import com.example.eatspire.businesslogik.Nahrung.Vorspeise;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
-
+    //Variablen
     private String name;
     private String beschreibung;
     private String adressfeld;
@@ -20,17 +26,16 @@ public class Restaurant {
     private Kategorien kategorie;
     private boolean toGomöglich;
     private boolean hatVegetarisch;
-
+    private LocalTime oeffnungszeit;
+    private LocalTime schliesszeit;
+    private int bildResourceId;
+    //Lists
     private ArrayList<Bewertung> bewertungen = new ArrayList<>();
-
     private ArrayList<Hauptspeise> listeHauptspeisen = new ArrayList<>();
     private ArrayList<Vorspeise> listeVorspeisen = new ArrayList<>();
     private ArrayList<Nachspeiße> listeNachspeisen = new ArrayList<>();
     private ArrayList<Heißgetränk> listeHeißgetränke = new ArrayList<>();
     private ArrayList<Kaltgetränk> listeKaltgetränke = new ArrayList<>();
-
-    private LocalTime oeffnungszeit;
-    private LocalTime schliesszeit;
 
     // Konstruktor
     public Restaurant(Kategorien kategorie, boolean toGoMoeglich) {
@@ -178,38 +183,34 @@ public class Restaurant {
     public LocalTime getOeffnungszeit() {
         return oeffnungszeit;
     }
-
     public LocalTime getSchliesszeit() {
         return schliesszeit;
     }
-
     public void setOeffnungszeiten(LocalTime oeffnungszeit, LocalTime schliesszeit) {
         this.oeffnungszeit = oeffnungszeit;
         this.schliesszeit = schliesszeit;
     }
-
+    //wird aktuell noch nicht genutzt, restaurants haben aber Öffnungszeiten
     public boolean istGeoeffnet(LocalTime zeit) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return !zeit.isBefore(oeffnungszeit) && !zeit.isAfter(schliesszeit);
         }
         return false;
     }
-
-    private int bildResourceId;
-
     public void setBildResourceId(int resId) {
         this.bildResourceId = resId;
     }
-
     public int getBildResourceId() {
         return bildResourceId;
     }
 
-
+    //getGetränke, weil Heiß- und Kaltgetränke zusammengefasst werden
     public List<BasisGetränk> getGetränke() {
         List<BasisGetränk> alleGetränke = new ArrayList<>();
         alleGetränke.addAll(listeHeißgetränke);
         alleGetränke.addAll(listeKaltgetränke);
         return alleGetränke;
     }
+
+
 }

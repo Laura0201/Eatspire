@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
-import com.example.eatspire.model.UserStuff.Standort;
+import com.example.eatspire.businesslogik.UserStuff.Standort;
 
 /**
  * View-Klasse für die Standortauswahl (manuell oder automatisch).
@@ -24,7 +24,7 @@ public class StandortActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.standort_activity);
+        setContentView(R.layout.standort);
 
         // UI-Elemente aus dem Layout verknüpfen
         textViewAdresse = findViewById(R.id.textViewAdresse);

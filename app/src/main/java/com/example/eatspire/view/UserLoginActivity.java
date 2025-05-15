@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
 import com.example.eatspire.controller.AppController;
-import com.example.eatspire.model.Data.UserVerwaltung;
 
 public class UserLoginActivity extends AppCompatActivity {
 

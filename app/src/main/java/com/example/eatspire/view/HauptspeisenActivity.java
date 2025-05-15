@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
-import com.example.eatspire.model.Nahrung.BasisEssen;
-import com.example.eatspire.model.Nahrung.Hauptspeise;
+import com.example.eatspire.businesslogik.Nahrung.BasisEssen;
+import com.example.eatspire.businesslogik.Nahrung.Hauptspeise;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class HauptspeisenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hauptspeisen_activity);
+        setContentView(R.layout.hauptspeisen_des_restaurants);
 
         containerHauptspeisen = findViewById(R.id.containerHauptspeisen);
         textViewRestaurantName = findViewById(R.id.textViewRestaurantName);

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
 import com.example.eatspire.controller.AppController;
-import com.example.eatspire.model.Data.UserVerwaltung;
 
 public class sign_up_activity extends AppCompatActivity {
     private TextView usernameTextView, passwordTextView, emailTextView;

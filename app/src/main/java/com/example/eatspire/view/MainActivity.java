@@ -18,10 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
 import com.example.eatspire.controller.AppController;
-import com.example.eatspire.model.EssensOrte.Kategorien;
-import com.example.eatspire.model.EssensOrte.Restaurant;
-import com.example.eatspire.model.UserStuff.Standort;
-import com.example.eatspire.model.UserStuff.User;
+import com.example.eatspire.businesslogik.EssensOrte.Kategorien;
+import com.example.eatspire.businesslogik.EssensOrte.Restaurant;
+import com.example.eatspire.businesslogik.UserStuff.Standort;
+import com.example.eatspire.businesslogik.UserStuff.User;
 
 import java.util.ArrayList;
 import java.util.List;

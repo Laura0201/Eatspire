@@ -4,7 +4,7 @@
  * @author Julius
  * @version 1.0
  */
-package com.example.eatspire.model.Nahrung;
+package com.example.eatspire.businesslogik.Nahrung;
 
 public abstract class BasisEssen {
     private static int idDesGerichts = 0;

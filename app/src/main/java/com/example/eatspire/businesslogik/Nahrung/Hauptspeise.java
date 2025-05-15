@@ -5,7 +5,7 @@
  * @author Julius
  * @version 1.0
  */
-package com.example.eatspire.model.Nahrung;
+package com.example.eatspire.businesslogik.Nahrung;
 
 public class Hauptspeise extends BasisEssen {
     public Hauptspeise(String name, Zutat[] zutaten) {

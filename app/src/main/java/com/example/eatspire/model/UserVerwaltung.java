@@ -1,6 +1,6 @@
-package com.example.eatspire.model.Data;
+package com.example.eatspire.model;
 
-import com.example.eatspire.model.UserStuff.User;
+import com.example.eatspire.businesslogik.UserStuff.User;
 
 import java.util.ArrayList;
 

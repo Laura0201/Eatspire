@@ -8,27 +8,23 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Looper;
-import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.eatspire.model.Data.DataManager;
-import com.example.eatspire.model.Data.UserVerwaltung;
-import com.example.eatspire.model.EssensOrte.Kategorien;
-import com.example.eatspire.model.EssensOrte.Restaurant;
-import com.example.eatspire.model.Nahrung.BasisEssen;
-import com.example.eatspire.model.Nahrung.BasisGetränk;
-import com.example.eatspire.model.Nahrung.Hauptspeise;
-import com.example.eatspire.model.Nahrung.Heißgetränk;
-import com.example.eatspire.model.Nahrung.Kaltgetränk;
-import com.example.eatspire.model.Nahrung.Nachspeiße;
-import com.example.eatspire.model.Nahrung.Vorspeise;
-import com.example.eatspire.model.UserStuff.Standort;
-import com.example.eatspire.model.UserStuff.User;
-import com.example.eatspire.view.FilterUndSortierOptionenActivity;
+import com.example.eatspire.model.DataManager;
+import com.example.eatspire.businesslogik.EssensOrte.Kategorien;
+import com.example.eatspire.businesslogik.EssensOrte.Restaurant;
+import com.example.eatspire.businesslogik.Nahrung.BasisGetränk;
+import com.example.eatspire.businesslogik.Nahrung.Hauptspeise;
+import com.example.eatspire.businesslogik.Nahrung.Heißgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Kaltgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Nachspeiße;
+import com.example.eatspire.businesslogik.Nahrung.Vorspeise;
+import com.example.eatspire.businesslogik.UserStuff.Standort;
+import com.example.eatspire.businesslogik.UserStuff.User;
 import com.google.android.gms.location.*;
 
 import java.io.IOException;
@@ -41,6 +37,7 @@ import java.util.stream.Collectors;
 public class AppController {
     //statische Instanz des Controllers als Singleton mit Getter
     private static final AppController controller = new AppController();
+    private AppController(){}
     public static AppController getInstance() { return controller; }
     //Controller enthält einen privaten DataManager(Verbindung ins Model)
     private DataManager dataManager;

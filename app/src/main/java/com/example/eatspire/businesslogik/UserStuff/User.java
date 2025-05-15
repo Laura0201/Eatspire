@@ -1,4 +1,4 @@
-package com.example.eatspire.model.UserStuff;
+package com.example.eatspire.businesslogik.UserStuff;
 
 import android.os.Build;
 import java.time.LocalTime;

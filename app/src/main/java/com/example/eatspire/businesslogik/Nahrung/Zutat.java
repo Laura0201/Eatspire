@@ -1,4 +1,4 @@
-package com.example.eatspire.model.Nahrung;
+package com.example.eatspire.businesslogik.Nahrung;
 
 public class Zutat {
     private String name;

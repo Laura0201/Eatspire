@@ -1,9 +1,9 @@
-package com.example.eatspire.model.Data;
+package com.example.eatspire.model;
 
 import android.content.Context;
 
-import com.example.eatspire.model.EssensOrte.Restaurant;
-import com.example.eatspire.model.Nahrung.BasisEssen;
+import com.example.eatspire.businesslogik.EssensOrte.Restaurant;
+import com.example.eatspire.businesslogik.Nahrung.BasisEssen;
 
 import java.util.ArrayList;
 import java.util.List;

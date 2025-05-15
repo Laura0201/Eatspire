@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
-import com.example.eatspire.model.EssensOrte.Restaurant;
+import com.example.eatspire.businesslogik.EssensOrte.Restaurant;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class RestaurantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant_activity);
+        setContentView(R.layout.restaurant_einzel_ansicht);
 
         // Views initialisieren
         textViewRestaurantName = findViewById(R.id.textViewRestaurantName);

@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eatspire.R;
-import com.example.eatspire.model.Nahrung.BasisEssen;
-import com.example.eatspire.model.Nahrung.Nachspeiße;
+import com.example.eatspire.businesslogik.Nahrung.BasisEssen;
+import com.example.eatspire.businesslogik.Nahrung.Nachspeiße;
 
 import java.util.List;
 

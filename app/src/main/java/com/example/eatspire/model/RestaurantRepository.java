@@ -1,22 +1,21 @@
-package com.example.eatspire.model.Data;
+package com.example.eatspire.model;
 
 import android.content.Context;
 import android.os.Build;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.example.eatspire.R;
 import com.example.eatspire.controller.AppController;
-import com.example.eatspire.model.EssensOrte.Kategorien;
-import com.example.eatspire.model.EssensOrte.Restaurant;
-import com.example.eatspire.model.Nahrung.Hauptspeise;
-import com.example.eatspire.model.Nahrung.Heißgetränk;
-import com.example.eatspire.model.Nahrung.Kaltgetränk;
-import com.example.eatspire.model.Nahrung.Nachspeiße;
-import com.example.eatspire.model.Nahrung.Vorspeise;
-import com.example.eatspire.model.Nahrung.Zutat;
+import com.example.eatspire.businesslogik.EssensOrte.Kategorien;
+import com.example.eatspire.businesslogik.EssensOrte.Restaurant;
+import com.example.eatspire.businesslogik.Nahrung.Hauptspeise;
+import com.example.eatspire.businesslogik.Nahrung.Heißgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Kaltgetränk;
+import com.example.eatspire.businesslogik.Nahrung.Nachspeiße;
+import com.example.eatspire.businesslogik.Nahrung.Vorspeise;
+import com.example.eatspire.businesslogik.Nahrung.Zutat;
 
 public class RestaurantRepository {
     private final ArrayList<Restaurant> restaurants = new ArrayList<>();
