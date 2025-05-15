@@ -1,4 +1,4 @@
-package com.example.eatspire.view.ViewHolder;
+package com.example.eatspire.view.RecyclerView;
 
 import android.view.View;
 import android.widget.ImageView;
